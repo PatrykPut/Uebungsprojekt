@@ -1,0 +1,30 @@
+.navbar {
+    height: 50px;
+    background-color: aquamarine;
+}
+.header-box {
+    display: flex;
+    justify-content:center;
+    padding: 20px;
+}
+.header {
+    width: max-content;
+    padding: 20px;
+    background-color: gray;
+    border-radius: 30px;
+}
+.info-box {
+    display:flex;
+    justify-content: space-between;
+    width: 60%;
+    position: relative;
+    left: 20%;
+    margin-top: 20px;
+}
+.games {
+    justify-content: center;
+    background-color: rgb(253, 212, 212);
+    width: max-content;
+    padding: 20px;
+    border-radius: 30px;
+}
