@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin
+@CrossOrigin                                                                //erlaubt die Anwendung der Anfragen von anderen Quellen
 public class gameController {
 
-    private final Projekt.services.gameRepository gameRepository;
+    private final Projekt.services.gameRepository gameRepository;           //erstellt eine Instanzvariable (nur in der Klasse verfügbar)
 
-    public gameController(Projekt.services.gameRepository gameRepository) {
+    public gameController(Projekt.services.gameRepository gameRepository) { //erlaubt Zugriff auf das Repository
         this.gameRepository = gameRepository;
     }
     @PostMapping("/games")
@@ -52,11 +52,11 @@ public class gameController {
         gameRepository.save(game4);
         gameRepository.save(game5);
     }
-    @GetMapping("/game/{id}")
-    public ResponseEntity<game> getGameWithRatings(@PathVariable Long id) {
-        Optional<game> gameOpt = gameRepository.findByIdWithRatings(id);
-        if (gameOpt.isPresent()) {
-            return ResponseEntity.ok(gameOpt.get());
+    @GetMapping("/game/{id}")                                                           //Methode wird aufgerufen wenn der User eine GET-Anfrage sendet
+    public ResponseEntity<game> getGameWithRatings(@PathVariable Long id) {             //die Methode nimmt die Id aus der URL und gibt eine ResponseEntity zurück
+        Optional<game> gameOpt = gameRepository.findByIdWithRatings(id);                //spiel mit der Id wird aufgerufen und in Optional Objekt gespeichert
+        if (gameOpt.isPresent()) {                                                      //überprüft ob ein Optional Objekt vorhanden ist
+            return ResponseEntity.ok(gameOpt.get());                                    //Ergebnis wird angezeig
         } else {
             return ResponseEntity.notFound().build();
         }

@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-public interface gameRepository extends CrudRepository<game, Long> {
+public interface gameRepository extends CrudRepository<game, Long> {            //erweitert das generische CRUD Repository
     @Query("SELECT g FROM game g LEFT JOIN FETCH g.ratings WHERE g.id = :id")
     Optional<game> findByIdWithRatings(@Param("id") Long id);
 }

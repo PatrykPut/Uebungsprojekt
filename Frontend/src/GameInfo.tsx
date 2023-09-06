@@ -43,18 +43,18 @@
 import React, { useEffect, useState } from 'react';  
   
   function GameInfo() {
-      const [isLoaded, setIsLoaded] = useState(false);  
-      const [game, setGame] = useState<Game | null>(null);  
+      const [isLoaded, setIsLoaded] = useState(false);      //variable zum checken ob die Daten geladen wurden
+      const [game, setGame] = useState<Game | null>(null);  //variable zum speicher der Daten des Spiels 
 
-      interface Game {  
+      interface Game {                                      //Interface für das Game Objekt
         id: number;  
         name: string;  
         releaseDate: string;  
         developer: string;  
       }
     
-      useEffect(() => {  
-          fetch('http://localhost:8080/game/4')  
+      useEffect(() => {                                     //GET-Anfrage wird an die URL gesendet, Antwort wird in JSON umgewandelt und aktualisiert den State der game- und isLoaded Variablen
+          fetch('http://localhost:8080/game/3')  
               .then(response =>   
                   response.json())  
                
@@ -66,7 +66,6 @@ import React, { useEffect, useState } from 'react';
       }, []);   
     
       if (isLoaded) { 
-        console.log(game);
         return ( 
           <div>  
           {game && (  

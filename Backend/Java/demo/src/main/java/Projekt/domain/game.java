@@ -18,7 +18,7 @@ public class game {
     private String developer;
 
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "game")
-    @JsonManagedReference
+    @JsonManagedReference //verhindert das entstehen von Endlosschleifen beim übersetzen in JSON
     private Set<rating> ratings;
 
     public Long getId() {

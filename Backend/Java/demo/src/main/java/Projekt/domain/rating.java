@@ -20,7 +20,7 @@ public class rating {
 
     @ManyToOne
     @JoinColumn(name="game_id", nullable=false)
-    @JsonBackReference
+    @JsonBackReference //verhindert das entstehen von Endlosschleifen beim übersetzen in JSON
     private Projekt.domain.game game;
 
     public Long getId() {
