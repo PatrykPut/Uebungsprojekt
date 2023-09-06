@@ -1,9 +1,12 @@
-import './GameInfo.css';
-import GameInfo from './GameInfo';
+import Navbar from './navbar';
+import GameInfoSidebar from './GameInfoSidebar';
 
 function App() {
   return (
-      <GameInfo/>
+      <div>
+        <Navbar/>
+      <GameInfoSidebar/>
+      </div>
   );
 };
 

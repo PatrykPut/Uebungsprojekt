@@ -1,0 +1,14 @@
+.star-box {
+    background-color: rgb(216, 216, 216);
+    width: max-content;
+    height: max-content;
+    padding: 10px;
+    border:solid black 1px;
+    color: white;
+}
+.star {
+    font-size: 50px;
+    text-shadow:2px 2px 0px #000000; 
+    position: relative;
+    bottom: 4px;
+}
