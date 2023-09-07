@@ -1,9 +1,11 @@
 import GameInfo from './GameInfo';
-import Sidebar from './Sidebar';
+import Sidebar from './SideBar';
+import './GameInfoSidebar.css';
+
 
 function GameInfoSidebar() {
     return (
-        <div>
+        <div className='gameinfosidebar'>
             <Sidebar/>
             <GameInfo/>
         </div>

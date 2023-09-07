@@ -1,8 +1,11 @@
-import Stars from './Stars.tsx';
+import Stars from './Stars';
+import './Sidebar.css';
+import Filter from './Filter';
 
 function Sidebar() {
     return (
-        <div>
+        <div className='sidebar'>
+            <Filter/>
             <Stars/>
         </div>
     )

@@ -1,44 +1,66 @@
-import './GameInfo.css';
-import React, { useEffect, useState } from 'react';  
+import './GameInfo.css'
+import React, { useState, useEffect } from 'react';   
   
-  function GameInfo() {
-      const [isLoaded, setIsLoaded] = useState(false);      //variable zum checken ob die Daten geladen wurden
-      const [games, setGames] = useState<Game[]>([])        //Array zum speicher der Daten des Spiels 
-
-      interface Game {                                      //Interface für das Game Objekt
-        id: number;  
-        name: string;  
-        releaseDate: string;  
-        developer: string;  
-      }
+interface Game {                                        
+  id: number;    
+  name: string;    
+  releaseDate: string;    
+  developer: string;    
+}  
+interface Rating {  
+  id: number;  
+  comment: string;  
+  rating: number;  
+}  
     
-      useEffect(() => {                                     //GET-Anfrage wird an die URL gesendet, Antwort wird in JSON umgewandelt und aktualisiert den State der games- und isLoaded Variablen
-          fetch('http://localhost:8080/games')  
-              .then(response =>   
-                  response.json())  
-               
-              .then(json => {  
-                  setGames(json); 
-                  setIsLoaded(true); 
-              })   
-      }, []);   
+// Die Game-Komponente repräsentiert ein einzelnes Spiel    
+function Game({ game }: {game : Game}) {    
+  const [ratings, setRatings] = useState<Rating[]>([]);    
     
-      if (isLoaded) {                                       //wenn die Daten geladen wurden wird ein div mit den Daten zurück gegeben
-        return ( 
-          <div className='games-box'>
-            {games.map((game: Game) => ( 
-              <div className='game'>  
-                  <h2 className='title'>{game.name}</h2>  
-                  <p>{game.releaseDate}</p>  
-                  <p>{game.developer}</p>  
-              </div>  
-          ))}  
-      </div>    
-      );}
-       else {
-        return null
-      }  
-  }  
-
-  export default GameInfo;  
+  useEffect(() => {    
+    fetch(`http://localhost:8080/game/${game.id}`)    
+      .then((response) => response.json())    
+      .then((json) => {    
+        setRatings(json.ratings);    
+      });    
+  }, [game.id]);    
+    
+  return (    
+    <div className='game'>    
+      <h2 className='title'>{game.name}</h2>    
+      <p>{game.releaseDate}</p>    
+      <p>{game.developer}</p>    
+      {Array.isArray(ratings) && ratings.map((rating) => (    
+        <div key={rating.id}>    
+          <p>{rating.comment}</p>    
+          <p>{rating.rating}</p>    
+        </div>    
+      ))}    
+    </div>    
+  );    
+}    
+    
+// Die Games-Komponente listet alle Spiele auf    
+function Games() {    
+  const [games, setGames] = useState<Game[]>([]);    
+    
+  useEffect(() => {    
+    fetch('http://localhost:8080/games')    
+      .then((response) => response.json())    
+      .then((json) => {    
+        setGames(json);    
+      });    
+  }, []);    
+    
+  return (    
+    <div className='games-box'>    
+      {games.map((game) => (    
+        <Game key={game.id} game={game} />    
+      ))}    
+    </div>    
+  );    
+}    
+    
+export default Games;  
+  
   
