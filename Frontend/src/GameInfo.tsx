@@ -1,6 +1,5 @@
 import './GameInfo.css'    
-import React, { useState, useEffect } from 'react'; 
-import Sidebar from './SideBar';    
+import React, { useState, useEffect } from 'react';     
      
 const API_URL = 'http://localhost:8080/games';  
   
@@ -62,8 +61,7 @@ function Games({sortOption}: {sortOption : string}) {
   } 
   
   return (
-    <div className='big-box'> 
-      <Sidebar/>   
+        
       <div className='game-box'>
       <button className='button' onClick={toggleShowRatings}>    
             {showRatings ? 'Show Games' : 'Show Ratings'}    
@@ -75,8 +73,7 @@ function Games({sortOption}: {sortOption : string}) {
           )) 
           : <Game key={game.id} game={game}/>  
         ))} 
-        </div>
-      </div>    
+        </div>   
   );    
 }  
 
