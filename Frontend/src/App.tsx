@@ -1,11 +1,11 @@
 import Navbar from './navbar';
-import GameInfoSidebar from './GameInfoSidebar';
+import GameInfoFilter from './GameInfoFilter';
 
 function App() {
   return (
-      <div>
+      <div className='main'>
         <Navbar/>
-      <GameInfoSidebar/>
+        <GameInfoFilter/>
       </div>
   );
 };

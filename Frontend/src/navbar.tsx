@@ -2,7 +2,7 @@ import './navbar.css';
 
 function Navbar() {
     return (
-        <div>
+        <div className='header-container'>
             <div className='header'>Games <img className='controller' src="/controller.png"/></div>
             <div className='navbar'>
                 <span>Home</span>

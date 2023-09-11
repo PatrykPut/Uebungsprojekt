@@ -66,7 +66,7 @@ function Stars() {
     }
     return (
         <div className="star-box">
-            <span className="stars" style={{color: color.star1}} onMouseOver={mouseOver1} onMouseLeave={mouseLeave}>&#9733;</span>
+            <span id='rotate' className="stars" style={{color: color.star1}} onMouseOver={mouseOver1} onMouseLeave={mouseLeave}>&#9733;</span>
             <span className="stars" style={{color: color.star2}} onMouseOver={mouseOver2} onMouseLeave={mouseLeave}>&#9733;</span>
             <span className="stars" style={{color: color.star3}} onMouseOver={mouseOver3} onMouseLeave={mouseLeave}>&#9733;</span>
             <span className="stars" style={{color: color.star4}} onMouseOver={mouseOver4} onMouseLeave={mouseLeave}>&#9733;</span>

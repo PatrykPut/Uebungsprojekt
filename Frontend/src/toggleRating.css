@@ -1,9 +1,0 @@
-.toggleRating-container {
-    height: max-content;
-    width: 100%;
-    background-color: aliceblue;
-    border-top: solid black 0.5px;
-    cursor: pointer;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
