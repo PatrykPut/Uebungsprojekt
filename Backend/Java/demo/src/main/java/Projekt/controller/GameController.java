@@ -1,6 +1,6 @@
 package Projekt.controller;
-import Projekt.domain.game;
-import Projekt.domain.rating;
+import Projekt.domain.Game;
+import Projekt.services.GameRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,23 +9,23 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin                                                                //erlaubt die Anwendung der Anfragen von anderen Quellen
-public class gameController {
+public class GameController {
 
-    private final Projekt.services.gameRepository gameRepository;           //erstellt eine Instanzvariable (nur in der Klasse verfügbar)
+    private final GameRepository gameRepository;           //erstellt eine Instanzvariable (nur in der Klasse verfügbar)
 
-    public gameController(Projekt.services.gameRepository gameRepository) { //erlaubt Zugriff auf das Repository
+    public GameController(GameRepository gameRepository) { //erlaubt Zugriff auf das Repository
         this.gameRepository = gameRepository;
     }
     @GetMapping("/games")
-    public ResponseEntity<List<game>> getAllGames() {
-        List<game> games = (List<game>) gameRepository.findAll();
+    public ResponseEntity<List<Game>> getAllGames() {
+        List<Game> games = gameRepository.findAll();
         return ResponseEntity.ok(games);
     }
-    @GetMapping("/game/{id}")                                                           //Methode wird aufgerufen wenn der User eine GET-Anfrage sendet
-    public ResponseEntity<game> getGameWithRatings(@PathVariable Long id) {             //die Methode nimmt die Id aus der URL und gibt eine ResponseEntity zurück
-        Optional<game> gameOpt = gameRepository.findByIdWithRatings(id);                //spiel mit der Id wird aufgerufen und in Optional Objekt gespeichert
-        if (gameOpt.isPresent()) {                                                      //überprüft ob ein Optional Objekt vorhanden ist
-            return ResponseEntity.ok(gameOpt.get());                                    //Ergebnis wird angezeigt
+    @GetMapping("/game/{id}")
+    public ResponseEntity<Game> getGameWithRatings(@PathVariable Long id) {
+        Optional<Game> gameOpt = gameRepository.findByIdWithRatings(id);
+        if (gameOpt.isPresent()) {
+            return ResponseEntity.ok(gameOpt.get());
         } else {
             return ResponseEntity.notFound().build();
         }

@@ -1,8 +1,0 @@
-.sidebar {
-    display: flex;
-    
-    flex-direction: column;
-    width: 18vw;
-    height: 86vh;
-    background-color: lightgrey;
-}

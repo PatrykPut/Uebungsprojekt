@@ -1,16 +1,44 @@
-import './navbar.css';
+import styled from 'styled-components';
+
+const Header = styled.div`
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    background-color: gray;
+    height:10vh;
+    font-size: 50px;
+    padding: 20px;
+`;
+
+const NavbarContainer = styled.div`
+    display: flex;
+    height: 4vh;
+    background-color: rgb(72, 124, 107);
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+`; 
+
+const Controller = styled.img`
+    height: 100px;
+    margin-left: 20px;
+`;
 
 function Navbar() {
     return (
-        <div className='header-container'>
-            <div className='header'>Games <img className='controller' src="/controller.png"/></div>
-            <div className='navbar'>
+        <div>
+            <Header>
+                Games 
+                <Controller src="/controller.png"/>
+            </Header>
+            <NavbarContainer>
                 <span>Home</span>
                 <span>Games</span>
                 <span>News</span>
                 <span>Reviews</span>
                 <span>Shop</span>
-            </div>
+            </NavbarContainer>
         </div>
     );
   };

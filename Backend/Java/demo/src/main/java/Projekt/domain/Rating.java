@@ -8,7 +8,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 
 @Entity
-public class rating {
+public class Rating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class rating {
     @ManyToOne
     @JoinColumn(name="game_id", nullable=false)
     @JsonBackReference //verhindert das entstehen von Endlosschleifen beim übersetzen in JSON
-    private Projekt.domain.game game;
+    private Game game;
 
     public Long getId() {
         return id;
@@ -47,11 +47,11 @@ public class rating {
         this.comment = comment;
     }
 
-    public Projekt.domain.game getGame() {
+    public Game getGame() {
         return game;
     }
 
-    public void setGame(Projekt.domain.game game) {
+    public void setGame(Game game) {
         this.game = game;
     }
 }

@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-public class game {
+public class Game {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class game {
 
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "game")
     @JsonManagedReference //verhindert das entstehen von Endlosschleifen beim übersetzen in JSON
-    private Set<rating> ratings;
+    private Set<Rating> ratings;
 
     public Long getId() {
         return id;
@@ -53,11 +53,11 @@ public class game {
         this.developer = developer;
     }
 
-    public Set<rating> getRatings() {
+    public Set<Rating> getRatings() {
         return ratings;
     }
 
-    public void setRatings(Set<rating> ratings) {
+    public void setRatings(Set<Rating> ratings) {
         this.ratings = ratings;
     }
 

@@ -1,17 +1,24 @@
 import Games from "./GameInfo";
-import Filter from "./Filter";
 import { useState } from "react";
 import Sidebar from "./SideBar";
-import './GameInfoFilter.css';
+import styled from 'styled-components';
+
+const BigBox = styled.div`
+    display:flex;
+`;
 
 function GameInfoFilter() {
-const [sortOption, setSortOption] = useState('')
+    const [sortOption, setSortOption] = useState('');
+    const [showRatings, setShowRatings] = useState(false);
 
+    const toggleShowRatings = () => {
+        setShowRatings(!showRatings);
+    }
     return (
-<div className="bigbox">
-    <Sidebar setSortOption={setSortOption}/>
-    <Games sortOption={sortOption}/>
-</div>
+<BigBox>
+    <Sidebar setSortOption={setSortOption} toggleShowRatings={toggleShowRatings} showRatings={showRatings}/>
+    <Games sortOption={sortOption} showRatings={showRatings}/>
+</BigBox>
 );
 }
 
