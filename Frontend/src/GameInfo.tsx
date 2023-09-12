@@ -1,6 +1,6 @@
 import styled from 'styled-components';    
 import React, { useState, useEffect } from 'react';
-import { NamedImportBindings } from 'typescript';
+import { sort1, sort2, sort3, sort4 } from './Sort';
 
 const AllGamesContainer = styled.div`
     display:flex;
@@ -62,7 +62,7 @@ function Rating({rating, game} : {rating : Rating,game : Game}) {
         <p>{rating.rating}</p>    
       </GameContainer>    
   );    
-}  
+} 
 
 function calculateAverageRatings(ratings: Rating[]): number {
     const sum = ratings.reduce((a, b) => a + b.rating, 0);
@@ -76,16 +76,16 @@ function Games({sortOption, showRatings}: {sortOption : string, showRatings: boo
     fetch(API_URL)    
       .then((response) => response.json())    
       .then((json: Game[]) => {
-        if (sortOption === 'newest') {
-          json.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
+        if (sortOption === sort1) {
+          setGames(json);
         } 
-        else if (sortOption === 'mostRatings') {
+        else if (sortOption === sort2) {
+          json.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
+        }
+        else if (sortOption === sort3)  {
           json.sort((a, b) => b.ratings.length - a.ratings.length);
         }
-        else if (sortOption === 'default')  {
-          setGames(json);
-        }
-        else if (sortOption === 'bestRatings') {
+        else if (sortOption === sort4) {
           json.sort((a, b) => calculateAverageRatings(b.ratings) - calculateAverageRatings(a.ratings));
         }  
         setGames(json);    
@@ -105,4 +105,4 @@ function Games({sortOption, showRatings}: {sortOption : string, showRatings: boo
   );    
 }  
 
-export default Games;
+export default Games; 

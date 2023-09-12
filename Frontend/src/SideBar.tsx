@@ -33,8 +33,8 @@ function Sidebar({ setSortOption, toggleShowRatings, showRatings }: { setSortOpt
             <ToggleRatings onClick={toggleShowRatings}>    
                 {showRatings ? 'Show Games' : 'Show Ratings'}    
             </ToggleRatings>
-            <Filter setSortOption={setSortOption}/>
             <Stars/>
+            <Filter setSortOption={setSortOption}/>
         </SidebarContainer>
     )
 }

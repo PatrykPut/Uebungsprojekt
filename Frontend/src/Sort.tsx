@@ -31,6 +31,11 @@ interface FilterProps {
     setSortOption: (value: string) => void;
 }
 
+export const sort1 = 'default';
+export const sort2 = 'newest';
+export const sort3 = 'mostRatings';
+export const sort4 = 'bestRatings';
+
 function Filter({setSortOption}: FilterProps) {
     const [display, setDisplay] = useState({drop: 'none'});
 
@@ -39,21 +44,22 @@ function Filter({setSortOption}: FilterProps) {
             drop: prevState.drop === 'none' ? 'block' : 'none'
         }))
     }
+
 return (
     <div>
         <Input onClick={toggleDropdown}>Filter</Input>
             <Drop style={{display: display.drop}}>
                 <Search onClick={() => 
-                setSortOption('default')}>Default
+                setSortOption(sort1)}>Default
                 </Search>
                 <Search onClick={() => 
-                    setSortOption('newest')}>Newest
+                    setSortOption(sort2)}>Newest
                 </Search>
                 <Search onClick={() => 
-                    setSortOption('mostRatings')}>Most Ratings
+                    setSortOption(sort3)}>Most Ratings
                 </Search>
                 <Search onClick={() => 
-                    setSortOption('bestRatings')}>Best Ratings
+                    setSortOption(sort4)}>Best Ratings
                 </Search>
             </Drop>
     </div>

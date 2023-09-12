@@ -1,114 +1,69 @@
 import { useState } from 'react';
-import styled, { css, keyframes } from 'styled-components';
+import styled from 'styled-components';
 
 const StarContainer = styled.div`
-    background-color: rgb(85, 85, 85);
     width: max-content;
     height: max-content;
     padding: 10px;
     color: white;
     border-radius: 20px;
     position: relative;
-    top: 500px;
-    display: none;
+    //display: none;
 `;
 
-const spin = keyframes`
-    from {transform: rotate(0deg)}
-    to {transform: rotate(40deg);}
-`;
+type StarProps = {
+    isActive: boolean;
+}
 
-const Star = styled.span<{ $animate: boolean }>`
+const Star = styled.span<StarProps>`
     font-size: 50px; 
     position: relative;
     bottom: 4px;
     cursor: pointer;
-    animation: ${props => 
-    (props.$animate ? css`${spin} 2s linear infinite` : 'none')};
+    color: ${props => props.isActive ? 'rgb(221, 221, 25)' : ''};
 `;
 
 function Stars() {
-    const [color, setColor] = useState({
-        star1: '',
-        star2: '',
-        star3: '',
-        star4: '',
-        star5: '',
-        animateStar1: false
-    });
+    const [activeStar, setActiveStar] = useState(0);
 
-    const mouseOver1 = () => {
-        setColor({
-           star1: 'yellow',
-           star2: '',
-           star3: '',
-           star4: '',
-           star5: '', 
-           animateStar1: true,
-        });
-    }
-    console.log(color.animateStar1);
-    const mouseOver2 = () => {
-        setColor({
-            star1: 'rgb(221, 221, 25)',
-            star2: 'rgb(221, 221, 25)',
-            star3: '',
-            star4: '',
-            star5: '',
-            animateStar1: true
-        });
-    }
-    const mouseOver3 = () => {
-        setColor({
-            star1: 'rgb(221, 221, 25)',
-            star2: 'rgb(221, 221, 25)',
-            star3: 'rgb(221, 221, 25)',
-            star4: '',
-            star5: '',
-            animateStar1: true
-        });
-    }
-    const mouseOver4 = () => {
-        setColor({
-            star1: 'rgb(221, 221, 25)',
-            star2: 'rgb(221, 221, 25)',
-            star3: 'rgb(221, 221, 25)',
-            star4: 'rgb(221, 221, 25)',
-            star5: '',
-            animateStar1: true
-        });
-    }
-    const mouseOver5 = () => {
-        setColor({
-            star1: 'rgb(221, 221, 25)',
-            star2: 'rgb(221, 221, 25)',
-            star3: 'rgb(221, 221, 25)',
-            star4: 'rgb(221, 221, 25)',
-            star5: 'rgb(221, 221, 25)',
-            animateStar1: true
-        });
-    }
+    const mouseOver = (index : number) => {
+        setActiveStar(index);
+    };
+
     const mouseLeave = () => {
-        setColor ({
-            star1: '',
-            star2: '',
-            star3: '',
-            star4: '',
-            star5: '',
-            animateStar1: false
-        });
-    }
+        setActiveStar(0)
+    };
+
     return (
         <StarContainer>
-            <Star style={{color: color.star1}} $animate={color.animateStar1} onMouseOver={mouseOver1} onMouseLeave={mouseLeave}>&#9733;</Star>
+            {[...Array(5)].map((star, index) => (
+            <Star
+            key={index}
+            isActive={index < activeStar}
+            onMouseOver={() => mouseOver(index + 1)}
+            onMouseLeave={mouseLeave}
+            >
+            &#9733;
+            </Star>
+            ))}
         </StarContainer>
-    )
+    );
 }
 
 export default Stars;
 
+/*
+    
+    $animate={color.animateStar1}
 
-    /*<Star style={{color: color.star2}} onMouseOver={mouseOver2} onMouseLeave={mouseLeave}>&#9733;</Star>
-    <Star style={{color: color.star3}} onMouseOver={mouseOver3} onMouseLeave={mouseLeave}>&#9733;</Star>
-    <Star style={{color: color.star4}} onMouseOver={mouseOver4} onMouseLeave={mouseLeave}>&#9733;</Star>
-    <Star style={{color: color.star5}} onMouseOver={mouseOver5} onMouseLeave={mouseLeave}>&#9733;</Star>*/
+    animation: ${props => 
+    (props.$animate ? css`${spin} 2s linear infinite` : 'none')};
+
+    const spin = keyframes`
+    from {transform: rotate(0deg)}
+    to {transform: rotate(40deg);}
+`;
+    
+<{ $animate: boolean }>
+
+    */

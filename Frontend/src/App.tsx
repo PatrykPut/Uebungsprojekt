@@ -1,5 +1,5 @@
 import Navbar from './navbar';
-import GameInfoFilter from './GameInfoFilter';
+import GameContainer from './GameContainer';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
@@ -23,7 +23,7 @@ function App() {
     <GlobalStyle/>
       <div className='main'>
         <Navbar/>
-        <GameInfoFilter/>
+        <GameContainer/>
       </div>
       </>
   );
