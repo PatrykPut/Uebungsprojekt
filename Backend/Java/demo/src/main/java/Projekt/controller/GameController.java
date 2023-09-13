@@ -12,7 +12,6 @@ import java.util.Optional;
 public class GameController {
 
     private final GameRepository gameRepository;           //erstellt eine Instanzvariable (nur in der Klasse verfügbar)
-
     public GameController(GameRepository gameRepository) { //erlaubt Zugriff auf das Repository
         this.gameRepository = gameRepository;
     }
@@ -27,6 +26,16 @@ public class GameController {
         if (gameOpt.isPresent()) {
             return ResponseEntity.ok(gameOpt.get());
         } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @GetMapping("game/platform/{id}")
+    public ResponseEntity<Game> getGameWithPlatforms(@PathVariable Long id) {
+        Optional<Game> gameOpt = gameRepository.findGameWithPlatforms(id);
+        if (gameOpt.isPresent()) {
+            return ResponseEntity.ok(gameOpt.get());
+        }
+        else {
             return ResponseEntity.notFound().build();
         }
     }

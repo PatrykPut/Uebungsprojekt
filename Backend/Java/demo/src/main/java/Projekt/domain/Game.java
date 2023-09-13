@@ -1,6 +1,7 @@
 package Projekt.domain;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
 
 import java.util.Set;
 
@@ -16,9 +17,11 @@ public class Game {
     private String releaseDate;
 
     private String developer;
-
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "game")
-    @JsonManagedReference //verhindert das entstehen von Endlosschleifen beim übersetzen in JSON
+    @JsonManagedReference
+    private Set<Platform> platforms;
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "game")
+    @JsonManagedReference //verhindert das Entstehen von Endlosschleifen beim Übersetzen in JSON
     private Set<Rating> ratings;
 
     public Long getId() {
@@ -60,7 +63,9 @@ public class Game {
     public void setRatings(Set<Rating> ratings) {
         this.ratings = ratings;
     }
+    public Set<Platform> getPlatforms() { return platforms; }
 
+    public void setPlatforms(Set<Platform> platforms) { this.platforms = platforms; }
 }
 
 

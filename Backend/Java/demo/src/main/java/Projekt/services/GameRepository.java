@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface GameRepository extends JpaRepository<Game, Long> {            //erweitert das generische CRUD Repository
     @Query("SELECT g FROM Game g LEFT JOIN FETCH g.ratings WHERE g.id = :id")
     Optional<Game> findByIdWithRatings(@Param("id") Long id);
+    @Query("SELECT g FROM Game g LEFT JOIN FETCH g.platforms WHERE g.id = (:id)")
+    Optional<Game> findGameWithPlatforms(@Param("id") Long id);
 }
