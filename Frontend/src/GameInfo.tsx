@@ -1,6 +1,7 @@
 import styled from 'styled-components';    
 import React, { useState, useEffect } from 'react';
 import { sort1, sort2, sort3, sort4 } from './Sort';
+import { type } from 'os';
 
 const AllGamesContainer = styled.div`
     display:flex;
@@ -27,9 +28,10 @@ const GameContainer = styled.div`
     }
 `;
      
-const API_URL = 'http://localhost:8080/games';  
+const allGamesWithRatings_URL = 'http://localhost:8080/games'; 
+//const oneGame_Url = `http://localhost:8080/game/${id}` 
   
-interface Game {                                            
+export interface Game {                                            
   id: number;        
   name: string;        
   releaseDate: string;        
@@ -69,11 +71,18 @@ function calculateAverageRatings(ratings: Rating[]): number {
     return sum / ratings.length;
 }
 
-function Games({sortOption, showRatings}: {sortOption : string, showRatings: boolean}) {    
+type GamesProps = {
+  sortOption: string;
+  showRatings: boolean;
+  selectedGame: Game | null;
+  setSelectedGame: React.Dispatch<React.SetStateAction<Game | null>>
+}
+
+function Games({sortOption, showRatings, selectedGame, setSelectedGame}: GamesProps) {    
   const [games, setGames] = useState<Game[]>([]);    
   
   useEffect(() => {    
-    fetch(API_URL)    
+    fetch(allGamesWithRatings_URL)    
       .then((response) => response.json())    
       .then((json: Game[]) => {
         if (sortOption === sort1) {
@@ -87,7 +96,8 @@ function Games({sortOption, showRatings}: {sortOption : string, showRatings: boo
         }
         else if (sortOption === sort4) {
           json.sort((a, b) => calculateAverageRatings(b.ratings) - calculateAverageRatings(a.ratings));
-        }  
+        }
+        
         setGames(json);    
       });    
   },[sortOption]);        
@@ -106,3 +116,4 @@ function Games({sortOption, showRatings}: {sortOption : string, showRatings: boo
 }  
 
 export default Games; 
+

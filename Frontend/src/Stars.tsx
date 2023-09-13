@@ -8,7 +8,6 @@ const StarContainer = styled.div`
     color: white;
     border-radius: 20px;
     position: relative;
-    //display: none;
 `;
 
 type StarProps = {
