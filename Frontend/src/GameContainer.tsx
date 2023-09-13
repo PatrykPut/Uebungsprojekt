@@ -24,5 +24,8 @@ const GameInfoToggle =() => {
 </BigBox>
 );
 }
+function test() {
+    
+}
 
 export default GameInfoToggle;
