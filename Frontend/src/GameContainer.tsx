@@ -11,21 +11,14 @@ const BigBox = styled.div`
 
 const GameInfoToggle =() => {
     const [sortOption, setSortOption] = useState('');
-    const [showRatings, setShowRatings] = useState(false);
     const [selectedGame, setSelectedGame] = useState<Game | null>(null);
 
-    const toggleShowRatings = () => {
-        setShowRatings(!showRatings);
-    }
     return (
 <BigBox>
-    <Sidebar setSortOption={setSortOption} toggleShowRatings={toggleShowRatings} showRatings={showRatings}/>
-    <Games sortOption={sortOption} showRatings={showRatings} selectedGame={selectedGame} setSelectedGame={setSelectedGame}/>
+    <Sidebar setSortOption={setSortOption}/>
+    <Games sortOption={sortOption} selectedGame={selectedGame} setSelectedGame={setSelectedGame}/>
 </BigBox>
 );
-}
-function test() {
-    
 }
 
 export default GameInfoToggle;

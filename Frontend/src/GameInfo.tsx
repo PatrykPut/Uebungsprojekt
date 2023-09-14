@@ -1,7 +1,6 @@
 import styled from 'styled-components';    
 import React, { useState, useEffect } from 'react';
-import { sort1, sort2, sort3, sort4 } from './Sort';
-import { type } from 'os';
+import { platform1, platform2, platform3, platform4, sort1, sort2, sort3, sort4 } from './Sort';
 
 const AllGamesContainer = styled.div`
     display:flex;
@@ -17,15 +16,12 @@ const GameContainer = styled.div`
     width: 250px;
     height: 200px;
     justify-content: center;
-    border:black solid 1px;
     margin-bottom: 20px;
     padding: 20px;
     border-radius: 10px;
     box-sizing: border-box;
-
-    &:hover {
-    box-shadow:0px 10px 13px -7px #000000 ;
-    }
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 `;
      
 const allGamesWithRatings_URL = 'http://localhost:8080/games'; 
@@ -35,16 +31,22 @@ export interface Game {
   id: number;        
   name: string;        
   releaseDate: string;        
-  developer: string;      
-  ratings: Rating[];      
+  developer: string;
+  platformName: string 
+  ratings: Rating[]; 
+  platforms: Platform[];     
 }      
     
 interface Rating {      
   id: number;   
-  name: string;     
   comment: string;      
   rating: number;      
 } 
+
+interface Platform {
+  id: number;
+  platformName: string;
+}
 
 function Game({ game }: {game : Game}) {       
   return (   
@@ -73,12 +75,11 @@ function calculateAverageRatings(ratings: Rating[]): number {
 
 type GamesProps = {
   sortOption: string;
-  showRatings: boolean;
   selectedGame: Game | null;
   setSelectedGame: React.Dispatch<React.SetStateAction<Game | null>>
 }
 
-function Games({sortOption, showRatings, selectedGame, setSelectedGame}: GamesProps) {    
+function Games({sortOption, selectedGame, setSelectedGame}: GamesProps) {    
   const [games, setGames] = useState<Game[]>([]);    
   
   useEffect(() => {    
@@ -97,21 +98,27 @@ function Games({sortOption, showRatings, selectedGame, setSelectedGame}: GamesPr
         else if (sortOption === sort4) {
           json.sort((a, b) => calculateAverageRatings(b.ratings) - calculateAverageRatings(a.ratings));
         }
-        
+        else if (sortOption === platform1 || sortOption === platform2 || sortOption === platform3 || sortOption === platform4) {
+          json = json.filter(game => game.platforms && game.platforms.some(platforms => platforms.platformName === sortOption))
+        }
         setGames(json);    
       });    
   },[sortOption]);        
-  
+
   return (
       <AllGamesContainer>
-        {games.map((game) => (    
-          showRatings 
-            ? game.ratings && game.ratings.map((rating) => (
-          <Rating key={rating.id} rating={rating} game={game}/>
-          )) 
-          : <Game key={game.id} game={game}/>  
-        ))} 
-        </AllGamesContainer>   
+        {selectedGame !== null ? (
+          selectedGame.ratings.map((rating) => (
+            <Rating key={rating.id} rating={rating} game={selectedGame}/>
+          ))
+        ) : (
+          games.map((game) => (
+            <div onClick={() => setSelectedGame(game)}>
+              <Game key={game.id} game={game}/>
+            </div>
+          ))
+        )}
+      </AllGamesContainer>   
   );    
 }  
 
