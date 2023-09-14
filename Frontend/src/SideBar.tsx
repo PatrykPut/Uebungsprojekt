@@ -26,13 +26,10 @@ const ToggleRatings = styled.div`
     }
 `;
 
-function Sidebar({ setSortOption, toggleShowRatings, showRatings }: { setSortOption: (value: string) => void; toggleShowRatings: () => void; showRatings: boolean}) {
+function Sidebar({ setSortOption}: { setSortOption: (value: string) => void}) {
 
     return (
         <SidebarContainer>
-            <ToggleRatings onClick={toggleShowRatings}>    
-                {showRatings ? 'Show Games' : 'Show Ratings'}    
-            </ToggleRatings>
             <Stars/>
             <Filter setSortOption={setSortOption}/>
         </SidebarContainer>
