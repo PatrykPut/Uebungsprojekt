@@ -26,11 +26,17 @@ const ToggleRatings = styled.div`
     }
 `;
 
-function Sidebar({ setSortOption}: { setSortOption: (value: string) => void}) {
+type SidebarProps = {
+    setSortOption: (value: string) => void;
+    selectedStar: number;
+    setSelectedStar: React.Dispatch<React.SetStateAction<number>>;
+}
+
+function Sidebar({ setSortOption, selectedStar, setSelectedStar }: SidebarProps) {
 
     return (
         <SidebarContainer>
-            <Stars/>
+            <Stars selectedStar={selectedStar} setSelectedStar={setSelectedStar}/>
             <Filter setSortOption={setSortOption}/>
         </SidebarContainer>
     )

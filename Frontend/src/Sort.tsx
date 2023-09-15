@@ -10,23 +10,25 @@ const Input = styled.div`
     padding-bottom: 5px;
     
     &:hover {
-        background-color: rgb(208, 233, 255);    
+        background-color: rgb(190, 225, 255);    
     }
     `;
 
 const Drop = styled.div`
-    background-color: rgb(224, 241, 255);
     border: solid greenyellow 0.5px;
     width: 18vw;
-    position: absolute;
-    z-index: 2;
     `;
 
-const Search = styled.div`
+type SearchProps = {
+    isSelected: boolean;
+};
+
+const Search = styled.div<SearchProps>`
     cursor: pointer;
+    background-color: ${props => props.isSelected ? 'rgb(168, 215, 255)' : 'rgb(224, 241, 255)'};
     
     &:hover {
-        background-color: rgb(208, 233, 255); 
+        background-color: rgb(168, 215, 255); 
     }
     `;
 
@@ -34,18 +36,17 @@ interface FilterProps {
     setSortOption: (value: string) => void;
 }
 
-export const sort1 = 'default';
-export const sort2 = 'newest';
-export const sort3 = 'mostRatings';
-export const sort4 = 'bestRatings';
-export const platform1 = 'PC';
-export const platform2 = 'Xbox';
-export const platform3 = 'PlayStation';
-export const platform4 = 'Nintendo';
+export const options = {
+    sort: ['Default', 'Newest', 'Most Ratings', 'Best Ratings'],
+    platform: ['PC', 'Xbox', 'PlayStation', 'Nintendo']
+}
 
 function Filter({setSortOption}: FilterProps) {
     const [display1, setDisplay1] = useState({drop: 'none'});
     const [display2, setDisplay2] = useState({drop: 'none'});
+    const [selectedOption, setSelectedOption] = useState('');
+    const sortOptions = [options.sort, options.platform];
+    
     const toggleDropdown1 = () => {
         setDisplay1(prevState => ({
             drop: prevState.drop === 'none' ? 'block' : 'none'
@@ -61,33 +62,37 @@ return (
     <div>
         <Input onClick={toggleDropdown1}>Filter</Input>
             <Drop style={{display: display1.drop}}>
-                <Search onClick={() => 
-                setSortOption(sort1)}>Default
+
+                {options.sort.map(option => (
+                <Search 
+                isSelected={selectedOption === option}
+                onClick={() => {
+                setSortOption(option);
+                setSelectedOption(option);
+                }}
+                >
+                    {option}
                 </Search>
-                <Search onClick={() => 
-                    setSortOption(sort2)}>Newest
-                </Search>
-                <Search onClick={() => 
-                    setSortOption(sort3)}>Most Ratings
-                </Search>
-                <Search onClick={() => 
-                    setSortOption(sort4)}>Best Ratings
-                </Search>
+                ))}
+                
+
             </Drop>
             <Input onClick={toggleDropdown2}>Platforms</Input>
             <Drop style={{display: display2.drop}}>
-                <Search onClick={() => 
-                setSortOption(platform1)}>PC
+                
+                {options.platform.map(option => (
+                <Search
+                isSelected={selectedOption === option}
+                onClick={() => {
+                setSortOption(option)
+                setSelectedOption(option)
+                }}
+                >
+                    {option}
                 </Search>
-                <Search onClick={() => 
-                    setSortOption(platform2)}>Xbox
-                </Search>
-                <Search onClick={() => 
-                    setSortOption(platform3)}>PlayStation
-                </Search>
-                <Search onClick={() => 
-                    setSortOption(platform4)}>Nintendo
-                </Search>
+                ))}
+
+                
             </Drop>
     </div>
 )

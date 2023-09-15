@@ -29,14 +29,4 @@ public class GameController {
             return ResponseEntity.notFound().build();
         }
     }
-    @GetMapping("game/platform/{id}")
-    public ResponseEntity<Game> getGameWithPlatforms(@PathVariable Long id) {
-        Optional<Game> gameOpt = gameRepository.findGameWithPlatforms(id);
-        if (gameOpt.isPresent()) {
-            return ResponseEntity.ok(gameOpt.get());
-        }
-        else {
-            return ResponseEntity.notFound().build();
-        }
-    }
 }
