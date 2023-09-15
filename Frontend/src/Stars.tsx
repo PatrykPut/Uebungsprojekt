@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 const StarContainer = styled.div`
     width: max-content;
@@ -19,12 +19,24 @@ type StarsProps = {
     setSelectedStar: React.Dispatch<React.SetStateAction<number>>;
 }
 
+const spin = keyframes`
+from {transform:rotate(0deg)}
+to {transform:rotate(40deg)}
+`;
+
+
 const Star = styled.span<StarProps>`
     font-size: 50px; 
     position: relative;
     bottom: 4px;
     cursor: pointer;
     color: ${props => props.isActive ? 'rgb(255, 255, 27)' : props.isSelected ? 'rgb(255, 255, 27)' : ''};
+
+    animation: ${props => props.isActive || props.isSelected ? css`${spin} 2s linear infinite` : 'none'};
+
+    &:hover {
+        animation: ${spin} 2s linear infinite;
+    }
 `;
 
 function Stars({selectedStar, setSelectedStar} : StarsProps) {

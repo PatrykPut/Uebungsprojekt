@@ -10,21 +10,25 @@ const Input = styled.div`
     padding-bottom: 5px;
     
     &:hover {
-        background-color: rgb(208, 233, 255);    
+        background-color: rgb(190, 225, 255);    
     }
     `;
 
 const Drop = styled.div`
-    background-color: rgb(224, 241, 255);
     border: solid greenyellow 0.5px;
     width: 18vw;
     `;
 
-const Search = styled.div`
+type SearchProps = {
+    isSelected: boolean;
+};
+
+const Search = styled.div<SearchProps>`
     cursor: pointer;
+    background-color: ${props => props.isSelected ? 'rgb(168, 215, 255)' : 'rgb(224, 241, 255)'};
     
     &:hover {
-        background-color: rgb(208, 233, 255); 
+        background-color: rgb(168, 215, 255); 
     }
     `;
 
@@ -44,6 +48,8 @@ export const platform4 = 'Nintendo';
 function Filter({setSortOption}: FilterProps) {
     const [display1, setDisplay1] = useState({drop: 'none'});
     const [display2, setDisplay2] = useState({drop: 'none'});
+    const [selectedOption, setSelectedOption] = useState('');
+    
     const toggleDropdown1 = () => {
         setDisplay1(prevState => ({
             drop: prevState.drop === 'none' ? 'block' : 'none'
@@ -59,33 +65,75 @@ return (
     <div>
         <Input onClick={toggleDropdown1}>Filter</Input>
             <Drop style={{display: display1.drop}}>
-                <Search onClick={() => 
-                setSortOption(sort1)}>Default
+
+                <Search 
+                isSelected={selectedOption === sort1}
+                onClick={() => {
+                setSortOption(sort1);
+                setSelectedOption(sort1)
+                }}>Default
                 </Search>
-                <Search onClick={() => 
-                    setSortOption(sort2)}>Newest
+
+                <Search
+                isSelected={selectedOption === sort2}
+                onClick={() => {
+                setSortOption(sort2)
+                setSelectedOption(sort2)
+                }}>Newest
                 </Search>
-                <Search onClick={() => 
-                    setSortOption(sort3)}>Most Ratings
+                
+                <Search
+                isSelected={selectedOption === sort3}
+                onClick={() => {
+                setSortOption(sort3)
+                setSelectedOption(sort3)
+                }}>Most Ratings
                 </Search>
-                <Search onClick={() => 
-                    setSortOption(sort4)}>Best Ratings
+
+                <Search
+                isSelected={selectedOption === sort4}
+                onClick={() => {
+                setSortOption(sort4)
+                setSelectedOption(sort4)
+                }}>Best Ratings
                 </Search>
+
             </Drop>
             <Input onClick={toggleDropdown2}>Platforms</Input>
             <Drop style={{display: display2.drop}}>
-                <Search onClick={() => 
-                setSortOption(platform1)}>PC
+
+                <Search
+                isSelected={selectedOption === platform1}
+                onClick={() => {
+                setSortOption(platform1)
+                setSelectedOption(platform1)
+                }}>PC
                 </Search>
-                <Search onClick={() => 
-                    setSortOption(platform2)}>Xbox
+
+                <Search
+                isSelected={selectedOption === platform2}
+                onClick={() => {
+                setSortOption(platform2)
+                setSelectedOption(platform2)
+                }}>Xbox
                 </Search>
-                <Search onClick={() => 
-                    setSortOption(platform3)}>PlayStation
+
+                <Search
+                isSelected={selectedOption === platform3}
+                onClick={() => {
+                setSortOption(platform3)
+                setSelectedOption(platform3)
+                }}>PlayStation
                 </Search>
-                <Search onClick={() => 
-                    setSortOption(platform4)}>Nintendo
+
+                <Search
+                isSelected={selectedOption === platform4}
+                onClick={() => {
+                setSortOption(platform4)
+                setSelectedOption(platform4)
+                }}>Nintendo
                 </Search>
+
             </Drop>
     </div>
 )
