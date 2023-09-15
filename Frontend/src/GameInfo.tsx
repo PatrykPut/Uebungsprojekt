@@ -47,6 +47,13 @@ interface Platform {
   platformName: string;
 }
 
+interface GamesProps {
+  sortOption: string;
+  selectedGame: Game | null;
+  setSelectedGame: React.Dispatch<React.SetStateAction<Game | null>>;
+  selectedStar: number;
+}
+
 function Game({ game }: {game : Game}) {       
   return (   
       <GameContainer>                                          
@@ -70,13 +77,6 @@ function Rating({rating, game} : {rating : Rating,game : Game}) {
 function calculateAverageRatings(ratings: Rating[]): number {
     const sum = ratings.reduce((a, b) => a + b.rating, 0);
     return sum / ratings.length;
-}
-
-type GamesProps = {
-  sortOption: string;
-  selectedGame: Game | null;
-  setSelectedGame: React.Dispatch<React.SetStateAction<Game | null>>;
-  selectedStar: number;
 }
 
 function Games({sortOption, selectedGame, setSelectedGame, selectedStar}: GamesProps) {    

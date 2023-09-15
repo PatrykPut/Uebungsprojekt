@@ -10,11 +10,11 @@ const StarContainer = styled.div`
     position: relative;
 `;
 
-type StarProps = {
+interface StarProps {
     isActive: boolean;
     isSelected: boolean;
 }
-type StarsProps = {
+interface StarsProps {
     selectedStar: number;
     setSelectedStar: React.Dispatch<React.SetStateAction<number>>;
 }
