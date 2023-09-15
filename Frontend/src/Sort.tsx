@@ -19,7 +19,7 @@ const Drop = styled.div`
     width: 18vw;
     `;
 
-type SearchProps = {
+interface SearchProps {
     isSelected: boolean;
 };
 
@@ -45,7 +45,7 @@ function Filter({setSortOption}: FilterProps) {
     const [display1, setDisplay1] = useState({drop: 'none'});
     const [display2, setDisplay2] = useState({drop: 'none'});
     const [selectedOption, setSelectedOption] = useState('');
-    const sortOptions = [options.sort, options.platform];
+    //const sortOptions = [options.sort, options.platform];
     
     const toggleDropdown1 = () => {
         setDisplay1(prevState => ({
