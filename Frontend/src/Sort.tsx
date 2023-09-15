@@ -36,19 +36,16 @@ interface FilterProps {
     setSortOption: (value: string) => void;
 }
 
-export const sort1 = 'default';
-export const sort2 = 'newest';
-export const sort3 = 'mostRatings';
-export const sort4 = 'bestRatings';
-export const platform1 = 'PC';
-export const platform2 = 'Xbox';
-export const platform3 = 'PlayStation';
-export const platform4 = 'Nintendo';
+export const options = {
+    sort: ['Default', 'Newest', 'Most Ratings', 'Best Ratings'],
+    platform: ['PC', 'Xbox', 'PlayStation', 'Nintendo']
+}
 
 function Filter({setSortOption}: FilterProps) {
     const [display1, setDisplay1] = useState({drop: 'none'});
     const [display2, setDisplay2] = useState({drop: 'none'});
     const [selectedOption, setSelectedOption] = useState('');
+    const sortOptions = [options.sort, options.platform];
     
     const toggleDropdown1 = () => {
         setDisplay1(prevState => ({
@@ -66,74 +63,36 @@ return (
         <Input onClick={toggleDropdown1}>Filter</Input>
             <Drop style={{display: display1.drop}}>
 
+                {options.sort.map(option => (
                 <Search 
-                isSelected={selectedOption === sort1}
+                isSelected={selectedOption === option}
                 onClick={() => {
-                setSortOption(sort1);
-                setSelectedOption(sort1)
-                }}>Default
+                setSortOption(option);
+                setSelectedOption(option);
+                }}
+                >
+                    {option}
                 </Search>
-
-                <Search
-                isSelected={selectedOption === sort2}
-                onClick={() => {
-                setSortOption(sort2)
-                setSelectedOption(sort2)
-                }}>Newest
-                </Search>
+                ))}
                 
-                <Search
-                isSelected={selectedOption === sort3}
-                onClick={() => {
-                setSortOption(sort3)
-                setSelectedOption(sort3)
-                }}>Most Ratings
-                </Search>
-
-                <Search
-                isSelected={selectedOption === sort4}
-                onClick={() => {
-                setSortOption(sort4)
-                setSelectedOption(sort4)
-                }}>Best Ratings
-                </Search>
 
             </Drop>
             <Input onClick={toggleDropdown2}>Platforms</Input>
             <Drop style={{display: display2.drop}}>
-
+                
+                {options.platform.map(option => (
                 <Search
-                isSelected={selectedOption === platform1}
+                isSelected={selectedOption === option}
                 onClick={() => {
-                setSortOption(platform1)
-                setSelectedOption(platform1)
-                }}>PC
+                setSortOption(option)
+                setSelectedOption(option)
+                }}
+                >
+                    {option}
                 </Search>
+                ))}
 
-                <Search
-                isSelected={selectedOption === platform2}
-                onClick={() => {
-                setSortOption(platform2)
-                setSelectedOption(platform2)
-                }}>Xbox
-                </Search>
-
-                <Search
-                isSelected={selectedOption === platform3}
-                onClick={() => {
-                setSortOption(platform3)
-                setSelectedOption(platform3)
-                }}>PlayStation
-                </Search>
-
-                <Search
-                isSelected={selectedOption === platform4}
-                onClick={() => {
-                setSortOption(platform4)
-                setSelectedOption(platform4)
-                }}>Nintendo
-                </Search>
-
+                
             </Drop>
     </div>
 )

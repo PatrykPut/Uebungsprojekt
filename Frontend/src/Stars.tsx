@@ -20,8 +20,8 @@ type StarsProps = {
 }
 
 const spin = keyframes`
-from {transform:rotate(0deg)}
-to {transform:rotate(40deg)}
+from {transform:rotate(0deg) scale(1)}
+to {transform:rotate(20deg) scale(1.2)}
 `;
 
 
@@ -30,13 +30,10 @@ const Star = styled.span<StarProps>`
     position: relative;
     bottom: 4px;
     cursor: pointer;
+    display:inline-block;
     color: ${props => props.isActive ? 'rgb(255, 255, 27)' : props.isSelected ? 'rgb(255, 255, 27)' : ''};
-
-    animation: ${props => props.isActive || props.isSelected ? css`${spin} 2s linear infinite` : 'none'};
-
-    &:hover {
-        animation: ${spin} 2s linear infinite;
-    }
+    animation: ${props => props.isActive ? css`${spin} 0.3s forwards` : ''};
+    transition: transform 0.3s ease-out;
 `;
 
 function Stars({selectedStar, setSelectedStar} : StarsProps) {

@@ -1,6 +1,6 @@
-import styled, { keyframes } from 'styled-components';    
+import styled from 'styled-components';    
 import React, { useState, useEffect } from 'react';
-import { platform1, platform2, platform3, platform4, sort1, sort2, sort3, sort4 } from './Sort';
+import { options } from './Sort';
 
 const AllGamesContainer = styled.div`
     display:flex;
@@ -87,19 +87,19 @@ function Games({sortOption, selectedGame, setSelectedGame, selectedStar}: GamesP
       .then((response) => response.json())    
       .then((originalJson: Game[]) => {
         let json = [...originalJson]
-        if (sortOption === sort1) {
+        if (sortOption === options.sort[0]) {
           
         }
-        else if (sortOption === sort2) {
+        else if (sortOption === options.sort[1]) {
           json.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
         }
-        else if (sortOption === sort3)  {
+        else if (sortOption === options.sort[2])  {
           json.sort((a, b) => b.ratings.length - a.ratings.length);
         }
-        else if (sortOption === sort4) {
+        else if (sortOption === options.sort[3]) {
           json.sort((a, b) => calculateAverageRatings(b.ratings) - calculateAverageRatings(a.ratings));
         }
-        else if (sortOption === platform1 || sortOption === platform2 || sortOption === platform3 || sortOption === platform4) {
+        else if (sortOption === options.platform[0] || sortOption === options.platform[1] || sortOption === options.platform[2] || sortOption === options.platform[3]) {
           json = json.filter(game => game.platforms && game.platforms.some(platforms => platforms.platformName === sortOption))
         }
         if (selectedStar > 0) {
