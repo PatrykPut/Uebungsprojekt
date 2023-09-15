@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const StarContainer = styled.div`
     width: max-content;
@@ -12,6 +12,11 @@ const StarContainer = styled.div`
 
 type StarProps = {
     isActive: boolean;
+    isSelected: boolean;
+}
+type StarsProps = {
+    selectedStar: number;
+    setSelectedStar: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const Star = styled.span<StarProps>`
@@ -19,10 +24,10 @@ const Star = styled.span<StarProps>`
     position: relative;
     bottom: 4px;
     cursor: pointer;
-    color: ${props => props.isActive ? 'rgb(221, 221, 25)' : ''};
+    color: ${props => props.isActive ? 'rgb(255, 255, 27)' : props.isSelected ? 'rgb(255, 255, 27)' : ''};
 `;
 
-function Stars() {
+function Stars({selectedStar, setSelectedStar} : StarsProps) {
     const [activeStar, setActiveStar] = useState(0);
 
     const mouseOver = (index : number) => {
@@ -33,14 +38,25 @@ function Stars() {
         setActiveStar(0)
     };
 
+    const starClick = (index : number) => {
+        if (index === selectedStar) {
+            setSelectedStar(0);
+        }
+        else {
+            setSelectedStar(index);
+        }
+    };
+
     return (
         <StarContainer>
             {[...Array(5)].map((star, index) => (
             <Star
             key={index}
             isActive={index < activeStar}
+            isSelected={index < selectedStar}
             onMouseOver={() => mouseOver(index + 1)}
             onMouseLeave={mouseLeave}
+            onClick={() => starClick(index + 1)}
             >
             &#9733;
             </Star>
@@ -50,19 +66,3 @@ function Stars() {
 }
 
 export default Stars;
-
-/*
-    
-    $animate={color.animateStar1}
-
-    animation: ${props => 
-    (props.$animate ? css`${spin} 2s linear infinite` : 'none')};
-
-    const spin = keyframes`
-    from {transform: rotate(0deg)}
-    to {transform: rotate(40deg);}
-`;
-    
-<{ $animate: boolean }>
-
-    */

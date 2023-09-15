@@ -18,8 +18,6 @@ const Drop = styled.div`
     background-color: rgb(224, 241, 255);
     border: solid greenyellow 0.5px;
     width: 18vw;
-    position: absolute;
-    z-index: 2;
     `;
 
 const Search = styled.div`

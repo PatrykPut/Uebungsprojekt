@@ -1,5 +1,5 @@
 import Navbar from './navbar';
-import GameContainer from './GameContainer';
+import GameContainer from './GameInfoSidebar';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`

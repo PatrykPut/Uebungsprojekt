@@ -1,4 +1,4 @@
-import styled from 'styled-components';    
+import styled, { keyframes } from 'styled-components';    
 import React, { useState, useEffect } from 'react';
 import { platform1, platform2, platform3, platform4, sort1, sort2, sort3, sort4 } from './Sort';
 
@@ -24,8 +24,7 @@ const GameContainer = styled.div`
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 `;
      
-const allGamesWithRatings_URL = 'http://localhost:8080/games'; 
-//const oneGame_Url = `http://localhost:8080/game/${id}` 
+const allGamesWithRatings_URL = 'http://localhost:8080/games';  
   
 export interface Game {                                            
   id: number;        
@@ -76,19 +75,21 @@ function calculateAverageRatings(ratings: Rating[]): number {
 type GamesProps = {
   sortOption: string;
   selectedGame: Game | null;
-  setSelectedGame: React.Dispatch<React.SetStateAction<Game | null>>
+  setSelectedGame: React.Dispatch<React.SetStateAction<Game | null>>;
+  selectedStar: number;
 }
 
-function Games({sortOption, selectedGame, setSelectedGame}: GamesProps) {    
+function Games({sortOption, selectedGame, setSelectedGame, selectedStar}: GamesProps) {    
   const [games, setGames] = useState<Game[]>([]);    
   
   useEffect(() => {    
     fetch(allGamesWithRatings_URL)    
       .then((response) => response.json())    
-      .then((json: Game[]) => {
+      .then((originalJson: Game[]) => {
+        let json = [...originalJson]
         if (sortOption === sort1) {
-          setGames(json);
-        } 
+          
+        }
         else if (sortOption === sort2) {
           json.sort((a, b) => new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime());
         }
@@ -101,9 +102,13 @@ function Games({sortOption, selectedGame, setSelectedGame}: GamesProps) {
         else if (sortOption === platform1 || sortOption === platform2 || sortOption === platform3 || sortOption === platform4) {
           json = json.filter(game => game.platforms && game.platforms.some(platforms => platforms.platformName === sortOption))
         }
-        setGames(json);    
+        if (selectedStar > 0) {
+          json = json.filter(game => 
+            Math.round(calculateAverageRatings(game.ratings)) === selectedStar);
+        }    
+        setGames(json);
       });    
-  },[sortOption]);        
+  },[sortOption, selectedStar]);        
 
   return (
       <AllGamesContainer>
