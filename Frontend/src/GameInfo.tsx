@@ -5,8 +5,8 @@ import { options } from './Sort';
 const AllGamesContainer = styled.div`
     display:flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
     width: 60vw;
+    justify-content:space-evenly;
     height: max-content;
     margin-top: 20px; 
     margin-left: 2vw;
@@ -22,6 +22,7 @@ const GameContainer = styled.div`
     box-sizing: border-box;
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    margin-right:10px;
 `;
      
 const allGamesWithRatings_URL = 'http://localhost:8080/games';  
@@ -52,6 +53,7 @@ interface GamesProps {
   selectedGame: Game | null;
   setSelectedGame: React.Dispatch<React.SetStateAction<Game | null>>;
   selectedStar: number;
+  searchTerm: string;
 }
 
 function Game({ game }: {game : Game}) {       
@@ -79,7 +81,7 @@ function calculateAverageRatings(ratings: Rating[]): number {
     return sum / ratings.length;
 }
 
-function Games({sortOption, selectedGame, setSelectedGame, selectedStar}: GamesProps) {    
+function Games({sortOption, selectedGame, setSelectedGame, selectedStar, searchTerm}: GamesProps) {    
   const [games, setGames] = useState<Game[]>([]);    
   
   useEffect(() => {    
@@ -105,10 +107,16 @@ function Games({sortOption, selectedGame, setSelectedGame, selectedStar}: GamesP
         if (selectedStar > 0) {
           json = json.filter(game => 
             Math.round(calculateAverageRatings(game.ratings)) === selectedStar);
-        }    
+        }
+        if (searchTerm) {
+          json = json.filter(game => 
+            game.name.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+          }
+
         setGames(json);
       });    
-  },[sortOption, selectedStar]);        
+  },[sortOption, selectedStar, searchTerm]);        
 
   return (
       <AllGamesContainer>
