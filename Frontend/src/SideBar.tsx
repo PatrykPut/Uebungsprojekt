@@ -23,8 +23,6 @@ interface SidebarProps {
 
 function Sidebar({ setSortOption, selectedStar, setSelectedStar, searchTerm, setSearchTerm }: SidebarProps) {
 
-    
-
     return (
         <SidebarContainer>
             <SearchGame searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
