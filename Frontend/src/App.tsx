@@ -1,4 +1,4 @@
-import Navbar from './navbar';
+import Navbar from './Navbar';
 import GameContainer from './GameInfoSidebar';
 import { createGlobalStyle } from 'styled-components';
 

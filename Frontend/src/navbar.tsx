@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Header = styled.div`
-    display: flex;
+    display:flex;
     justify-content: left;
     align-items: center;
     background-color: gray;
@@ -25,9 +25,14 @@ const Controller = styled.img`
     margin-left: 20px;
 `;
 
+const MainContainer = styled.div`
+    width:100vw;
+    position: fixed;
+`;
+
 function Navbar() {
     return (
-        <div>
+        <MainContainer>
             <Header>
                 Games 
                 <Controller src="/controller.png"/>
@@ -39,8 +44,8 @@ function Navbar() {
                 <span>Reviews</span>
                 <span>Shop</span>
             </NavbarContainer>
-        </div>
+        </MainContainer>
     );
   };
 
-export default Navbar
+export default Navbar;
