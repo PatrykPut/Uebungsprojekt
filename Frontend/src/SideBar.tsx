@@ -11,7 +11,6 @@ const SidebarContainer = styled.div`
     background-color: lightgrey;
     position: fixed;
     left: 0;
-    top: 17vh;
 `;
 
 interface SidebarProps {

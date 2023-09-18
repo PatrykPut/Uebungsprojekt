@@ -9,7 +9,7 @@ const AllGamesContainer = styled.div`
     justify-content:space-evenly;
     height: max-content;
     margin-top: 20px; 
-    margin-left: 2vw;
+    
 `;
 
 const GameContainer = styled.div`

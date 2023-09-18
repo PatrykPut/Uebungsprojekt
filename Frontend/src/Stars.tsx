@@ -20,10 +20,15 @@ interface StarsProps {
 }
 
 const spin = keyframes`
-from {transform:rotate(0deg) scale(1)}
-to {transform:rotate(20deg) scale(1.2)}
+from {
+    transform:rotate(0deg) scale(1);
+    color: none;
+}
+to {
+    transform:rotate(20deg) scale(1.2);
+    color: rgb(255, 255, 27)
+}
 `;
-
 
 const Star = styled.span<StarProps>`
     font-size: 50px; 
@@ -31,9 +36,8 @@ const Star = styled.span<StarProps>`
     bottom: 4px;
     cursor: pointer;
     display:inline-block;
-    color: ${props => props.isActive ? 'rgb(255, 255, 27)' : props.isSelected ? 'rgb(255, 255, 27)' : ''};
-    animation: ${props => props.isActive ? css`${spin} 0.3s forwards` : ''};
-    transition: transform 0.3s ease-out;
+    color: ${props => props.isSelected ? 'rgb(255, 255, 27)' : ''};
+    animation: ${props => props.isActive ? css`${spin} 0.5s forwards` : ''};
 `;
 
 function Stars({selectedStar, setSelectedStar} : StarsProps) {
