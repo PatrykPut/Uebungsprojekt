@@ -1,8 +1,8 @@
-import Games from "./GameInfo";
-import { useState } from "react";
+import { Routes, Route} from "react-router-dom";
 import Sidebar from "./SideBar";
 import styled from 'styled-components';
 import { Game } from "./GameInfo";
+import Games, { GamePage } from "./GameInfo";
 
 const BigBox = styled.div`
     display:flex;
@@ -11,16 +11,26 @@ const BigBox = styled.div`
     top: 17vh;
 `;
 
-const GameInfoSidebar =() => {
-    const [sortOption, setSortOption] = useState('');
-    const [selectedGame, setSelectedGame] = useState<Game | null>(null);
-    const [selectedStar, setSelectedStar] = useState(0);
-    const [searchTerm, setSearchTerm] = useState('');
+interface GamesProps {
+    sortOption: string;
+    selectedGame: Game | null;
+    setSelectedGame: React.Dispatch<React.SetStateAction<Game | null>>;
+    selectedStar: number;
+    searchTerm: string;
+    setSortOption:(value: string) => void;
+    setSelectedStar: React.Dispatch<React.SetStateAction<number>>;
+    setSearchTerm: (searchTerm: string) => void;
+  }
 
+const GameInfoSidebar =({sortOption, selectedGame, setSortOption, setSelectedGame, selectedStar, setSelectedStar, searchTerm, setSearchTerm} : GamesProps) => {
+    
     return (
 <BigBox>
     <Sidebar setSortOption={setSortOption} selectedStar={selectedStar} setSelectedStar={setSelectedStar} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-    <Games sortOption={sortOption} selectedGame={selectedGame} setSelectedGame={setSelectedGame} selectedStar={selectedStar} searchTerm={searchTerm}/>
+    <Routes>  
+        <Route index element={<Games sortOption={sortOption} selectedStar={selectedStar} searchTerm={searchTerm} selectedGame={selectedGame} setSelectedGame={setSelectedGame}/>}/>  
+        <Route path="game/:id" element={<GamePage/>}/>  
+      </Routes>  
 </BigBox>
 );
 }

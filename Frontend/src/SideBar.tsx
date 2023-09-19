@@ -11,7 +11,6 @@ const SidebarContainer = styled.div`
     background-color: lightgrey;
     position: fixed;
     left: 0;
-    top: 17vh;
 `;
 
 interface SidebarProps {
@@ -23,8 +22,6 @@ interface SidebarProps {
 }
 
 function Sidebar({ setSortOption, selectedStar, setSelectedStar, searchTerm, setSearchTerm }: SidebarProps) {
-
-    
 
     return (
         <SidebarContainer>

@@ -1,6 +1,9 @@
-import Navbar from './Navbar';
-import GameContainer from './GameInfoSidebar';
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import Navbar from './navbar';
+import GameInfoSidebar from "./GameInfoSidebar";
 import { createGlobalStyle } from 'styled-components';
+import { useState } from "react";
+import { Game } from "./GameInfo";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -15,17 +18,23 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-function App() {
+function App () {
+
+  const [sortOption, setSortOption] = useState('');
+    const [selectedGame, setSelectedGame] = useState<Game | null>(null);
+    const [selectedStar, setSelectedStar] = useState(0);
+    const [searchTerm, setSearchTerm] = useState('');
+
   return (
-    <>
-    <GlobalStyle/>
-      <div className='main'>
+    
+    <Router>
+      <GlobalStyle/>
         <Navbar/>
-        <GameContainer/>
-      </div>
-      </>
+         <Routes>
+          <Route path="/*" element={<GameInfoSidebar sortOption={sortOption} selectedGame={selectedGame} setSortOption={setSortOption} setSelectedGame={setSelectedGame} selectedStar={selectedStar} setSelectedStar={setSelectedStar} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>}/>
+         </Routes>
+    </Router>
   );
 };
-
+  
 export default App; 
-

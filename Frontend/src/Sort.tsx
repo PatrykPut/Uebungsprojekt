@@ -19,10 +19,6 @@ const Drop = styled.div`
     width: 18vw;
     `;
 
-interface SearchProps {
-    isSelected: boolean;
-};
-
 const Search = styled.div<SearchProps>`
     cursor: pointer;
     background-color: ${props => props.isSelected ? 'rgb(168, 215, 255)' : 'rgb(224, 241, 255)'};
@@ -31,6 +27,10 @@ const Search = styled.div<SearchProps>`
         background-color: rgb(168, 215, 255); 
     }
     `;
+
+interface SearchProps {
+    isSelected: boolean;
+};
 
 interface FilterProps {
     setSortOption: (value: string) => void;
@@ -58,7 +58,7 @@ function Filter({setSortOption}: FilterProps) {
     }
 
 return (
-    <div>
+    <>
         <Input onClick={toggleDropdown1}>Filter</Input>
             <Drop style={{display: display1.drop}}>
 
@@ -74,7 +74,6 @@ return (
                 </Search>
                 ))}
                 
-
             </Drop>
             <Input onClick={toggleDropdown2}>Platforms</Input>
             <Drop style={{display: display2.drop}}>
@@ -90,10 +89,8 @@ return (
                     {option}
                 </Search>
                 ))}
-
-                
             </Drop>
-    </div>
+    </>
 )
 }
 

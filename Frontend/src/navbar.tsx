@@ -28,6 +28,9 @@ const Controller = styled.img`
 const MainContainer = styled.div`
     width:100vw;
     position: fixed;
+    opacity: 1;
+    z-index: 1;
+    //display:none;
 `;
 
 function Navbar() {
