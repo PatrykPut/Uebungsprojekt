@@ -17,12 +17,10 @@ function SearchGame ({searchTerm, setSearchTerm} : SearchGameProps) {
     };
 
     return (
-    <div>
+    <>
     Search
-    <Input placeholder="Search" value={searchTerm} onChange={handleChange}>
-    
-    </Input>
-    </div>
+    <Input placeholder="Search" value={searchTerm} onChange={handleChange}/>
+    </>
         )
 }
 

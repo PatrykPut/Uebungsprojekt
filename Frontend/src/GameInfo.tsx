@@ -1,6 +1,8 @@
 import styled from 'styled-components';    
 import React, { useState, useEffect } from 'react';
 import { options } from './Sort';
+import { BrowserRouter as Router, Route, Link, useParams } from "react-router-dom";  
+import { useNavigate } from 'react-router-dom';
 
 const AllGamesContainer = styled.div`
     display:flex;
@@ -9,7 +11,6 @@ const AllGamesContainer = styled.div`
     justify-content:space-evenly;
     height: max-content;
     margin-top: 20px; 
-    
 `;
 
 const GameContainer = styled.div`
@@ -20,9 +21,9 @@ const GameContainer = styled.div`
     padding: 20px;
     border-radius: 10px;
     box-sizing: border-box;
-    cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    margin-right:10px;
+    margin-right: 10px;
+    cursor: pointer;
 `;
      
 const allGamesWithRatings_URL = 'http://localhost:8080/games';  
@@ -37,13 +38,13 @@ export interface Game {
   platforms: Platform[];     
 }      
     
-interface Rating {      
+export interface Rating {      
   id: number;   
   comment: string;      
   rating: number;      
 } 
 
-interface Platform {
+export interface Platform {
   id: number;
   platformName: string;
 }
@@ -56,17 +57,27 @@ interface GamesProps {
   searchTerm: string;
 }
 
-function Game({ game }: {game : Game}) {       
+export function Game({ game }: {game : Game}) {   
+  
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`game/${game.id}`);
+  }
+
   return (   
-      <GameContainer>                                          
+   <GameContainer onClick={() => {
+    handleClick();
+    console.log("Click");
+   }}>                       
         <h3>{game.name}</h3>    
         <p>{game.releaseDate}</p>    
         <p>{game.developer}</p>  
-      </GameContainer>      
-  );    
+   </GameContainer>
+    );    
 }    
     
-function Rating({rating, game} : {rating : Rating,game : Game}) {    
+export function Rating({rating, game} : {rating : Rating,game : Game}) {    
   return (    
       <GameContainer>    
         <h3>{game.name}</h3>  
@@ -76,13 +87,36 @@ function Rating({rating, game} : {rating : Rating,game : Game}) {
   );    
 } 
 
+export function GamePage() {  
+  const { id } = useParams<{ id: string }>();  
+  const [game, setGame] = useState<Game | null>(null);  
+  
+  useEffect(() => {  
+    fetch(`http://localhost:8080/game/${id}`)  
+      .then((response) => response.json())  
+      .then((data: Game) => setGame(data))  
+  }, [id]);  
+  
+  return game ?  (  
+    <> 
+      <h3>{game.name}</h3>
+      <p>{game.developer}</p>
+      <p>{game.releaseDate}</p> 
+      <p>random text</p>   
+    </>  
+  ) : (
+    <div>Loading...</div>
+  );
+}  
+
 function calculateAverageRatings(ratings: Rating[]): number {
     const sum = ratings.reduce((a, b) => a + b.rating, 0);
     return sum / ratings.length;
 }
 
-function Games({sortOption, selectedGame, setSelectedGame, selectedStar, searchTerm}: GamesProps) {    
-  const [games, setGames] = useState<Game[]>([]);    
+function Games({sortOption, selectedStar, searchTerm} : GamesProps) {  
+  
+  const [games, setGames] = useState<Game[]>([]);
   
   useEffect(() => {    
     fetch(allGamesWithRatings_URL)    
@@ -120,20 +154,21 @@ function Games({sortOption, selectedGame, setSelectedGame, selectedStar, searchT
 
   return (
       <AllGamesContainer>
-        {selectedGame !== null ? (
-          selectedGame.ratings.map((rating) => (
-            <Rating key={rating.id} rating={rating} game={selectedGame}/>
-          ))
-        ) : (
-          games.map((game) => (
-            <div onClick={() => setSelectedGame(game)}>
+          {games.map((game) => (
               <Game key={game.id} game={game}/>
-            </div>
-          ))
-        )}
+          ))}
       </AllGamesContainer>   
   );    
 }  
 
 export default Games; 
 
+/*return game ? (  
+  <>  
+    <h3>{game.name}</h3>  
+    <p>{game.releaseDate}</p>  
+    <p>{game.developer}</p>    
+  </>  
+) : (  
+  <div>Loading...</div>  
+);*/

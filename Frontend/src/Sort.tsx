@@ -58,7 +58,7 @@ function Filter({setSortOption}: FilterProps) {
     }
 
 return (
-    <div>
+    <>
         <Input onClick={toggleDropdown1}>Filter</Input>
             <Drop style={{display: display1.drop}}>
 
@@ -90,7 +90,7 @@ return (
                 </Search>
                 ))}
             </Drop>
-    </div>
+    </>
 )
 }
 
