@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import Navbar from './navbar';
-import GameInfoSidebar from "./GameInfoSidebar";
+import Navbar from "../UserInterface/Head/Navbar";
+import GameInfoSidebar from "../UserInterface/CardDeckSidebar";
 import { createGlobalStyle } from 'styled-components';
 import { useState } from "react";
-import { Game } from "./GameInfo";
+import { IGame } from "../UserInterface/Games/GameCard";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
 function App () {
 
   const [sortOption, setSortOption] = useState('');
-    const [selectedGame, setSelectedGame] = useState<Game | null>(null);
+    const [selectedGame, setSelectedGame] = useState<IGame | null>(null);
     const [selectedStar, setSelectedStar] = useState(0);
     const [searchTerm, setSearchTerm] = useState('');
 
