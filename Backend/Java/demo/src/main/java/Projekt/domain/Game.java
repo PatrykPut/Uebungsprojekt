@@ -17,12 +17,31 @@ public class Game {
     private String releaseDate;
 
     private String developer;
+    private String description;
+    private String trailer;
+
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "game")
     @JsonManagedReference
     private Set<Platform> platforms;
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "game")
     @JsonManagedReference //verhindert das Entstehen von Endlosschleifen beim Übersetzen in JSON
     private Set<Rating> ratings;
+
+    public String getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(String trailer) {
+        this.trailer = trailer;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Long getId() {
         return id;

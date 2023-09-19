@@ -1,7 +1,6 @@
 import styled from 'styled-components';    
 import React, { useState, useEffect } from 'react';
-import { options } from './Sort';
-import { BrowserRouter as Router, Route, Link, useParams } from "react-router-dom";  
+import { options } from './Sort'; 
 import { useNavigate } from 'react-router-dom';
 
 const AllGamesContainer = styled.div`
@@ -33,6 +32,8 @@ export interface Game {
   name: string;        
   releaseDate: string;        
   developer: string;
+  description: string;
+  trailer: string;
   platformName: string 
   ratings: Rating[]; 
   platforms: Platform[];     
@@ -87,28 +88,6 @@ export function Rating({rating, game} : {rating : Rating,game : Game}) {
   );    
 } 
 
-export function GamePage() {  
-  const { id } = useParams<{ id: string }>();  
-  const [game, setGame] = useState<Game | null>(null);  
-  
-  useEffect(() => {  
-    fetch(`http://localhost:8080/game/${id}`)  
-      .then((response) => response.json())  
-      .then((data: Game) => setGame(data))  
-  }, [id]);  
-  
-  return game ?  (  
-    <> 
-      <h3>{game.name}</h3>
-      <p>{game.developer}</p>
-      <p>{game.releaseDate}</p> 
-      <p>random text</p>   
-    </>  
-  ) : (
-    <div>Loading...</div>
-  );
-}  
-
 function calculateAverageRatings(ratings: Rating[]): number {
     const sum = ratings.reduce((a, b) => a + b.rating, 0);
     return sum / ratings.length;
@@ -162,13 +141,3 @@ function Games({sortOption, selectedStar, searchTerm} : GamesProps) {
 }  
 
 export default Games; 
-
-/*return game ? (  
-  <>  
-    <h3>{game.name}</h3>  
-    <p>{game.releaseDate}</p>  
-    <p>{game.developer}</p>    
-  </>  
-) : (  
-  <div>Loading...</div>  
-);*/

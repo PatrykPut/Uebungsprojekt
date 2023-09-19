@@ -1,8 +1,11 @@
-import { Routes, Route} from "react-router-dom";
+import { Routes, Route, useMatch } from "react-router-dom";
 import Sidebar from "./SideBar";
 import styled from 'styled-components';
 import { Game } from "./GameInfo";
-import Games, { GamePage } from "./GameInfo";
+import Games from "./GameInfo";
+import GamePage from "./GamePage";
+
+
 
 const BigBox = styled.div`
     display:flex;
@@ -23,10 +26,12 @@ interface GamesProps {
   }
 
 const GameInfoSidebar =({sortOption, selectedGame, setSortOption, setSelectedGame, selectedStar, setSelectedStar, searchTerm, setSearchTerm} : GamesProps) => {
+
+    const match = useMatch("game/:id")
     
     return (
 <BigBox>
-    <Sidebar setSortOption={setSortOption} selectedStar={selectedStar} setSelectedStar={setSelectedStar} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+    {!match && <Sidebar setSortOption={setSortOption} selectedStar={selectedStar} setSelectedStar={setSelectedStar} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>}
     <Routes>  
         <Route index element={<Games sortOption={sortOption} selectedStar={selectedStar} searchTerm={searchTerm} selectedGame={selectedGame} setSelectedGame={setSelectedGame}/>}/>  
         <Route path="game/:id" element={<GamePage/>}/>  

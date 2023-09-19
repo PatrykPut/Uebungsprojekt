@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-const Input = styled.div`
+const Button = styled.div`
     width: 100%;
     height: 20px;
     background-color: aliceblue;
@@ -41,7 +41,7 @@ export const options = {
     platform: ['PC', 'Xbox', 'PlayStation', 'Nintendo']
 }
 
-function Filter({setSortOption}: FilterProps) {
+function Sort({setSortOption}: FilterProps) {
     const [display1, setDisplay1] = useState({drop: 'none'});
     const [display2, setDisplay2] = useState({drop: 'none'});
     const [selectedOption, setSelectedOption] = useState('');
@@ -59,7 +59,7 @@ function Filter({setSortOption}: FilterProps) {
 
 return (
     <>
-        <Input onClick={toggleDropdown1}>Filter</Input>
+        <Button onClick={toggleDropdown1}>Filter</Button>
             <Drop style={{display: display1.drop}}>
 
                 {options.sort.map(option => (
@@ -75,7 +75,7 @@ return (
                 ))}
                 
             </Drop>
-            <Input onClick={toggleDropdown2}>Platforms</Input>
+            <Button onClick={toggleDropdown2}>Platforms</Button>
             <Drop style={{display: display2.drop}}>
                 
                 {options.platform.map(option => (
@@ -94,4 +94,4 @@ return (
 )
 }
 
-export default Filter;
+export default Sort;

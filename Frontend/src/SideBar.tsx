@@ -1,5 +1,5 @@
 import Stars from './Stars';
-import Filter from './Sort';
+import Sort from './Sort';
 import SearchGame from './SearchGame';
 import styled from 'styled-components';
 
@@ -27,7 +27,7 @@ function Sidebar({ setSortOption, selectedStar, setSelectedStar, searchTerm, set
         <SidebarContainer>
             <SearchGame searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
             <Stars selectedStar={selectedStar} setSelectedStar={setSelectedStar}/>
-            <Filter setSortOption={setSortOption}/>
+            <Sort setSortOption={setSortOption}/>
         </SidebarContainer>
     )
 }
