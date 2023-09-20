@@ -17,6 +17,10 @@ const Button = styled.div`
 const Drop = styled.div`
     border: solid greenyellow 0.5px;
     width: 18vw;
+    height: 0;
+    opacity: 0;
+    transition: all 1s;
+    overflow: hidden;
     `;
 
 const Search = styled.div<SearchProps>`
@@ -60,7 +64,7 @@ function Sort({setSortOption}: FilterProps) {
 return (
     <>
         <Button onClick={toggleDropdown1}>Filter</Button>
-            <Drop style={{display: display1.drop}}>
+            <Drop style={{height: display1.drop === 'none' ? '0' : 'auto', opacity: display1.drop === 'none' ? '0' : '1'}}>
 
                 {options.sort.map(option => (
                 <Search 
@@ -76,7 +80,7 @@ return (
                 
             </Drop>
             <Button onClick={toggleDropdown2}>Platforms</Button>
-            <Drop style={{display: display2.drop}}>
+            <Drop style={{height: display2.drop === 'none' ? '0' : 'auto', opacity: display2.drop === 'none' ? '0' : '1'}}>
                 
                 {options.platform.map(option => (
                 <Search

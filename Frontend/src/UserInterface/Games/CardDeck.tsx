@@ -1,7 +1,7 @@
 import styled from 'styled-components';    
 import React, { useState, useEffect } from 'react';
 import { options } from '../Sidebar/Sort'; 
-import { IGame, Game } from './GameCard';
+import { IGame, GameCard } from './GameCard';
 import { IRating } from './GameCard';
 
 const AllGamesContainer = styled.div`
@@ -61,7 +61,6 @@ function Games({sortOption, selectedStar, searchTerm} : GamesProps) {
             game.name.toLowerCase().includes(searchTerm.toLowerCase())
           );
           }
-
         setGames(json);
       });    
   },[sortOption, selectedStar, searchTerm]);        
@@ -69,7 +68,7 @@ function Games({sortOption, selectedStar, searchTerm} : GamesProps) {
   return (
       <AllGamesContainer>
           {games.map((game) => (
-              <Game key={game.id} game={game}/>
+              <GameCard key={game.id} game={game}/>
           ))}
       </AllGamesContainer>   
   );    

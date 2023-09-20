@@ -6,15 +6,23 @@ import styled from 'styled-components';
 const MainContainer = styled.div`
   justify-content: space-between;
   width: 60vw;
+  background-color: #f3fff3;
+  padding: 10px;
 `;
 
 const GameContainer = styled.div`
   background-color: lightgray;
   height:max-content;
+  width: max-content;
   padding: 10px;
   border-radius: 10px;
+  margin-top: 10px;
   margin-bottom: 10px;
-  `;
+`;
+
+const RatingsWithTitle = styled.div`
+  margin-top: 300px;
+`;
 
 const RatingsContainer = styled.div`
   display: flex;
@@ -40,9 +48,17 @@ const DescriptionContainer = styled.div`
   border-radius: 10px;
 `;
 
-const TrailerContainer = styled.iframe`
+const Trailer = styled.iframe`
   background-color: lightgray;
+  margin-bottom: 10px;
+  margin-right: 10px;
 `;
+
+const Trailer_Description = styled.div`
+  display: flex;
+`;
+
+
 
 function GamePage() {  
     const { id } = useParams<{ id: string }>();  
@@ -60,14 +76,18 @@ function GamePage() {
         <h3>{game.name}</h3>
         <p>{game.developer}</p>
         <p>{game.releaseDate}</p> 
-        </GameContainer> 
+        </GameContainer>
+
+        <Trailer_Description>
+        <Trailer width="560" height="315" src={game.trailer} frameBorder={0} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></Trailer> 
         
         <DescriptionContainer>
         <p>{game.description}</p>
         </DescriptionContainer>
+        </Trailer_Description>
 
-        <TrailerContainer width="560" height="315" src={game.trailer} frameBorder={0} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></TrailerContainer>
-
+        <RatingsWithTitle>
+          <h3>Ratings</h3>
         <RatingsContainer>
         {game.ratings.map((rating) => (
         <Ratings key={rating.id}>
@@ -76,6 +96,7 @@ function GamePage() {
         </Ratings>
         ))}  
           </RatingsContainer> 
+        </RatingsWithTitle>
       </MainContainer>  
     ) : (
       null

@@ -25,7 +25,7 @@ interface GamesProps {
     setSearchTerm: (searchTerm: string) => void;
   }
 
-const GameInfoSidebar =({sortOption, selectedGame, setSortOption, setSelectedGame, selectedStar, setSelectedStar, searchTerm, setSearchTerm} : GamesProps) => {
+const CardDeckSidebar =({sortOption, selectedGame, setSortOption, setSelectedGame, selectedStar, setSelectedStar, searchTerm, setSearchTerm} : GamesProps) => {
 
     const match = useMatch("game/:id")
     
@@ -40,4 +40,4 @@ const GameInfoSidebar =({sortOption, selectedGame, setSortOption, setSelectedGam
 );
 }
 
-export default GameInfoSidebar;
+export default CardDeckSidebar;

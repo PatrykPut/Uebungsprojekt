@@ -37,7 +37,7 @@ export interface IPlatform {
     platformName: string;
   }
 
-export function Game({ game }: {game : IGame}) {   
+export function GameCard({ game }: {game : IGame}) {   
   
     const navigate = useNavigate();
   
