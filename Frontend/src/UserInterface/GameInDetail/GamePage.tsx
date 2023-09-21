@@ -61,46 +61,46 @@ const Trailer_Description = styled.div`
 
 
 function GamePage() {  
-    const { id } = useParams<{ id: string }>();  
-    const [game, setGame] = useState<IGame | null>(null);  
-    
-    useEffect(() => {  
-      fetch(`http://localhost:8080/game/${id}`)  
-        .then((response) => response.json())  
-        .then((data: IGame) => setGame(data))  
-    }, [id]);  
-    
-    return game ?  (  
-      <MainContainer>
-        <GameContainer>
-        <h3>{game.name}</h3>
-        <p>{game.developer}</p>
-        <p>{game.releaseDate}</p> 
-        </GameContainer>
+  const { id } = useParams<{ id: string }>();  
+  const [game, setGame] = useState<IGame | null>(null);  
+  
+  useEffect(() => {  
+    fetch(`http://localhost:8080/game/${id}`)  
+      .then((response) => response.json())  
+      .then((data: IGame) => setGame(data))  
+  }, [id]);  
+  
+  return game ?  (  
+    <MainContainer>
+      <GameContainer>
+      <h3>{game.name}</h3>
+      <p>{game.developer}</p>
+      <p>{game.releaseDate}</p> 
+      </GameContainer>
 
-        <Trailer_Description>
-        <Trailer width="560" height="315" src={game.trailer} frameBorder={0} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></Trailer> 
-        
-        <DescriptionContainer>
-        <p>{game.description}</p>
-        </DescriptionContainer>
-        </Trailer_Description>
+      <Trailer_Description>
+      <Trailer width="560" height="315" src={game.trailer} frameBorder={0} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></Trailer> 
+      
+      <DescriptionContainer>
+      <p>{game.description}</p>
+      </DescriptionContainer>
+      </Trailer_Description>
 
-        <RatingsWithTitle>
-          <h3>Ratings</h3>
-        <RatingsContainer>
-        {game.ratings.map((rating) => (
-        <Ratings key={rating.id}>
-          <p>{rating.comment}</p>
-          <p>{rating.rating}</p>
-        </Ratings>
-        ))}  
-          </RatingsContainer> 
-        </RatingsWithTitle>
-      </MainContainer>  
-    ) : (
-      null
-    );
-  }  
+      <RatingsWithTitle>
+        <h3>Ratings</h3>
+      <RatingsContainer>
+      {game.ratings.map((rating) => (
+      <Ratings key={rating.id}>
+        <p>{rating.comment}</p>
+        <p>{rating.rating}</p>
+      </Ratings>
+      ))}  
+        </RatingsContainer> 
+      </RatingsWithTitle>
+    </MainContainer>  
+  ) : (
+    null
+  );
+}  
 
 export default GamePage;
