@@ -58,8 +58,6 @@ const Trailer_Description = styled.div`
   display: flex;
 `;
 
-
-
 function GamePage() {  
   const { id } = useParams<{ id: string }>();  
   const [game, setGame] = useState<IGame | null>(null);  

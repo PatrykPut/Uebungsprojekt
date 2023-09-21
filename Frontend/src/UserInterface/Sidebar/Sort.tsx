@@ -38,17 +38,19 @@ interface SearchProps {
 
 interface FilterProps {
     setSortOption: (value: string) => void;
+    setPlatformOption: (value: string) => void;
 }
 
 export const options = {
     sort: ['Default', 'Newest', 'Most Ratings', 'Best Ratings'],
-    platform: ['PC', 'Xbox', 'PlayStation', 'Nintendo']
+    platform: ['All', 'PC', 'Xbox', 'PlayStation', 'Nintendo']
 }
 
-function Sort({setSortOption}: FilterProps) {
+function Sort({setSortOption, setPlatformOption}: FilterProps) {
     const [display1, setDisplay1] = useState({drop: 'none'});
     const [display2, setDisplay2] = useState({drop: 'none'});
     const [selectedOption, setSelectedOption] = useState('');
+    const [selectedPlatformOption, setSelectedPlatformOption] = useState('');
 
     const toggleDropdown1 = () => {
         setDisplay1(prevState => ({
@@ -84,10 +86,10 @@ return (
                 
                 {options.platform.map(option => (
                 <Search
-                isSelected={selectedOption === option}
+                isSelected={selectedPlatformOption === option}
                 onClick={() => {
-                setSortOption(option)
-                setSelectedOption(option)
+                setPlatformOption(option)
+                setSelectedPlatformOption(option)
                 }}
                 >
                     {option}

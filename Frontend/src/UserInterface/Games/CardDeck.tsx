@@ -1,6 +1,5 @@
 import styled from 'styled-components';    
-import React, { useState, useEffect } from 'react';
-import { options } from '../Sidebar/Sort'; 
+import React, { useState, useEffect } from 'react'; 
 import { IGame, GameCard } from './GameCard';
 import { IRating } from './GameCard';
 
@@ -12,8 +11,6 @@ const AllGamesContainer = styled.div`
     height: max-content;
     margin-top: 20px; 
 `;
-   
-const allGamesWithRatings_URL = 'http://localhost:8080/games';  
 
 interface GamesProps {
   sortOption: string;
@@ -21,6 +18,7 @@ interface GamesProps {
   setSelectedGame: React.Dispatch<React.SetStateAction<IGame | null>>;
   selectedStar: number;
   searchTerm: string;
+  platformOption: string;
 }
 
 function calculateAverageRatings(ratings: IRating[]): number {
@@ -28,48 +26,23 @@ function calculateAverageRatings(ratings: IRating[]): number {
     return sum / ratings.length;
 }
 
-function Games({sortOption, selectedStar, searchTerm} : GamesProps) {  
+function Games({sortOption, platformOption, selectedStar, searchTerm} : GamesProps) {  
   
   const [games, setGames] = useState<IGame[]>([]);
   
-  useEffect(() => {    
+  useEffect(() => {  
+    const allGamesWithRatings_URL = `http://localhost:8080/games/sorted?sortOption=${sortOption}`
+                                   + (platformOption ? `&platform=${platformOption}` : '')
+                                   + (selectedStar ? `&selectedStar=${selectedStar}` : '')
+                                   + (searchTerm ? `&searchTerm=${searchTerm}` : '');  
     fetch(allGamesWithRatings_URL)    
       .then((response) => response.json())    
       .then((originalJson: IGame[]) => {
         const json = [...originalJson]
-        .sort((a, b) => {
-          if (sortOption === options.sort[1]) {
-            return new Date(b.releaseDate).getTime() - new Date(a.releaseDate).getTime();
-          }
-          else if (sortOption === options.sort[2])  {
-            return b.ratings.length - a.ratings.length ;
-          }
-          else if (sortOption === options.sort[3]) {
-            return calculateAverageRatings(b.ratings) - calculateAverageRatings(a.ratings);
-          }
-          return 0;
-        })
-        .filter(game => {
-          if (options.platform.includes(sortOption)) {
-            return game.platforms && game.platforms.some(platforms => platforms.platformName === sortOption)
-          }
-          return true;
-        })
-        .filter(game => {
-          if (selectedStar > 0) {
-            return Math.round(calculateAverageRatings(game.ratings)) === selectedStar;
-          }
-          return true;
-        })
-        .filter(game => {
-          if (searchTerm) {
-            return game.name.toLowerCase().includes(searchTerm.toLowerCase())
-          }
-          return true;
-        });
+        
         setGames(json);
         });
-      },[sortOption, selectedStar, searchTerm]);
+      },[sortOption, selectedStar, searchTerm, platformOption]);
         
   return (
       <AllGamesContainer>
@@ -81,5 +54,3 @@ function Games({sortOption, selectedStar, searchTerm} : GamesProps) {
 }  
 
 export default Games; 
-
-//sortOption === options.platform[0] || sortOption === options.platform[1] || sortOption === options.platform[2] || sortOption === options.platform[3]
