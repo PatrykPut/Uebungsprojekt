@@ -12,6 +12,10 @@ const GameContainer = styled.div`
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     margin-right: 10px;
     cursor: pointer;
+
+    &:hover {
+      border: black solid 1px;
+    }
 `;
 
 export interface IGame {                                            
