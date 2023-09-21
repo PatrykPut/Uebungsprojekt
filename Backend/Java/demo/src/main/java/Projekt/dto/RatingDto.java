@@ -1,11 +1,11 @@
-package Projekt.domain;
+package Projekt.dto;
 
-public class Rating {
+public class RatingDto {
 
     private Long id;
     private int rating;
     private String comment;
-    private Game game;
+    private Long gameId;
 
     public Long getId() {
         return id;
@@ -31,13 +31,11 @@ public class Rating {
         this.comment = comment;
     }
 
-    public Game getGame() {
-        return game;
+    public Long getGameId() {
+        return gameId;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 }
-
-

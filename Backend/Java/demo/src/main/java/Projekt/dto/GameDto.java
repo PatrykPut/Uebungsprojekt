@@ -1,16 +1,16 @@
-package Projekt.domain;
+package Projekt.dto;
 
-import java.util.Set;
+import java.util.List;
 
-public class Game {
+public class GameDto {
     private Long id;
     private String name;
     private String releaseDate;
     private String developer;
     private String description;
     private String trailer;
-    private Set<Platform> platforms;
-    private Set<Rating>ratings;
+    private List<RatingDto> ratings;
+    private List<PlatformDto> platforms;
 
     public Long getId() {
         return id;
@@ -60,20 +60,19 @@ public class Game {
         this.trailer = trailer;
     }
 
-    public Set<Platform> getPlatforms() {
-        return platforms;
-    }
-
-    public void setPlatforms(Set<Platform> platforms) {
-        this.platforms = platforms;
-    }
-
-    public Set<Rating> getRatings() {
+    public List<RatingDto> getRatings() {
         return ratings;
     }
 
-    public void setRatings(Set<Rating> ratings) {
+    public void setRatings(List<RatingDto> ratings) {
         this.ratings = ratings;
     }
-}
 
+    public List<PlatformDto> getPlatforms() {
+        return platforms;
+    }
+
+    public void setPlatforms(List<PlatformDto> platforms) {
+        this.platforms = platforms;
+    }
+}
