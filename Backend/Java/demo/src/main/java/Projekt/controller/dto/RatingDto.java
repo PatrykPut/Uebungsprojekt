@@ -7,35 +7,27 @@ public class RatingDto {
     private String comment;
     private Long gameId;
 
-    public Long getId() {
-        return id;
+    public RatingDto() {}
+    public RatingDto(Long id, int rating, String comment, Long gameId) {
+        this.id = id;
+        this.rating = rating;
+        this.comment = comment;
+        this.gameId = gameId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return id;
     }
 
     public int getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
     public String getComment() {
         return comment;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
-
     public Long getGameId() {
         return gameId;
-    }
-
-    public void setGameId(Long gameId) {
-        this.gameId = gameId;
     }
 }

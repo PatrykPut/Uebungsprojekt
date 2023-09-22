@@ -1,14 +1,11 @@
 package Projekt.controller;
-import Projekt.domain.GameEntityToDtoConverter;
+import Projekt.controller.converter.GameEntityToDtoConverter;
 import Projekt.controller.dto.GameDto;
 import Projekt.repository.entities.GameEntity;
-import Projekt.repository.entities.RatingEntity;
 import Projekt.repository.GameRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import Projekt.service.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -17,75 +14,42 @@ import java.util.stream.Collectors;
 @CrossOrigin
 public class GameController {
 
+    private final AllGames allGames;
+    private final GamesById gamesById;
     private final GameRepository gameRepository;
     private final GameEntityToDtoConverter converter;
 
-    @Autowired
-    public GameController(GameRepository gameRepository, GameEntityToDtoConverter converter) {
+    public GameController(AllGames allGames, GamesById gamesById, GameRepository gameRepository, GameEntityToDtoConverter converter) {
+        this.allGames = allGames;
+        this.gamesById = gamesById;
         this.gameRepository = gameRepository;
         this.converter = converter;
     }
-
     @GetMapping("/games")
     public ResponseEntity<List<GameDto>> getAllGames() {
-        List<GameEntity> gameEntities = gameRepository.findAll();
-        List<GameDto> games = gameEntities.stream()
-                .map(converter::convert)
-                .collect(Collectors.toList());
+        List<GameDto> games = allGames.getAllGames();
         return ResponseEntity.ok(games);
     }
+
     @GetMapping("/game/{id}")
     public ResponseEntity<GameDto> getGameWithRatings(@PathVariable Long id) {
-        Optional<GameEntity> gameOpt = gameRepository.findByIdWithRatings(id);
-        if (gameOpt.isPresent()) {
-            GameDto gameDto = converter.convert(gameOpt.get());
-            return ResponseEntity.ok(gameDto);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        Optional<GameDto> gameDtoOpt = gamesById.getGameWithRatings(id);
+        return gameDtoOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
     @GetMapping("/games/sorted")
     public ResponseEntity<List<GameDto>>
         getSortedGames(@RequestParam String sortOption,
-        @RequestParam(required = false) String platform,
-        @RequestParam(required = false) Integer selectedStar,
-        @RequestParam(required = false) String searchTerm) {
-        List<GameEntity> gameEntities = gameRepository.findAll( );
-        switch (sortOption) {
-            case "Newest":
-                gameEntities.sort(Comparator.comparing(GameEntity::getReleaseDate).reversed());
-                break;
-            case "Most Ratings":
-                gameEntities.sort(Comparator.comparing((GameEntity gameEntity) ->
-                        gameEntity.getRatings().size()).reversed());
-                break;
-            case "Best Ratings":
-                gameEntities.sort(Comparator.comparing((GameEntity gameEntity) ->
-                        gameEntity.getRatings().stream().mapToInt(RatingEntity::getRating).average().orElse(0)).reversed());
+                       @RequestParam(required = false) String platform,
+                       @RequestParam(required = false) Integer selectedStar,
+                       @RequestParam(required = false) String searchTerm) {
 
-        }
-        if (platform != null && !platform.equals("All")) {
-            gameEntities = gameEntities.stream()
-                    .filter(gameEntity -> gameEntity.getPlatforms().stream()
-                            .anyMatch(platformEntity -> platformEntity.getPlatformName().equals(platform)))
-                    .collect(Collectors.toList());
-        }
-        if (selectedStar != null && selectedStar > 0) {
-            gameEntities = gameEntities.stream()
-                    .filter(gameEntity -> {
-                        double averageRating = gameEntity.getRatings().stream()
-                                .mapToInt(RatingEntity::getRating)
-                                .average().orElse(0);
-                        return Math.round(averageRating) == selectedStar;
-                    })
-                    .collect(Collectors.toList());
-        }
-        if (searchTerm != null) {
-            gameEntities = gameEntities.stream()
-                    .filter(gameEntity ->
-                        gameEntity.getName().toLowerCase().contains(searchTerm.toLowerCase()))
-                    .collect(Collectors.toList());
-        }
+        List<GameEntity> gameEntities = gameRepository.findAll( );
+
+        GamesSorted.sortGames(gameEntities, sortOption);
+        gameEntities = GamesFiltered.filteredGames(gameEntities, platform);
+        gameEntities = GamesFilteredByStars.starsGames(gameEntities, selectedStar);
+        gameEntities= GamesFilteredBySearch.searchGame(gameEntities, searchTerm);
+
         List<GameDto> games = gameEntities.stream()
                 .map(converter::convert)
                 .collect(Collectors.toList());

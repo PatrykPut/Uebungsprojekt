@@ -1,4 +1,4 @@
-package Projekt.domain;
+package Projekt.controller.converter;
 
 import Projekt.controller.dto.PlatformDto;
 import Projekt.repository.entities.PlatformEntity;
@@ -9,13 +9,15 @@ public class PlatformEntityToDtoConverter {
 
     public PlatformDto convertToPlatformDto(PlatformEntity platformEntity) {
 
-        PlatformDto platformDto = new PlatformDto();
-        platformDto.setId(platformEntity.getId());
-        platformDto.setPlatformName(platformEntity.getPlatformName());
+        Long gameId = null;
         if (platformEntity.getGame() != null) {
-            platformDto.setGameId(platformEntity.getGame().getId());
+            gameId = platformEntity.getGame().getId();
         }
-        return platformDto;
+        return new PlatformDto(
+                platformEntity.getId(),
+                platformEntity.getPlatformName(),
+                gameId
+        );
     }
 }
 

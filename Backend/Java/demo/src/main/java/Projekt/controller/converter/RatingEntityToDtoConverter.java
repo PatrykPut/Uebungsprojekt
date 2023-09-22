@@ -1,4 +1,4 @@
-package Projekt.domain;
+package Projekt.controller.converter;
 
 import Projekt.controller.dto.RatingDto;
 import Projekt.repository.entities.RatingEntity;
@@ -8,13 +8,16 @@ import org.springframework.stereotype.Service;
 public class RatingEntityToDtoConverter {
 
     public RatingDto convertToRatingDto(RatingEntity ratingEntity) {
-        RatingDto ratingDto = new RatingDto();
-        ratingDto.setId(ratingEntity.getId());
-        ratingDto.setComment(ratingEntity.getComment());
-        ratingDto.setRating(ratingEntity.getRating());
+        Long gameId = null;
+
         if (ratingEntity.getGame() != null) {
-            ratingDto.setGameId(ratingEntity.getGame().getId());
+            gameId = ratingEntity.getGame().getId();
         }
-        return ratingDto;
+        return new RatingDto(
+                ratingEntity.getId(),
+                ratingEntity.getRating(),
+                ratingEntity.getComment(),
+                gameId
+                );
     }
 }

@@ -5,8 +5,6 @@ import Games from "./Games/CardDeck";
 import GamePage from "./GameInDetail/GamePage";
 import { IGame } from "./Games/GameCard";
 
-
-
 const BigBox = styled.div`
     display:flex;
     justify-content:center;

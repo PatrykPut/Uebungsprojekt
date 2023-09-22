@@ -8,7 +8,6 @@ const Button = styled.div`
     cursor: pointer;
     padding-top: 5px;
     padding-bottom: 5px;
-    
     &:hover {
         background-color: rgb(190, 225, 255);    
     }
@@ -26,7 +25,6 @@ const Drop = styled.div`
 const Search = styled.div<SearchProps>`
     cursor: pointer;
     background-color: ${props => props.isSelected ? 'rgb(168, 215, 255)' : 'rgb(224, 241, 255)'};
-    
     &:hover {
         background-color: rgb(168, 215, 255); 
     }

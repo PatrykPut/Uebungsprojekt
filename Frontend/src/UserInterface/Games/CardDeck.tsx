@@ -21,11 +21,6 @@ interface GamesProps {
   platformOption: string;
 }
 
-function calculateAverageRatings(ratings: IRating[]): number {
-    const sum = ratings.reduce((a, b) => a + b.rating, 0);
-    return sum / ratings.length;
-}
-
 function Games({sortOption, platformOption, selectedStar, searchTerm} : GamesProps) {  
   
   const [games, setGames] = useState<IGame[]>([]);

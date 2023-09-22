@@ -7,37 +7,17 @@ public class Rating {
     private String comment;
     private Game game;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public Rating(Long id, int rating, String comment, Game game){
         this.id = id;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
         this.rating = rating;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
         this.comment = comment;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
         this.game = game;
     }
+
+    public Long getId() { return id; }
+    public int getRating() { return rating; }
+    public String getComment() { return comment; }
+    public Game getGame() { return game; }
 }
 
 
