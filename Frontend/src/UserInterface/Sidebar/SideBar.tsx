@@ -15,19 +15,20 @@ const SidebarContainer = styled.div`
 
 interface SidebarProps {
     setSortOption: (value: string) => void;
+    setPlatformOption: (value: string) => void;
     selectedStar: number;
     setSelectedStar: React.Dispatch<React.SetStateAction<number>>;
     searchTerm: string;
     setSearchTerm: (searchTerm: string) => void;
 }
 
-function Sidebar({ setSortOption, selectedStar, setSelectedStar, searchTerm, setSearchTerm }: SidebarProps) {
+function Sidebar({ setSortOption, setPlatformOption, selectedStar, setSelectedStar, searchTerm, setSearchTerm }: SidebarProps) {
 
     return (
         <SidebarContainer>
             <SearchGame searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
             <Stars selectedStar={selectedStar} setSelectedStar={setSelectedStar}/>
-            <Sort setSortOption={setSortOption}/>
+            <Sort setSortOption={setSortOption} setPlatformOption={setPlatformOption}/>
         </SidebarContainer>
     )
 }

@@ -60,4 +60,3 @@ export function GameCard({ game }: {game : IGame}) {
      </GameContainer>
       );    
   }    
-

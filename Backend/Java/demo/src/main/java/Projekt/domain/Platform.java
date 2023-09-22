@@ -6,27 +6,12 @@ public class Platform {
     private String platformName;
     private Game game;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
+    public Platform(Long id, String platformName, Game game) {
         this.id = id;
-    }
-
-    public String getPlatformName() {
-        return platformName;
-    }
-
-    public void setPlatformName(String platformName) {
         this.platformName = platformName;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public void setGame(Game game) {
         this.game = game;
     }
+    public Long getId() { return id; }
+    public String getPlatformName() { return platformName; }
+    public Game getGame() { return game; }
 }
