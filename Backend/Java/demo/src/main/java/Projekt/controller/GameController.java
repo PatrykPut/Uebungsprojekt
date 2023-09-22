@@ -1,9 +1,9 @@
 package Projekt.controller;
 import Projekt.domain.GameEntityToDtoConverter;
-import Projekt.dto.GameDto;
-import Projekt.entities.GameEntity;
-import Projekt.entities.RatingEntity;
-import Projekt.services.GameRepository;
+import Projekt.controller.dto.GameDto;
+import Projekt.repository.entities.GameEntity;
+import Projekt.repository.entities.RatingEntity;
+import Projekt.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,7 +50,7 @@ public class GameController {
         @RequestParam(required = false) String platform,
         @RequestParam(required = false) Integer selectedStar,
         @RequestParam(required = false) String searchTerm) {
-        List<GameEntity> gameEntities = gameRepository.findAll();
+        List<GameEntity> gameEntities = gameRepository.findAll( );
         switch (sortOption) {
             case "Newest":
                 gameEntities.sort(Comparator.comparing(GameEntity::getReleaseDate).reversed());

@@ -1,7 +1,6 @@
-package Projekt.entities;
+package Projekt.repository.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity(name = "platforms")

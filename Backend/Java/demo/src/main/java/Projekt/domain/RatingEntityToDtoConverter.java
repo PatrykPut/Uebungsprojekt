@@ -1,7 +1,7 @@
 package Projekt.domain;
 
-import Projekt.dto.RatingDto;
-import Projekt.entities.RatingEntity;
+import Projekt.controller.dto.RatingDto;
+import Projekt.repository.entities.RatingEntity;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,5 +1,5 @@
-package Projekt.services;
-import Projekt.entities.GameEntity;
+package Projekt.repository;
+import Projekt.repository.entities.GameEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,7 +1,7 @@
 package Projekt.domain;
 
-import Projekt.dto.PlatformDto;
-import Projekt.entities.PlatformEntity;
+import Projekt.controller.dto.PlatformDto;
+import Projekt.repository.entities.PlatformEntity;
 import org.springframework.stereotype.Service;
 
 @Service

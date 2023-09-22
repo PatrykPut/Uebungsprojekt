@@ -1,4 +1,4 @@
-package Projekt.dto;
+package Projekt.controller.dto;
 
 import java.util.List;
 

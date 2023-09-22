@@ -1,7 +1,7 @@
 package Projekt.domain;
 
-import Projekt.dto.GameDto;
-import Projekt.entities.GameEntity;
+import Projekt.controller.dto.GameDto;
+import Projekt.repository.entities.GameEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.stream.Collectors;

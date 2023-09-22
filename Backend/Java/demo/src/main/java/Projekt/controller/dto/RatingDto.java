@@ -1,24 +1,11 @@
-package Projekt.entities;
+package Projekt.controller.dto;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+public class RatingDto {
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "rating")
-public class RatingEntity {
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int rating;
     private String comment;
-
-    @ManyToOne
-    @JoinColumn(name="game_id", nullable= false)
-    @JsonBackReference
-    private GameEntity game;
+    private Long gameId;
 
     public Long getId() {
         return id;
@@ -44,11 +31,11 @@ public class RatingEntity {
         this.comment = comment;
     }
 
-    public GameEntity getGame() {
-        return game;
+    public Long getGameId() {
+        return gameId;
     }
 
-    public void setGame(GameEntity game) {
-        this.game = game;
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 }
