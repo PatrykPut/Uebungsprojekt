@@ -19,8 +19,8 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App () {
-
-  const [sortOption, setSortOption] = useState('');
+    const [platformOption, setPlatformOption] = useState('');
+    const [sortOption, setSortOption] = useState('');
     const [selectedGame, setSelectedGame] = useState<IGame | null>(null);
     const [selectedStar, setSelectedStar] = useState(0);
     const [searchTerm, setSearchTerm] = useState('');
@@ -31,7 +31,9 @@ function App () {
       <GlobalStyle/>
         <Head/>
          <Routes>
-          <Route path="/*" element={<CardDeckSidebar sortOption={sortOption} selectedGame={selectedGame} setSortOption={setSortOption} setSelectedGame={setSelectedGame} selectedStar={selectedStar} setSelectedStar={setSelectedStar} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>}/>
+          <Route path="/*" element={<CardDeckSidebar sortOption={sortOption} selectedGame={selectedGame} setSortOption={setSortOption}
+           setPlatformOption={setPlatformOption} setSelectedGame={setSelectedGame} selectedStar={selectedStar} setSelectedStar={setSelectedStar}
+            searchTerm={searchTerm} setSearchTerm={setSearchTerm} platformOption={platformOption}/>}/>
          </Routes>
     </Router>
   );
