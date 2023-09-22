@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import Navbar from './navbar';
-import GameInfoSidebar from "./GameInfoSidebar";
+import Head from "../UserInterface/Head/Head";
+import CardDeckSidebar from "../UserInterface/CardDeckSidebar";
 import { createGlobalStyle } from 'styled-components';
 import { useState } from "react";
-import { Game } from "./GameInfo";
+import { IGame } from "../UserInterface/Games/GameCard";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
 function App () {
 
   const [sortOption, setSortOption] = useState('');
-    const [selectedGame, setSelectedGame] = useState<Game | null>(null);
+    const [selectedGame, setSelectedGame] = useState<IGame | null>(null);
     const [selectedStar, setSelectedStar] = useState(0);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -29,9 +29,9 @@ function App () {
     
     <Router>
       <GlobalStyle/>
-        <Navbar/>
+        <Head/>
          <Routes>
-          <Route path="/*" element={<GameInfoSidebar sortOption={sortOption} selectedGame={selectedGame} setSortOption={setSortOption} setSelectedGame={setSelectedGame} selectedStar={selectedStar} setSelectedStar={setSelectedStar} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>}/>
+          <Route path="/*" element={<CardDeckSidebar sortOption={sortOption} selectedGame={selectedGame} setSortOption={setSortOption} setSelectedGame={setSelectedGame} selectedStar={selectedStar} setSelectedStar={setSelectedStar} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>}/>
          </Routes>
     </Router>
   );

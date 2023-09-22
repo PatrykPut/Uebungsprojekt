@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-const Input = styled.div`
+const Button = styled.div`
     width: 100%;
     height: 20px;
     background-color: aliceblue;
@@ -17,6 +17,10 @@ const Input = styled.div`
 const Drop = styled.div`
     border: solid greenyellow 0.5px;
     width: 18vw;
+    height: 0;
+    opacity: 0;
+    transition: all 1s;
+    overflow: hidden;
     `;
 
 const Search = styled.div<SearchProps>`
@@ -41,7 +45,7 @@ export const options = {
     platform: ['PC', 'Xbox', 'PlayStation', 'Nintendo']
 }
 
-function Filter({setSortOption}: FilterProps) {
+function Sort({setSortOption}: FilterProps) {
     const [display1, setDisplay1] = useState({drop: 'none'});
     const [display2, setDisplay2] = useState({drop: 'none'});
     const [selectedOption, setSelectedOption] = useState('');
@@ -59,8 +63,8 @@ function Filter({setSortOption}: FilterProps) {
 
 return (
     <>
-        <Input onClick={toggleDropdown1}>Filter</Input>
-            <Drop style={{display: display1.drop}}>
+        <Button onClick={toggleDropdown1}>Filter</Button>
+            <Drop style={{height: display1.drop === 'none' ? '0' : 'auto', opacity: display1.drop === 'none' ? '0' : '1'}}>
 
                 {options.sort.map(option => (
                 <Search 
@@ -75,8 +79,8 @@ return (
                 ))}
                 
             </Drop>
-            <Input onClick={toggleDropdown2}>Platforms</Input>
-            <Drop style={{display: display2.drop}}>
+            <Button onClick={toggleDropdown2}>Platforms</Button>
+            <Drop style={{height: display2.drop === 'none' ? '0' : 'auto', opacity: display2.drop === 'none' ? '0' : '1'}}>
                 
                 {options.platform.map(option => (
                 <Search
@@ -94,4 +98,4 @@ return (
 )
 }
 
-export default Filter;
+export default Sort;

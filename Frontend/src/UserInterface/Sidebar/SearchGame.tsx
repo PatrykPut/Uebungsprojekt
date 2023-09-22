@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const Input = styled.input`
     margin-top: 20px;
-    margin-left:5px;
+    width:70%;
 `;
 
 interface SearchGameProps {
@@ -17,10 +17,7 @@ function SearchGame ({searchTerm, setSearchTerm} : SearchGameProps) {
     };
 
     return (
-    <>
-    Search
     <Input placeholder="Search" value={searchTerm} onChange={handleChange}/>
-    </>
         )
 }
 

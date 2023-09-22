@@ -1,10 +1,13 @@
-package Projekt.domain;
+package Projekt.dto;
 
-public class Platform {
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+public class PlatformDto {
 
     private Long id;
     private String platformName;
-    private Game game;
+
+    private Long gameId;
 
     public Long getId() {
         return id;
@@ -22,11 +25,11 @@ public class Platform {
         this.platformName = platformName;
     }
 
-    public Game getGame() {
-        return game;
+    public Long getGameId() {
+        return gameId;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGameId(Long gameId) {
+        this.gameId = gameId;
     }
 }

@@ -30,10 +30,10 @@ const MainContainer = styled.div`
     position: fixed;
     opacity: 1;
     z-index: 1;
-    //display:none;
+    //height: 14vh;
 `;
 
-function Navbar() {
+function Head() {
     return (
         <MainContainer>
             <Header>
@@ -51,4 +51,4 @@ function Navbar() {
     );
   };
 
-export default Navbar;
+export default Head;
