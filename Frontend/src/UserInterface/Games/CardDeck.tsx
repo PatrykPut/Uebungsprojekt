@@ -1,7 +1,6 @@
 import styled from 'styled-components';    
 import React, { useState, useEffect } from 'react'; 
 import { IGame, GameCard } from './GameCard';
-import { IRating } from './GameCard';
 
 const AllGamesContainer = styled.div`
     display:flex;

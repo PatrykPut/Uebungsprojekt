@@ -30,7 +30,6 @@ const MainContainer = styled.div`
     position: fixed;
     opacity: 1;
     z-index: 1;
-    //height: 14vh;
 `;
 
 function Head() {
