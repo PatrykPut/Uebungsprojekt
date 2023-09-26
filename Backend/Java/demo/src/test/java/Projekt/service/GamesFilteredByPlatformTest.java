@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GamesFilteredByPlatformTest {
 
     @Test
-    public void filteredGamesTest() {
+    public void filteredGamesWhenPlatformIsSelectedTest() {
         Set<PlatformEntity> platforms1 = new HashSet<>();
         Set<PlatformEntity> platforms2 = new HashSet<>();
 
@@ -34,7 +34,7 @@ class GamesFilteredByPlatformTest {
         assertEquals(game1, result.get(0));
     }
     @Test
-    public void filteredGamesWhenNoPlatformSelected() {
+    public void filteredGamesWhenNoPlatformIsSelectedTest() {
         Set<PlatformEntity> platforms1 = new HashSet<>();
         Set<PlatformEntity> platforms2 = new HashSet<>();
 
