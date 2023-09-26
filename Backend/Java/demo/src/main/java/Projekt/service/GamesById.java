@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
-public class GamesById {
-    private final GameRepository gameRepository;
-    private final GameEntityToDtoConverter converter;
+    @Service
+    public class GamesById {
+        private final GameRepository gameRepository;
+        private final GameEntityToDtoConverter converter;
 
-    public GamesById(GameRepository gameRepository, GameEntityToDtoConverter converter) {
-        this.gameRepository = gameRepository;
-        this.converter =  converter;
-    }
-    public Optional<GameDto> getGameWithRatings(Long id) {
-        Optional<GameEntity> gameOpt = gameRepository.findByIdWithRatings(id);
-        return gameOpt.map(converter::convert);
-    }
+        public GamesById(GameRepository gameRepository, GameEntityToDtoConverter converter) {
+            this.gameRepository = gameRepository;
+            this.converter =  converter;
+        }
+        public Optional<GameDto> getGameWithRatings(Long id) {
+            Optional<GameEntity> gameOpt = gameRepository.findByIdWithRatings(id);
+            return gameOpt.map(converter::convert);
+        }
 }

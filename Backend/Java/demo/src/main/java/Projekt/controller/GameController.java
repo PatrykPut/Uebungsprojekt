@@ -46,7 +46,7 @@ public class GameController {
         List<GameEntity> gameEntities = gameRepository.findAll( );
 
         GamesSorted.sortGames(gameEntities, sortOption);
-        gameEntities = GamesFiltered.filteredGames(gameEntities, platform);
+        gameEntities = GamesFilteredByPlatform.filteredGames(gameEntities, platform);
         gameEntities = GamesFilteredByStars.starsGames(gameEntities, selectedStar);
         gameEntities= GamesFilteredBySearch.searchGame(gameEntities, searchTerm);
 

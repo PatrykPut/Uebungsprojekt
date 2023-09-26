@@ -1,7 +1,6 @@
 package Projekt.service;
 
 import Projekt.repository.entities.GameEntity;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
