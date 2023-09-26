@@ -16,20 +16,20 @@ class GamesByIdTest {
     private final GamesById gamesById = new GamesById(gameRepository, converter);
 
     @Test
-    public void getGameWithRatingsTest() {
-        GameEntity gameEntity = new GameEntity();
-        GameDto gameDto = new GameDto();
-        Long id = 1L;
+    public void getGameWithRatingsAndConvertToDtoTest() {
+        GameEntity gameEntity = new GameEntity(1L, "Witcher","2000-01-01", "Developer1", "Description1", "Trailer1",null, null);
 
-        when(gameRepository.findByIdWithRatings(id)).thenReturn(Optional.of(gameEntity));
+        GameDto gameDto = new GameDto(gameEntity.getId(), gameEntity.getName(), gameEntity.getReleaseDate(), gameEntity.getDeveloper(), gameEntity.getDescription(), gameEntity.getTrailer(), null, null);
+
+        when(gameRepository.findByIdWithRatings(gameEntity.getId())).thenReturn(Optional.of(gameEntity));
         when(converter.convert(gameEntity)).thenReturn(gameDto);
 
-        Optional<GameDto> result = gamesById.getGameWithRatings(id);
+        Optional<GameDto> result = gamesById.getGameWithRatings(gameEntity.getId());
 
         assertEquals(Optional.of(gameDto), result);
     }
     @Test
-    public void getGameWithRatingsNonExistentTest() {
+    public void getGameWithRatingsWhenRatingIsNonExistentTest() {
         Long nonExistentId = 2L;
 
         when(gameRepository.findByIdWithRatings(nonExistentId)).thenReturn(Optional.empty());

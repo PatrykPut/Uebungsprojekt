@@ -2,11 +2,9 @@ package Projekt.service;
 
 import Projekt.repository.entities.GameEntity;
 import Projekt.repository.entities.RatingEntity;
-import org.springframework.stereotype.Service;
 import java.util.Comparator;
 import java.util.List;
 
-@Service
 public class GamesSorted {
     public static void sortGames(List<GameEntity> games, String sortOption) {
         switch (sortOption) {

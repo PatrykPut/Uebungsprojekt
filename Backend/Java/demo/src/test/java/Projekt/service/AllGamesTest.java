@@ -7,7 +7,6 @@ import Projekt.repository.entities.GameEntity;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -17,7 +16,7 @@ class AllGamesTest {
     private final AllGames allGames = new AllGames(gameRepository, converter);
 
     @Test
-    public void getAllGamesTest() {
+    public void fetchAllGamesAndConvertToDtoTest() {
         GameEntity gameEntity = new GameEntity();
         GameDto gameDto = new GameDto();
 
