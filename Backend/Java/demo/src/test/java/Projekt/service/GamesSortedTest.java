@@ -4,7 +4,10 @@ import Projekt.domain.Game;
 import Projekt.repository.entities.GameEntity;
 import Projekt.repository.entities.RatingEntity;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 class GamesSortedTest {
+    GamesSorted gamesSorted = new GamesSorted();
     @Test
     public void sortGamesWhenNewestIsSelected() {
         GameEntity game1 = new GameEntity(1L, "Witcher", "2000-01-01", "Developer1", "Description1", "Trailer1", null, null);
@@ -23,7 +27,7 @@ class GamesSortedTest {
         games.add(game1);
         games.add(game2);
 
-        GamesSorted.sortGames(games, "Newest");
+        gamesSorted.sortGames(games, "Newest");
 
         assertEquals(game2, games.get(0));
         assertEquals(game1, games.get(1));
@@ -44,7 +48,7 @@ class GamesSortedTest {
         games.add(game1);
         games.add(game2);
 
-        GamesSorted.sortGames(games, "Most Ratings");
+        gamesSorted.sortGames(games, "Most Ratings");
 
         assertEquals(game2, games.get(1));
         assertEquals(game1, games.get(0));
@@ -68,7 +72,7 @@ class GamesSortedTest {
 
         List<GameEntity> games = new ArrayList<>(List.of(game1, game2));
 
-        GamesSorted.sortGames(games, "Best Ratings");
+        gamesSorted.sortGames(games, "Best Ratings");
 
         assertEquals(game1, games.get(1));
         assertEquals(game2, games.get(0));
@@ -85,7 +89,7 @@ class GamesSortedTest {
         games.add(game2);
         games.add(game3);
 
-        GamesSorted.sortGames(games, "Default");
+        gamesSorted.sortGames(games, "Default");
 
         assertEquals(game1, games.get(0));
         assertEquals(game2, games.get(1));

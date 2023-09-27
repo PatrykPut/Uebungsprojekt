@@ -4,6 +4,7 @@ import Projekt.controller.dto.GameDto;
 import Projekt.repository.entities.GameEntity;
 import Projekt.repository.GameRepository;
 import Projekt.service.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -18,6 +19,9 @@ public class GameController {
     private final GamesById gamesById;
     private final GameRepository gameRepository;
     private final GameEntityToDtoConverter converter;
+
+    @Autowired
+    private GamesSorted gamesSorted;
 
     public GameController(AllGames allGames, GamesById gamesById, GameRepository gameRepository, GameEntityToDtoConverter converter) {
         this.allGames = allGames;
@@ -45,7 +49,7 @@ public class GameController {
 
         List<GameEntity> gameEntities = gameRepository.findAll( );
 
-        GamesSorted.sortGames(gameEntities, sortOption);
+        gamesSorted.sortGames(gameEntities, sortOption);
         gameEntities = GamesFilteredByPlatform.filteredGames(gameEntities, platform);
         gameEntities = GamesFilteredByStars.starsGames(gameEntities, selectedStar);
         gameEntities= GamesFilteredBySearch.searchGame(gameEntities, searchTerm);

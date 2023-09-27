@@ -2,11 +2,13 @@ package Projekt.service;
 
 import Projekt.repository.entities.GameEntity;
 import Projekt.repository.entities.RatingEntity;
+import org.springframework.stereotype.Component;
+
 import java.util.Comparator;
 import java.util.List;
-
+@Component
 public class GamesSorted {
-    public static void sortGames(List<GameEntity> games, String sortOption) {
+    public void sortGames(List<GameEntity> games, String sortOption) {
         switch (sortOption) {
             case "Newest":
                 games.sort(Comparator.comparing(GameEntity::getReleaseDate).reversed());
