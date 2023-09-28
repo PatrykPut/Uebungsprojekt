@@ -25,9 +25,9 @@ public class GameEntityToDtoConverterTest {
     public void converterTest() {
         GameEntity gameEntity = new GameEntity(1L, "Game1", "ReleaseDate", "Developer", "Description", "Trailer", null, null);
 
-        RatingDto ratingDto = new RatingDto(1L, 3, "Comment", 1L);
+        RatingDto ratingDto = new RatingDto(1L, 3, "Comment", 1L); //unnötig
 
-        PlatformDto platformDto = new PlatformDto(1L, "Platform1", 1L);
+        PlatformDto platformDto = new PlatformDto(1L, "Platform1", 1L); //unnötig , platform und rating rausnehmen
 
         when(ratingConverter.convertToRatingDto(Mockito.any())).thenReturn(ratingDto);
         when(platformConverter.convertToPlatformDto(Mockito.any())).thenReturn(platformDto);

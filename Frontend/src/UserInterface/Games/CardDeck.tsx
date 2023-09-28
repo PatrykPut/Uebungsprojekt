@@ -1,6 +1,6 @@
 import styled from 'styled-components';    
 import React, { useState, useEffect } from 'react'; 
-import { IGame, GameCard } from './GameCard';
+import { Game, GameCard } from './GameCard';
 
 const AllGamesContainer = styled.div`
     display:flex;
@@ -13,8 +13,8 @@ const AllGamesContainer = styled.div`
 
 interface GamesProps {
   sortOption: string;
-  selectedGame: IGame | null;
-  setSelectedGame: React.Dispatch<React.SetStateAction<IGame | null>>;
+  selectedGame: Game | null;
+  setSelectedGame: React.Dispatch<React.SetStateAction<Game | null>>;
   selectedStar: number;
   searchTerm: string;
   platformOption: string;
@@ -22,7 +22,7 @@ interface GamesProps {
 
 function Games({sortOption, platformOption, selectedStar, searchTerm} : GamesProps) {  
   
-  const [games, setGames] = useState<IGame[]>([]);
+  const [games, setGames] = useState<Game[]>([]);
   
   useEffect(() => {  
     const allGamesWithRatings_URL = `http://localhost:8080/games/sorted?sortOption=${sortOption}`
@@ -32,7 +32,7 @@ function Games({sortOption, platformOption, selectedStar, searchTerm} : GamesPro
        
     fetch(allGamesWithRatings_URL)    
       .then((response) => response.json())    
-      .then((originalJson: IGame[]) => {
+      .then((originalJson: Game[]) => {
         console.log(originalJson);
         const json = [...originalJson]
         setGames(json);

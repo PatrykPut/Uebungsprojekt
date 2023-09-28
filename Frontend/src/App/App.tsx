@@ -3,7 +3,7 @@ import Head from "../UserInterface/Head/Head";
 import CardDeckSidebar from "../UserInterface/CardDeckSidebar";
 import { createGlobalStyle } from 'styled-components';
 import { useState } from "react";
-import { IGame } from "../UserInterface/Games/GameCard";
+import { Game } from "../UserInterface/Games/GameCard";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
 function App () {
     const [platformOption, setPlatformOption] = useState('');
     const [sortOption, setSortOption] = useState('');
-    const [selectedGame, setSelectedGame] = useState<IGame | null>(null);
+    const [selectedGame, setSelectedGame] = useState<Game | null>(null);
     const [selectedStar, setSelectedStar] = useState(0);
     const [searchTerm, setSearchTerm] = useState('');
 

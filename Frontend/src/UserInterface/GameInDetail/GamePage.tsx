@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { IGame } from "../Games/GameCard";
+import { Game } from "../Games/GameCard";
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
@@ -60,12 +60,12 @@ const Trailer_Description = styled.div`
 
 function GamePage() {  
   const { id } = useParams<{ id: string }>();  
-  const [game, setGame] = useState<IGame | null>(null);  
+  const [game, setGame] = useState<Game | null>(null);  
   
   useEffect(() => {  
     fetch(`http://localhost:8080/game/${id}`)  
       .then((response) => response.json())  
-      .then((data: IGame) => setGame(data))  
+      .then((data: Game) => setGame(data))  
   }, [id]);  
   
   return game ?  (  

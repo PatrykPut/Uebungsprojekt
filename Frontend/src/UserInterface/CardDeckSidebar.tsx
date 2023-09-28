@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar/SideBar";
 import styled from 'styled-components';
 import Games from "./Games/CardDeck";
 import GamePage from "./GameInDetail/GamePage";
-import { IGame } from "./Games/GameCard";
+import { Game } from "./Games/GameCard";
 
 const BigBox = styled.div`
     display:flex;
@@ -14,8 +14,8 @@ const BigBox = styled.div`
 
 interface GamesProps {
     sortOption: string;
-    selectedGame: IGame | null;
-    setSelectedGame: React.Dispatch<React.SetStateAction<IGame | null>>;
+    selectedGame: Game | null;
+    setSelectedGame: React.Dispatch<React.SetStateAction<Game | null>>;
     selectedStar: number;
     searchTerm: string;
     setSortOption:(value: string) => void;
