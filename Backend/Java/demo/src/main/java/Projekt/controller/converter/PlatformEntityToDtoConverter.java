@@ -11,8 +11,7 @@ public class PlatformEntityToDtoConverter {
 
         return new PlatformDto(
                 platformEntity.getId(),
-                platformEntity.getPlatformName(),
-                platformEntity.getGameId()
+                platformEntity.getPlatformName()
         );
     }
 }

@@ -15,18 +15,13 @@ public class RatingDto {
         this.gameId = gameId;
     }
 
-    public Long getId() {
-        return id;
-    }
-
+    public Long getId() { return id; }
     public int getRating() {
         return rating;
     }
-
     public String getComment() {
         return comment;
     }
-
     public Long getGameId() {
         return gameId;
     }

@@ -1,9 +1,8 @@
-/*package Projekt.service;
+package Projekt.service;
 
 import Projekt.repository.entities.GameEntity;
 import Projekt.repository.entities.PlatformEntity;
 import org.junit.jupiter.api.Test;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,4 +52,4 @@ class GamesFilteredByPlatformTest {
 
         assertEquals(2, result.size());
     }
-}*/
+}

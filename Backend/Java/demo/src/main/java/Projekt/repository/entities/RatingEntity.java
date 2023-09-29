@@ -1,7 +1,5 @@
 package Projekt.repository.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.*;
 
 @Entity

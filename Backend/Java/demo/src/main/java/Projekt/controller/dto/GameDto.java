@@ -10,10 +10,10 @@ public class GameDto {
     private String description;
     private String trailer;
     private List<Long> ratingId;
-    private List<Long> platformId;
+    private List<PlatformDto> platforms;
 
     public GameDto() {}
-    public GameDto(Long id, String name, String releaseDate, String developer, String description, String trailer, List<Long> ratingId, List<Long> platformId) {
+    public GameDto(Long id, String name, String releaseDate, String developer, String description, String trailer, List<Long> ratingId, List<PlatformDto> platforms) {
         this.id = id;
         this.name = name;
         this.releaseDate = releaseDate;
@@ -21,7 +21,7 @@ public class GameDto {
         this.description = description;
         this.trailer = trailer;
         this.ratingId = ratingId;
-        this.platformId = platformId;
+        this.platforms = platforms;
     }
     public Long getId() { return id; }
     public String getName() { return name; }
@@ -30,5 +30,5 @@ public class GameDto {
     public String getDescription() { return description; }
     public String getTrailer() { return trailer; }
     public List<Long> getRatingId() { return ratingId; }
-    public List<Long> getPlatformId() { return platformId; }
+    public List<PlatformDto> getPlatforms() { return platforms; }
 }

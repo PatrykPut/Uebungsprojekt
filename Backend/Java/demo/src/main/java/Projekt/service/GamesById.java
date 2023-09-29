@@ -4,7 +4,6 @@ import Projekt.controller.converter.GameEntityToDtoConverter;
 import Projekt.controller.dto.GameDto;
 import Projekt.repository.GameRepository;
 import Projekt.repository.entities.GameEntity;
-import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
