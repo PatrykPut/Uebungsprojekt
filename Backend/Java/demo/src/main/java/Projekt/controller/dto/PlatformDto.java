@@ -4,7 +4,6 @@ public class PlatformDto {
 
     private Long id;
     private String platformName;
-
     private Long gameId;
 
     public PlatformDto() {}

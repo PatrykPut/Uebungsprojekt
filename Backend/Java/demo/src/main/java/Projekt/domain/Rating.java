@@ -5,19 +5,19 @@ public class Rating {
     private Long id;
     private int rating;
     private String comment;
-    private Game game;
+    private Long gameId;
 
-    public Rating(Long id, int rating, String comment, Game game){
+    public Rating(Long id, int rating, String comment, Long gameId){
         this.id = id;
         this.rating = rating;
         this.comment = comment;
-        this.game = game;
+        this.gameId = gameId;
     }
 
     public Long getId() { return id; }
     public int getRating() { return rating; }
     public String getComment() { return comment; }
-    public Game getGame() { return game; }
+    public Long getGameId() { return gameId; }
 }
 
 

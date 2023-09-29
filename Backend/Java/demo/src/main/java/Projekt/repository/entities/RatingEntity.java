@@ -13,20 +13,18 @@ public class RatingEntity {
     private Long id;
     private String comment;
     private int rating;
-    @ManyToOne
-    @JoinColumn(name="game_id", nullable= false)
-    @JsonBackReference
-    private GameEntity game;
+    @Column(name = "game_id")
+    private Long gameId;
 
     public RatingEntity() {}
-    public RatingEntity(Long id, int rating, String comment, GameEntity game) {
+    public RatingEntity(Long id, int rating, String comment, Long gameId) {
         this.id = id;
         this.rating = rating;
         this.comment = comment;
-        this.game = game;
+        this.gameId = gameId;
     }
     public Long getId() { return id; }
     public String getComment() { return comment; }
     public int getRating() { return rating; }
-    public GameEntity getGame() { return game; }
+    public Long getGameId() { return gameId; }
 }

@@ -19,7 +19,7 @@ public class GamesById {
         this.converter =  converter;
     }
     public Optional<GameDto> getGameWithRatings(Long id) {
-        Optional<GameEntity> gameOpt = gameRepository.findByIdWithRatings(id);
+        Optional<GameEntity> gameOpt = gameRepository.findById(id);
         return gameOpt.map(converter::convert);
     }
 }

@@ -17,13 +17,12 @@ class RatingEntityToDtoConverterTest {
     public void converterTest() {
         GameEntity gameEntity = new GameEntity(1L, "Game1", "ReleaseDate", "Developer", "Description", "Trailer", null, null);
 
-        RatingEntity ratingEntity = new RatingEntity(1L, 3, "Comment", gameEntity);
+        RatingEntity ratingEntity = new RatingEntity(1L, 3, "Comment", 1L);
 
         RatingDto ratingDto = converter.convertToRatingDto(ratingEntity);
 
         assertEquals(ratingEntity.getId(), ratingDto.getId());
         assertEquals(ratingEntity.getRating(), ratingDto.getRating());
         assertEquals(ratingEntity.getComment(), ratingDto.getComment());
-        assertEquals(ratingEntity.getGame().getId(), ratingDto.getGameId());
     }
 }

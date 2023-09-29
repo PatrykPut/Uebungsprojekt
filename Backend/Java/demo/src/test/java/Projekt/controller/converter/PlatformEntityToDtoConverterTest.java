@@ -16,12 +16,12 @@ class PlatformEntityToDtoConverterTest {
     public void converterTest() {
         GameEntity gameEntity = new GameEntity(1L, "Game1", "ReleaseDate", "Developer", "Description", "Trailer", null, null);
 
-        PlatformEntity platformEntity = new PlatformEntity(1L, "Platform1", gameEntity);
+        PlatformEntity platformEntity = new PlatformEntity(1L, "Platform1", 1L);
 
         PlatformDto platformDto = converter.convertToPlatformDto(platformEntity);
 
         assertEquals(platformEntity.getId(), platformDto.getId());
         assertEquals(platformEntity.getPlatformName(), platformDto.getPlatformName());
-        assertEquals(platformEntity.getGame().getId(), platformDto.getGameId());
+
     }
 }

@@ -1,39 +1,23 @@
 package Projekt.controller.converter;
 
 import Projekt.controller.dto.GameDto;
-import Projekt.controller.dto.PlatformDto;
-import Projekt.controller.dto.RatingDto;
 import Projekt.repository.entities.GameEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class GameEntityToDtoConverter {
-    private final RatingEntityToDtoConverter ratingConverter;
-    private final PlatformEntityToDtoConverter platformConverter;
-
-    @Autowired
-    public GameEntityToDtoConverter(RatingEntityToDtoConverter ratingConverter, PlatformEntityToDtoConverter platformConverter) {
-        this.ratingConverter = ratingConverter;
-        this.platformConverter = platformConverter;
-    }
 
     public GameDto convert(GameEntity gameEntity) {
-        List<RatingDto> ratings = null;
-        List<PlatformDto> platforms = null;
 
-        if (gameEntity.getRatings() != null) {
-            ratings = gameEntity.getRatings().stream()
-                    .map(ratingConverter::convertToRatingDto)
-                    .collect(Collectors.toList());
-        }
-        if (gameEntity.getPlatforms() != null) {
-            platforms = gameEntity.getPlatforms().stream()
-                    .map(platformConverter::convertToPlatformDto)
-                    .collect(Collectors.toList());
-        }
+        List<Long> ratingId = gameEntity.getRatingId() != null
+                ? new ArrayList<>(gameEntity.getRatingId())
+                : new ArrayList<>();
+
+        List<Long> platformId = gameEntity.getPlatformId() != null
+                ? new ArrayList<>(gameEntity.getPlatformId())
+                : new ArrayList<>();
 
         return new GameDto(
                 gameEntity.getId(),
@@ -42,8 +26,8 @@ public class GameEntityToDtoConverter {
                 gameEntity.getDeveloper(),
                 gameEntity.getDescription(),
                 gameEntity.getTrailer(),
-                ratings,
-                platforms
+                ratingId,
+                platformId
         );
     }
 }

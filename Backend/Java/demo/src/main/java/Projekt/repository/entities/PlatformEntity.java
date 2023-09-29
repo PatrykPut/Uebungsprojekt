@@ -1,6 +1,5 @@
 package Projekt.repository.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity(name = "platforms")
@@ -12,18 +11,16 @@ public class PlatformEntity {
     private Long id;
     @Column(name = "platformName")
     private String platformName;
-    @ManyToOne
-    @JoinColumn(name = "game_id", nullable = false)
-    @JsonBackReference
-    private GameEntity game;
+    @Column(name = "game_id")
+    private Long gameId;
 
     public PlatformEntity() {}
-    public PlatformEntity(Long id, String platformName, GameEntity game) {
+    public PlatformEntity(Long id, String platformName, Long gameId) {
         this.id = id;
         this.platformName = platformName;
-        this.game = game;
+        this.gameId = gameId;
     }
     public Long getId() { return id; }
     public String getPlatformName() { return platformName; }
-    public GameEntity getGame() { return game; }
+    public Long getGameId() { return gameId; }
 }

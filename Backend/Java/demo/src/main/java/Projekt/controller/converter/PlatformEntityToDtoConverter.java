@@ -9,14 +9,10 @@ public class PlatformEntityToDtoConverter {
 
     public PlatformDto convertToPlatformDto(PlatformEntity platformEntity) {
 
-        Long gameId = null;
-        if (platformEntity.getGame() != null) {
-            gameId = platformEntity.getGame().getId();
-        }
         return new PlatformDto(
                 platformEntity.getId(),
                 platformEntity.getPlatformName(),
-                gameId
+                platformEntity.getGameId()
         );
     }
 }

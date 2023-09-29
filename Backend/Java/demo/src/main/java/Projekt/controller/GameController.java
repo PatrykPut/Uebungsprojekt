@@ -4,9 +4,10 @@ import Projekt.controller.dto.GameDto;
 import Projekt.repository.entities.GameEntity;
 import Projekt.repository.GameRepository;
 import Projekt.service.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,15 +20,19 @@ public class GameController {
     private final GamesById gamesById;
     private final GameRepository gameRepository;
     private final GameEntityToDtoConverter converter;
+    private final GamesSorted gamesSorted;
+    private final GamesFilteredByStars gamesFilteredByStars;
+    private final GamesFilteredByPlatform gamesFilteredByPlatform;
 
-    @Autowired
-    private GamesSorted gamesSorted;
-
-    public GameController(AllGames allGames, GamesById gamesById, GameRepository gameRepository, GameEntityToDtoConverter converter) {
+    public GameController(AllGames allGames, GamesById gamesById, GameRepository gameRepository, GameEntityToDtoConverter converter, GamesSorted gamesSorted,
+                          GamesFilteredByStars gamesFilteredByStars, GamesFilteredByPlatform gamesFilteredByPlatform) {
         this.allGames = allGames;
         this.gamesById = gamesById;
         this.gameRepository = gameRepository;
         this.converter = converter;
+        this.gamesSorted = gamesSorted;
+        this.gamesFilteredByStars = gamesFilteredByStars;
+        this.gamesFilteredByPlatform = gamesFilteredByPlatform;
     }
     @GetMapping("/games")
     public ResponseEntity<List<GameDto>> getAllGames() {
@@ -49,10 +54,10 @@ public class GameController {
 
         List<GameEntity> gameEntities = gameRepository.findAll( );
 
-        gamesSorted.sortGames(gameEntities, sortOption);
-        gameEntities = GamesFilteredByPlatform.filteredGames(gameEntities, platform);
-        gameEntities = GamesFilteredByStars.starsGames(gameEntities, selectedStar);
-        gameEntities= GamesFilteredBySearch.searchGame(gameEntities, searchTerm);
+        gameEntities = gamesSorted.sortGames(gameEntities, sortOption);
+        gameEntities = gamesFilteredByPlatform.filteredGames(gameEntities, platform);
+        gameEntities = gamesFilteredByStars.starsGames(gameEntities, selectedStar);
+        gameEntities = GamesFilteredBySearch.searchGame(gameEntities, searchTerm);
 
         List<GameDto> games = gameEntities.stream()
                 .map(converter::convert)

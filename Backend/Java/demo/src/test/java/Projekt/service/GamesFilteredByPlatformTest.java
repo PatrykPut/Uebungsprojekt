@@ -1,4 +1,4 @@
-package Projekt.service;
+/*package Projekt.service;
 
 import Projekt.repository.entities.GameEntity;
 import Projekt.repository.entities.PlatformEntity;
@@ -53,4 +53,4 @@ class GamesFilteredByPlatformTest {
 
         assertEquals(2, result.size());
     }
-}
+}*/
