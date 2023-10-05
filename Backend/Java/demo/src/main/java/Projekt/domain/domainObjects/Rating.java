@@ -1,4 +1,4 @@
-package Projekt.domain;
+package Projekt.domain.domainObjects;
 
 public class Rating {
 

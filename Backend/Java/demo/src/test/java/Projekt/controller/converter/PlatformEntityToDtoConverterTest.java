@@ -10,8 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(properties = "spring.profiles.active=test")
 class PlatformEntityToDtoConverterTest {
-    @Autowired
-    private PlatformEntityToDtoConverter converter;
+    private final PlatformEntityToDtoConverter converter = new PlatformEntityToDtoConverter();
     @Test
     public void converterTest() {
 

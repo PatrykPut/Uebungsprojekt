@@ -1,8 +1,8 @@
-package Projekt.service;
+package Projekt.domain;
 
 import Projekt.controller.converter.GameEntityToDtoConverter;
-import Projekt.controller.converter.PlatformEntityToDtoConverter;
 import Projekt.controller.dto.GameDto;
+import Projekt.domain.businessLogic.AllGames;
 import Projekt.repository.GameRepository;
 import Projekt.repository.entities.GameEntity;
 import org.junit.jupiter.api.Test;

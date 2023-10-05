@@ -1,4 +1,4 @@
-package Projekt.service;
+package Projekt.domain.businessLogic;
 
 import Projekt.controller.converter.GameEntityToDtoConverter;
 import Projekt.controller.converter.RatingEntityToDtoConverter;

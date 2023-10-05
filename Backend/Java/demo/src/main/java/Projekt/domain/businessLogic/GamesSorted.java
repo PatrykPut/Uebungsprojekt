@@ -1,4 +1,4 @@
-package Projekt.service;
+package Projekt.domain.businessLogic;
 
 import Projekt.repository.RatingRepository;
 import Projekt.repository.entities.GameEntity;

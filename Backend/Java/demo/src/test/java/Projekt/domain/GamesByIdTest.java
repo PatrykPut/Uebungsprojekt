@@ -1,9 +1,10 @@
-package Projekt.service;
+package Projekt.domain;
 
 import Projekt.controller.converter.GameEntityToDtoConverter;
 import Projekt.controller.converter.PlatformEntityToDtoConverter;
 import Projekt.controller.converter.RatingEntityToDtoConverter;
 import Projekt.controller.dto.GameWithRatingsDto;
+import Projekt.domain.businessLogic.GamesById;
 import Projekt.repository.GameRepository;
 import Projekt.repository.RatingRepository;
 import Projekt.repository.entities.GameEntity;
