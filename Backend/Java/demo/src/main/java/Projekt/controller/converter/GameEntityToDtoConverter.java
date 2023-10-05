@@ -19,10 +19,6 @@ public class GameEntityToDtoConverter {
 
     public GameDto convert(GameEntity gameEntity) {
 
-        List<Long> ratingId = gameEntity.getRatingId() != null
-                ? new ArrayList<>(gameEntity.getRatingId())
-                : new ArrayList<>();
-
         List<PlatformDto> platforms = new ArrayList<>();
         if (gameEntity.getPlatforms() != null) {
             for (PlatformEntity platformEntity : gameEntity.getPlatforms()) {
@@ -37,7 +33,6 @@ public class GameEntityToDtoConverter {
                 gameEntity.getDeveloper(),
                 gameEntity.getDescription(),
                 gameEntity.getTrailer(),
-                ratingId,
                 platforms
         );
     }

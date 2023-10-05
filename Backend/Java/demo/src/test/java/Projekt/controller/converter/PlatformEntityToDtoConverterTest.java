@@ -14,7 +14,6 @@ class PlatformEntityToDtoConverterTest {
     private PlatformEntityToDtoConverter converter;
     @Test
     public void converterTest() {
-        GameEntity gameEntity = new GameEntity(1L, "Game1", "ReleaseDate", "Developer", "Description", "Trailer", null, null);
 
         PlatformEntity platformEntity = new PlatformEntity(1L, "Platform1", 1L);
 

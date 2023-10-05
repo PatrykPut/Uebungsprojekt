@@ -4,7 +4,6 @@ import Projekt.repository.RatingRepository;
 import Projekt.repository.entities.GameEntity;
 import Projekt.repository.entities.RatingEntity;
 import org.springframework.stereotype.Component;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;

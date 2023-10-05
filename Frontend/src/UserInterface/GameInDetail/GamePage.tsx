@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Game } from "../Games/GameCard";
+import { Game, Rating } from "../Games/GameCard";
 import styled from 'styled-components';
+
 
 const MainContainer = styled.div`
   justify-content: space-between;
@@ -60,34 +61,34 @@ const Trailer_Description = styled.div`
 
 function GamePage() {  
   const { id } = useParams<{ id: string }>();  
-  const [game, setGame] = useState<Game | null>(null);  
+  const [gameWithRatings, setGameWithRatings] = useState<{ game : Game, ratings : Rating[] } | null>(null);  
   
   useEffect(() => {  
     fetch(`http://localhost:8080/game/${id}`)  
       .then((response) => response.json())  
-      .then((data: Game) => setGame(data))  
+      .then((data: { game : Game, ratings : Rating[] }) => setGameWithRatings(data))  
   }, [id]);  
   
-  return game ?  (  
+  return gameWithRatings ?  (  
     <MainContainer>
       <GameContainer>
-      <h3>{game.name}</h3>
-      <p>{game.developer}</p>
-      <p>{game.releaseDate}</p> 
+      <h3>{gameWithRatings.game.name}</h3>
+      <p>{gameWithRatings.game.developer}</p>
+      <p>{gameWithRatings.game.releaseDate}</p> 
       </GameContainer>
 
       <Trailer_Description>
-      <Trailer width="560" height="315" src={game.trailer} frameBorder={0} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></Trailer> 
+      <Trailer width="560" height="315" src={gameWithRatings.game.trailer} frameBorder={0} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></Trailer> 
       
       <DescriptionContainer>
-      <p>{game.description}</p>
+      <p>{gameWithRatings.game.description}</p>
       </DescriptionContainer>
       </Trailer_Description>
 
       <RatingsWithTitle>
         <h3>Ratings</h3>
       <RatingsContainer>
-      {game.ratings.map((rating) => (
+      {gameWithRatings.ratings.map((rating) => (
       <Ratings key={rating.id}>
         <p>{rating.comment}</p>
         <p>{rating.rating}</p>

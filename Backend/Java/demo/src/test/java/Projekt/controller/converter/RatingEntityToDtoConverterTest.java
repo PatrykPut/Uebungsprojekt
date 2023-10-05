@@ -15,7 +15,6 @@ class RatingEntityToDtoConverterTest {
     RatingEntityToDtoConverter converter;
     @Test
     public void converterTest() {
-        GameEntity gameEntity = new GameEntity(1L, "Game1", "ReleaseDate", "Developer", "Description", "Trailer", null, null);
 
         RatingEntity ratingEntity = new RatingEntity(1L, 3, "Comment", 1L);
 

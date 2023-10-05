@@ -3,18 +3,16 @@ package Projekt.controller.converter;
 import Projekt.controller.dto.GameDto;
 import Projekt.repository.entities.GameEntity;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
-
-@SpringBootTest(properties = "spring.profiles.active=test")
 public class GameEntityToDtoConverterTest {
 
     @Test
     public void converterTest() {
-        GameEntity gameEntity = new GameEntity(1L, "Game1", "ReleaseDate", "Developer", "Description", "Trailer", null, null);
+        GameEntity gameEntity = new GameEntity(1L, "Game1", "ReleaseDate", "Developer", "Description", "Trailer", null);
 
-        GameEntityToDtoConverter converter = new GameEntityToDtoConverter();
+        PlatformEntityToDtoConverter platformConverter = new PlatformEntityToDtoConverter();
+        GameEntityToDtoConverter converter = new GameEntityToDtoConverter(platformConverter);
 
         GameDto gameDto = converter.convert(gameEntity);
 
