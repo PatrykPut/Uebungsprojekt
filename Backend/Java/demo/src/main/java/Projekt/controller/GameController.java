@@ -1,6 +1,7 @@
 package Projekt.controller;
 import Projekt.controller.converter.GameEntityToDtoConverter;
 import Projekt.controller.dto.GameDto;
+import Projekt.controller.dto.GameWithRatingsDto;
 import Projekt.repository.entities.GameEntity;
 import Projekt.repository.GameRepository;
 import Projekt.service.*;
@@ -18,12 +19,17 @@ public class GameController {
     private final GamesById gamesById;
     private final GameRepository gameRepository;
     private final GameEntityToDtoConverter converter;
+    private final GamesSorted gamesSorted;
+    private final GamesFilteredByStars gamesFilteredByStars;
 
-    public GameController(AllGames allGames, GamesById gamesById, GameRepository gameRepository, GameEntityToDtoConverter converter) {
+    public GameController(AllGames allGames, GamesById gamesById, GameRepository gameRepository, GameEntityToDtoConverter converter, GamesSorted gamesSorted,
+                          GamesFilteredByStars gamesFilteredByStars) {
         this.allGames = allGames;
         this.gamesById = gamesById;
         this.gameRepository = gameRepository;
         this.converter = converter;
+        this.gamesSorted = gamesSorted;
+        this.gamesFilteredByStars = gamesFilteredByStars;
     }
     @GetMapping("/games")
     public ResponseEntity<List<GameDto>> getAllGames() {
@@ -32,9 +38,9 @@ public class GameController {
     }
 
     @GetMapping("/game/{id}")
-    public ResponseEntity<GameDto> getGameWithRatings(@PathVariable Long id) {
-        Optional<GameDto> gameDtoOpt = gamesById.getGameWithRatings(id);
-        return gameDtoOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<GameWithRatingsDto> getGamesById(@PathVariable Long id) {
+        Optional<GameWithRatingsDto> gameWithRatingsDtoOpt = gamesById.getGameById(id);
+        return gameWithRatingsDtoOpt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
     @GetMapping("/games/sorted")
     public ResponseEntity<List<GameDto>>
@@ -45,10 +51,10 @@ public class GameController {
 
         List<GameEntity> gameEntities = gameRepository.findAll( );
 
-        GamesSorted.sortGames(gameEntities, sortOption);
+        gameEntities = gamesSorted.sortGames(gameEntities, sortOption);
         gameEntities = GamesFilteredByPlatform.filteredGames(gameEntities, platform);
-        gameEntities = GamesFilteredByStars.starsGames(gameEntities, selectedStar);
-        gameEntities= GamesFilteredBySearch.searchGame(gameEntities, searchTerm);
+        gameEntities = gamesFilteredByStars.starsGames(gameEntities, selectedStar);
+        gameEntities = GamesFilteredBySearch.searchGame(gameEntities, searchTerm);
 
         List<GameDto> games = gameEntities.stream()
                 .map(converter::convert)

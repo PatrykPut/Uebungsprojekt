@@ -1,40 +1,56 @@
 package Projekt.service;
 
 import Projekt.controller.converter.GameEntityToDtoConverter;
-import Projekt.controller.dto.GameDto;
+import Projekt.controller.converter.PlatformEntityToDtoConverter;
+import Projekt.controller.converter.RatingEntityToDtoConverter;
+import Projekt.controller.dto.GameWithRatingsDto;
 import Projekt.repository.GameRepository;
+import Projekt.repository.RatingRepository;
 import Projekt.repository.entities.GameEntity;
+import Projekt.repository.entities.RatingEntity;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import java.util.Collections;
 import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class GamesByIdTest {
-    private final GameRepository gameRepository = Mockito.mock(GameRepository.class);
-    private final GameEntityToDtoConverter converter = Mockito.mock(GameEntityToDtoConverter.class);
-    private final GamesById gamesById = new GamesById(gameRepository, converter);
+    private final PlatformEntityToDtoConverter platformConverter = new PlatformEntityToDtoConverter();
+    private final GameRepository gameRepository = mock(GameRepository.class);
+    private final GameEntityToDtoConverter gameConverter = new GameEntityToDtoConverter(platformConverter);
+    private final RatingRepository ratingRepository = mock(RatingRepository.class);
+    private final RatingEntityToDtoConverter ratingConverter = new RatingEntityToDtoConverter();
+    private final GamesById gamesById = new GamesById(gameRepository, gameConverter, ratingRepository, ratingConverter);
 
     @Test
-    public void getGameWithRatingsAndConvertToDtoTest() {
-        GameEntity gameEntity = new GameEntity(1L, "Witcher","2000-01-01", "Developer1", "Description1", "Trailer1",null, null);
+    public void getGameByIdWhenGameExists() {
+        GameRepository gameRepository = mock(GameRepository.class);
+        RatingRepository ratingRepository = mock(RatingRepository.class);
+        GameEntityToDtoConverter gameConverter = new GameEntityToDtoConverter(platformConverter);
+        RatingEntityToDtoConverter ratingConverter = new RatingEntityToDtoConverter();
 
-        GameDto gameDto = new GameDto(gameEntity.getId(), gameEntity.getName(), gameEntity.getReleaseDate(), gameEntity.getDeveloper(), gameEntity.getDescription(), gameEntity.getTrailer(), null, null);
+        GamesById service = new GamesById(gameRepository, gameConverter, ratingRepository, ratingConverter);
 
-        when(gameRepository.findByIdWithRatings(gameEntity.getId())).thenReturn(Optional.of(gameEntity));
-        when(converter.convert(gameEntity)).thenReturn(gameDto);
+        GameEntity mockGameEntity = new GameEntity();
+        RatingEntity mockRatingEntity = new RatingEntity();
 
-        Optional<GameDto> result = gamesById.getGameWithRatings(gameEntity.getId());
+        when(gameRepository.findById(anyLong())).thenReturn(Optional.of(mockGameEntity));
+        when(ratingRepository.findByGameId(anyLong())).thenReturn(Collections.singletonList(mockRatingEntity));
 
-        assertEquals(Optional.of(gameDto), result);
+        Optional<GameWithRatingsDto> result = service.getGameById(1L);
+
+        assertTrue(result.isPresent());
     }
     @Test
-    public void getGameWithRatingsWhenRatingIsNonExistentTest() {
+    public void getGameByIdWhenGameIsNonExistentTest() {
         Long nonExistentId = 2L;
 
-        when(gameRepository.findByIdWithRatings(nonExistentId)).thenReturn(Optional.empty());
+        when(gameRepository.findById(nonExistentId)).thenReturn(Optional.empty());
 
-        Optional<GameDto> result = gamesById.getGameWithRatings(nonExistentId);
+        Optional<GameWithRatingsDto> result = gamesById.getGameById(nonExistentId);
 
         assertEquals(Optional.empty(), result);
     }

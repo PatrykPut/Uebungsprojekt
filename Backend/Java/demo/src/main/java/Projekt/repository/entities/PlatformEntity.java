@@ -1,29 +1,24 @@
 package Projekt.repository.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import java.util.Set;
 
-@Entity(name = "platforms")
+@Entity
 @Table(name =  "platforms")
 public class PlatformEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "platformName")
     private String platformName;
-    @ManyToOne
-    @JoinColumn(name = "game_id", nullable = false)
-    @JsonBackReference
-    private GameEntity game;
+    @ManyToMany(mappedBy = "platforms")
+    private Set<GameEntity> games;
 
     public PlatformEntity() {}
-    public PlatformEntity(Long id, String platformName, GameEntity game) {
+    public PlatformEntity(Long id, String platformName, Long gameId) {
         this.id = id;
         this.platformName = platformName;
-        this.game = game;
     }
     public Long getId() { return id; }
     public String getPlatformName() { return platformName; }
-    public GameEntity getGame() { return game; }
 }

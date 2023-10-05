@@ -18,7 +18,7 @@ const GameContainer = styled.div`
     }
 `;
 
-export interface IGame {                                            
+export interface Game {                                            
     id: number;        
     name: string;        
     releaseDate: string;        
@@ -26,22 +26,22 @@ export interface IGame {
     description: string;
     trailer: string;
     platformName: string 
-    ratings: IRating[]; 
-    platforms: IPlatform[];     
+    ratings: Rating[]; 
+    platforms: Platform[];     
   }
 
-export interface IRating {      
+export interface Rating {      
     id: number;   
     comment: string;      
     rating: number;      
   } 
   
-export interface IPlatform {
+export interface Platform {
     id: number;
     platformName: string;
   }
 
-export function GameCard({ game }: {game : IGame}) {   
+export function GameCard({ game }: {game : Game}) {   
   
     const navigate = useNavigate();
   

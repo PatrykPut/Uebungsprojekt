@@ -1,6 +1,5 @@
 package Projekt.repository.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.Set;
 
@@ -17,15 +16,14 @@ public class GameEntity {
     @Column(length = 2000)
     private String description;
     private String trailer;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "game")
-    @JsonManagedReference
+    @ManyToMany
+    @JoinTable(
+            name = "game_platforms",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "platform_id"))
     private Set<PlatformEntity> platforms;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "game")
-    @JsonManagedReference
-    private Set<RatingEntity> ratings;
-
     public GameEntity(){}
-    public GameEntity(Long id, String name, String releaseDate, String developer, String description, String trailer, Set<PlatformEntity> platforms, Set<RatingEntity> ratings) {
+    public GameEntity(Long id, String name, String releaseDate, String developer, String description, String trailer, Set<PlatformEntity> platforms) {
         this.id = id;
         this.name = name;
         this.releaseDate = releaseDate;
@@ -33,7 +31,6 @@ public class GameEntity {
         this.description = description;
         this.trailer = trailer;
         this.platforms = platforms;
-        this.ratings = ratings;
     }
     public Long getId() { return id; }
     public String getName() { return name; }
@@ -41,6 +38,5 @@ public class GameEntity {
     public String getDeveloper() { return developer; }
     public String getDescription() { return description; }
     public String getTrailer() { return trailer; }
-    public Set<PlatformEntity> getPlatforms() { return platforms; }
-    public Set<RatingEntity> getRatings() { return ratings; }
+    public Set<PlatformEntity> getPlatforms() { return platforms ; }
 }

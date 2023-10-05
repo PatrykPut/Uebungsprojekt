@@ -1,94 +1,71 @@
 package Projekt.service;
 
-import Projekt.domain.Game;
+import Projekt.repository.RatingRepository;
 import Projekt.repository.entities.GameEntity;
 import Projekt.repository.entities.RatingEntity;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class GamesSortedTest {
-    @Test
-    public void sortGamesWhenNewestIsSelected() {
-        GameEntity game1 = new GameEntity(1L, "Witcher", "2000-01-01", "Developer1", "Description1", "Trailer1", null, null);
-        GameEntity game2 = new GameEntity(2L, "Minecraft", "2000-01-02", "Developer2", "Description2", "Trailer2", null, null);
+    GameEntity game1 = new GameEntity(1L, "Witcher", "2000-01-01", "Developer1", "Description1", "Trailer1", null);
+    GameEntity game2 = new GameEntity(2L, "Minecraft", "2000-01-02", "Developer2", "Description2", "Trailer2", null);
+    GameEntity game3 = new GameEntity(3L, "Warzone", "2000-01-03", "Developer3", "Description3", "Trailer3", null);
+    RatingEntity rating1 = new RatingEntity(1L, 2, "", 1L);
+    RatingEntity rating2 = new RatingEntity(2L, 3, "", 2L);
+    RatingEntity rating3 = new RatingEntity(3L, 4, "", 2L);
+    private final RatingRepository ratingRepository = mock(RatingRepository.class);
+    GamesSorted gamesSorted = new GamesSorted(ratingRepository);
 
-        List<GameEntity> games = new ArrayList<>();
-        games.add(game1);
-        games.add(game2);
-
-        GamesSorted.sortGames(games, "Newest");
-
-        assertEquals(game2, games.get(0));
-        assertEquals(game1, games.get(1));
-    }
     @Test
     public void sortGamesWhenMostRatingsIsSelected() {
-        RatingEntity rating1 = new RatingEntity();
-        RatingEntity rating2 = new RatingEntity();
-        RatingEntity rating3 = new RatingEntity();
 
-        Set<RatingEntity> ratings1 = Set.of(rating1, rating2);
-        Set<RatingEntity> ratings2 = Set.of(rating3);
+        List<GameEntity> games = new ArrayList<>(List.of(game1, game2, game3));
+        List<RatingEntity> allRatings = List.of(rating1, rating2, rating3);
 
-        GameEntity game1 = new GameEntity(1L, "Witcher", "2000-01-01", "Developer1", "Description1", "Trailer1", null, ratings1);
-        GameEntity game2 = new GameEntity(2L, "Minecraft", "2000-01-02", "Developer2", "Description2", "Trailer2", null, ratings2);
+        when(ratingRepository.findAll()).thenReturn(allRatings);
 
-        List<GameEntity> games = new ArrayList<>();
-        games.add(game1);
-        games.add(game2);
+        List<GameEntity> sortedGames = gamesSorted.sortGames(games, "Most Ratings");
 
-        GamesSorted.sortGames(games, "Most Ratings");
-
-        assertEquals(game2, games.get(1));
-        assertEquals(game1, games.get(0));
+        assertEquals(game3, sortedGames.get(2));
+        assertEquals(game2, sortedGames.get(0));
+        assertEquals(game1, sortedGames.get(1));
     }
     @Test
+    public void sortGamesWhenNewestIsSelected() {
+
+        List<GameEntity> games = new ArrayList<>(List.of(game1, game2, game3));
+
+        gamesSorted.sortGames(games, "Newest");
+
+        assertEquals(game3, games.get(0));
+        assertEquals(game2, games.get(1));
+        assertEquals(game1, games.get(2));
+}
+    @Test
     public void sortGamesWhenBestRatingsIsSelected() {
-        GameEntity game1 = Mockito.mock(GameEntity.class);
-        GameEntity game2 = Mockito.mock(GameEntity.class);
 
-        RatingEntity rating1 = Mockito.mock(RatingEntity.class);
-        RatingEntity rating2 = Mockito.mock(RatingEntity.class);
+        List<GameEntity> games = new ArrayList<>(List.of(game1, game2, game3));
+        List<RatingEntity> allRatings = new ArrayList<>(List.of(rating1, rating2, rating3));
 
-        when(rating1.getRating()).thenReturn(3);
-        when(rating2.getRating()).thenReturn(4);
+        when(ratingRepository.findAll()).thenReturn(allRatings);
 
-        Set<RatingEntity> ratings1 = Set.of(rating1);
-        Set<RatingEntity> ratings2 = Set.of(rating2);
-
-        when(game1.getRatings()).thenReturn(ratings1);
-        when(game2.getRatings()).thenReturn(ratings2);
-
-        List<GameEntity> games = new ArrayList<>(List.of(game1, game2));
-
-        GamesSorted.sortGames(games, "Best Ratings");
+        gamesSorted.sortGames(games, "Best Ratings");
 
         assertEquals(game1, games.get(1));
         assertEquals(game2, games.get(0));
+        assertEquals(game3, games.get(2));
     }
     @Test
     public void sortGamesWhenDefaultIsSelected() {
 
-        GameEntity game1 = new GameEntity(1L, "Witcher", "2000-01-01", "Developer1", "Description1", "Trailer1", null, null);
-        GameEntity game2 = new GameEntity(2L, "Minecraft", "2000-01-02", "Developer2", "Description2", "Trailer2", null, null);
-        GameEntity game3 = new GameEntity(2L, "Warzone", "2000-01-03", "Developer3", "Description3", "Trailer3", null, null);
+        List<GameEntity> games = List.of(game1, game2, game3);
 
-        List<GameEntity> games = new ArrayList<>();
-        games.add(game1);
-        games.add(game2);
-        games.add(game3);
+        List<GameEntity> sortedGames = gamesSorted.sortGames(games, "Default");
 
-        GamesSorted.sortGames(games, "Default");
-
-        assertEquals(game1, games.get(0));
-        assertEquals(game2, games.get(1));
-        assertEquals(game3, games.get(2));
+        assertArrayEquals(games.toArray(), sortedGames.toArray());
     }
 }
