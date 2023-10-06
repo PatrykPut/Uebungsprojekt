@@ -1,5 +1,6 @@
-package Projekt.service;
+package Projekt.domain;
 
+import Projekt.domain.businessLogic.GamesFilteredByStars;
 import Projekt.repository.RatingRepository;
 import Projekt.repository.entities.GameEntity;
 import Projekt.repository.entities.RatingEntity;
@@ -11,11 +12,11 @@ import static org.mockito.Mockito.when;
 
 class GamesFilteredByStarsTest {
     private final RatingRepository ratingRepository = mock(RatingRepository.class);
-    GameEntity game1 = new GameEntity(1L, "Witcher", "2000-01-01", "Developer1", "Description1", "Trailer1", null);
-    GameEntity game2 = new GameEntity(2L, "Minecraft", "2000-01-02", "Developer2", "Description2", "Trailer2", null);
-    RatingEntity rating1 = new RatingEntity(1L, 3, "", null);
-    RatingEntity rating2 = new RatingEntity(2L, 4, "", null);
-    GamesFilteredByStars gamesFilteredByStars = new GamesFilteredByStars(ratingRepository);
+    private final GameEntity game1 = new GameEntity(1L, "Witcher", "2000-01-01", "Developer1", "Description1", "Trailer1", null);
+    private final GameEntity game2 = new GameEntity(2L, "Minecraft", "2000-01-02", "Developer2", "Description2", "Trailer2", null);
+    private final RatingEntity rating1 = new RatingEntity(1L, 3, "", null);
+    private final RatingEntity rating2 = new RatingEntity(2L, 4, "", null);
+    private final GamesFilteredByStars gamesFilteredByStars = new GamesFilteredByStars(ratingRepository);
     @Test
     public void filteredGamesByStarsTestWhenStarIsSelected() {
 

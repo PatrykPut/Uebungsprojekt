@@ -1,5 +1,6 @@
-package Projekt.service;
+package Projekt.domain;
 
+import Projekt.domain.businessLogic.GamesSorted;
 import Projekt.repository.RatingRepository;
 import Projekt.repository.entities.GameEntity;
 import Projekt.repository.entities.RatingEntity;
@@ -11,14 +12,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class GamesSortedTest {
-    GameEntity game1 = new GameEntity(1L, "Witcher", "2000-01-01", "Developer1", "Description1", "Trailer1", null);
-    GameEntity game2 = new GameEntity(2L, "Minecraft", "2000-01-02", "Developer2", "Description2", "Trailer2", null);
-    GameEntity game3 = new GameEntity(3L, "Warzone", "2000-01-03", "Developer3", "Description3", "Trailer3", null);
-    RatingEntity rating1 = new RatingEntity(1L, 2, "", 1L);
-    RatingEntity rating2 = new RatingEntity(2L, 3, "", 2L);
-    RatingEntity rating3 = new RatingEntity(3L, 4, "", 2L);
+    private final GameEntity game1 = new GameEntity(1L, "Witcher", "2000-01-01", "Developer1", "Description1", "Trailer1", null);
+    private final GameEntity game2 = new GameEntity(2L, "Minecraft", "2000-01-02", "Developer2", "Description2", "Trailer2", null);
+    private final GameEntity game3 = new GameEntity(3L, "Warzone", "2000-01-03", "Developer3", "Description3", "Trailer3", null);
+    private final RatingEntity rating1 = new RatingEntity(1L, 2, "", 1L);
+    private final RatingEntity rating2 = new RatingEntity(2L, 3, "", 2L);
+    private final RatingEntity rating3 = new RatingEntity(3L, 4, "", 2L);
     private final RatingRepository ratingRepository = mock(RatingRepository.class);
-    GamesSorted gamesSorted = new GamesSorted(ratingRepository);
+    private final GamesSorted gamesSorted = new GamesSorted(ratingRepository);
 
     @Test
     public void sortGamesWhenMostRatingsIsSelected() {

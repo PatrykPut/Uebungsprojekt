@@ -14,7 +14,6 @@ public class RatingDto {
         this.comment = comment;
         this.gameId = gameId;
     }
-
     public Long getId() { return id; }
     public int getRating() {
         return rating;

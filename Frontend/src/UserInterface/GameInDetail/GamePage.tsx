@@ -53,6 +53,7 @@ const Trailer = styled.iframe`
   background-color: lightgray;
   margin-bottom: 10px;
   margin-right: 10px;
+  border: none;
 `;
 
 const Trailer_Description = styled.div`
@@ -78,7 +79,7 @@ function GamePage() {
       </GameContainer>
 
       <Trailer_Description>
-      <Trailer width="560" height="315" src={gameWithRatings.game.trailer} frameBorder={0} allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></Trailer> 
+      <Trailer width="560" height="315" src={gameWithRatings.game.trailer}  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></Trailer> 
       
       <DescriptionContainer>
       <p>{gameWithRatings.game.description}</p>

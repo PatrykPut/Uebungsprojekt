@@ -1,4 +1,4 @@
-package Projekt.service;
+package Projekt.domain.businessLogic;
 
 import Projekt.repository.entities.GameEntity;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 @Component
 public class GamesFilteredBySearch {
 
-    public static List<GameEntity> searchGame(List<GameEntity> games, String searchTerm ) {
+    public List<GameEntity> searchGame(List<GameEntity> games, String searchTerm ) {
         if (searchTerm != null) {
             games = games.stream()
                     .filter(gameEntity ->
