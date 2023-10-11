@@ -3,6 +3,7 @@ import Sort from './Sort';
 import SearchGame from './SearchGame';
 import styled from 'styled-components';
 
+
 const SidebarContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -25,10 +26,10 @@ interface SidebarProps {
 function Sidebar({ setSortOption, setPlatformOption, selectedStar, setSelectedStar, searchTerm, setSearchTerm }: SidebarProps) {
 
     return (
-        <SidebarContainer>
-            <SearchGame searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-            <Stars selectedStar={selectedStar} setSelectedStar={setSelectedStar}/>
-            <Sort setSortOption={setSortOption} setPlatformOption={setPlatformOption}/>
+        <SidebarContainer data-testid="SidebarContainer">
+            <SearchGame data-testid="SearchGame" searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+            <Stars data-testid="Stars" selectedStar={selectedStar} setSelectedStar={setSelectedStar}/>
+            <Sort data-testid="Sort" setSortOption={setSortOption} setPlatformOption={setPlatformOption}/>
         </SidebarContainer>
     )
 }

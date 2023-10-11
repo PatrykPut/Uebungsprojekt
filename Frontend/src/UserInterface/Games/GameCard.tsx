@@ -24,23 +24,15 @@ export interface Game {
     releaseDate: string;        
     developer: string;
     description: string;
-    trailer: string;
-    platformName: string 
-    ratings: Rating[]; 
-    platforms: Platform[];     
+    trailer: string;     
   }
 
 export interface Rating {      
     id: number;   
     comment: string;      
     rating: number;      
-  } 
-  
-export interface Platform {
-    id: number;
-    platformName: string;
   }
-
+  
 export function GameCard({ game }: {game : Game}) {   
   
     const navigate = useNavigate();

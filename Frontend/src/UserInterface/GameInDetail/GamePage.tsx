@@ -3,7 +3,6 @@ import { useParams } from "react-router";
 import { Game, Rating } from "../Games/GameCard";
 import styled from 'styled-components';
 
-
 const MainContainer = styled.div`
   justify-content: space-between;
   width: 60vw;

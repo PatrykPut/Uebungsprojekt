@@ -36,8 +36,8 @@ function Head() {
     return (
         <MainContainer>
             <Header>
-                Games 
-                <Controller src="/controller.png"/>
+                GameLibrary
+                <Controller src="/controller.png" alt='controller'/>
             </Header>
             <NavbarContainer>
                 <span>Home</span>
