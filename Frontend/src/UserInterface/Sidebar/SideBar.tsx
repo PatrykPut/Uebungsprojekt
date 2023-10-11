@@ -27,9 +27,9 @@ function Sidebar({ setSortOption, setPlatformOption, selectedStar, setSelectedSt
 
     return (
         <SidebarContainer data-testid="SidebarContainer">
-            <SearchGame data-testid="SearchGame" searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
-            <Stars data-testid="Stars" selectedStar={selectedStar} setSelectedStar={setSelectedStar}/>
-            <Sort data-testid="Sort" setSortOption={setSortOption} setPlatformOption={setPlatformOption}/>
+            <SearchGame searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+            <Stars selectedStar={selectedStar} setSelectedStar={setSelectedStar}/>
+            <Sort setSortOption={setSortOption} setPlatformOption={setPlatformOption}/>
         </SidebarContainer>
     )
 }
