@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Head from "../UserInterface/Head/Head";
-import CardDeckSidebar from "../UserInterface/CardDeckSidebar";
+import CardDeckSidebar from "../UserInterface/CardDeckAndSidebar";
 import { createGlobalStyle } from 'styled-components';
 import { useState } from "react";
 import { Game } from "../UserInterface/Games/GameCard";
