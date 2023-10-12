@@ -3,11 +3,10 @@ import Sort from './Sort';
 import SearchGame from './SearchGame';
 import styled from 'styled-components';
 
-
 const SidebarContainer = styled.div`
     display: flex;
     flex-direction: column;
-    width: 18vw;
+    width: 16vw;
     height:100vh ;
     background-color: lightgrey;
     position: fixed;

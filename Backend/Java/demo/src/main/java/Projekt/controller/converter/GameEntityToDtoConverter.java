@@ -33,7 +33,8 @@ public class GameEntityToDtoConverter {
                 gameEntity.getDeveloper(),
                 gameEntity.getDescription(),
                 gameEntity.getTrailer(),
-                platforms
+                platforms,
+                gameEntity.getImage()
         );
     }
 }

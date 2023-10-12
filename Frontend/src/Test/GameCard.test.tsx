@@ -10,7 +10,8 @@ test('renders GameCard with correct content', () => {
         releaseDate: '2022-01-01',
         developer: 'Test Developer',
         description: '',
-        trailer: ''
+        trailer: '',
+        image: ''
     };
 
     const { getByText } = render(
@@ -31,7 +32,8 @@ test('navigates to correct path on click', () => {
         releaseDate: '2022-01-01',
         developer: 'Test Developer',
         description: '',
-        trailer: ''
+        trailer: '',
+        image: ''
     };
 
     const { getByText } = render(

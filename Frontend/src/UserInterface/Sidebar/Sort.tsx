@@ -15,7 +15,6 @@ const Button = styled.div`
 
 const Drop = styled.div`
     border: solid greenyellow 0.5px;
-    width: 18vw;
     height: 0;
     opacity: 0;
     transition: all 1s;

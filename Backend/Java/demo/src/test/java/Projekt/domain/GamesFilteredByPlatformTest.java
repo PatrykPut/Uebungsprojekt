@@ -13,8 +13,8 @@ class GamesFilteredByPlatformTest {
     private final GamesFilteredByPlatform gamesFilteredByPlatform = new GamesFilteredByPlatform();
     private final PlatformEntity platform1 = new PlatformEntity(1L, "Platform1", 1L);
     private final PlatformEntity platform2 = new PlatformEntity(2L, "Platform2", 2L);
-    private final GameEntity game1 = new GameEntity(1L, "Game1", "2000-01-01", "Developer1", "Description1", "Trailer1", Set.of(platform1));
-    private final GameEntity game2 = new GameEntity(2L, "Game2", "2000-01-02", "Developer2", "Description2", "Trailer2", Set.of(platform2));
+    private final GameEntity game1 = new GameEntity(1L, "Game1", "2000-01-01", "Developer1", "Description1", "Trailer1", Set.of(platform1), "image");
+    private final GameEntity game2 = new GameEntity(2L, "Game2", "2000-01-02", "Developer2", "Description2", "Trailer2", Set.of(platform2), "image");
 
     @Test
     public void filteredGamesWhenPlatformIsSelectedTest() {

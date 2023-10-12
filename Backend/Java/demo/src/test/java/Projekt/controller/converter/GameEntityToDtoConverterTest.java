@@ -9,7 +9,7 @@ public class GameEntityToDtoConverterTest {
 
     @Test
     public void converterTest() {
-        GameEntity gameEntity = new GameEntity(1L, "Game1", "ReleaseDate", "Developer", "Description", "Trailer", null);
+        GameEntity gameEntity = new GameEntity(1L, "Game1", "ReleaseDate", "Developer", "Description", "Trailer", null, "image");
 
         PlatformEntityToDtoConverter platformConverter = new PlatformEntityToDtoConverter();
         GameEntityToDtoConverter converter = new GameEntityToDtoConverter(platformConverter);
