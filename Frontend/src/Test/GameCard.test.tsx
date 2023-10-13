@@ -1,7 +1,8 @@
 import { render, fireEvent } from "@testing-library/react";
-import { GameCard, Game } from "../UserInterface/Games/GameCard";
+import { GameCard } from "../UserInterface/Games/GameCard";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import '@testing-library/jest-dom/extend-expect';
+import { Game } from "../App/GameContext";
 
 test('renders GameCard with correct content', () => {
     const game: Game = {
@@ -49,4 +50,6 @@ test('navigates to correct path on click', () => {
 
     expect(getByText('Game detail page')).toBeInTheDocument();
 });
+
+export{}
 

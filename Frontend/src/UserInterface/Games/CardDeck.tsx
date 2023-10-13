@@ -1,6 +1,7 @@
 import styled from 'styled-components';    
-import React, { useState, useEffect } from 'react'; 
-import { Game, GameCard } from './GameCard';
+import React, { useState, useEffect, useContext } from 'react'; 
+import { GameCard } from './GameCard';
+import { Game, GameContext } from '../../App/GameContext';
 
 const AllGamesContainer = styled.div`
     display:flex;
@@ -11,17 +12,16 @@ const AllGamesContainer = styled.div`
     margin-top: 20px; 
 `;
 
-interface GamesProps {
-  sortOption: string;
-  selectedGame: Game | null;
-  setSelectedGame: React.Dispatch<React.SetStateAction<Game | null>>;
-  selectedStar: number;
-  searchTerm: string;
-  platformOption: string;
-}
-
-function Games({sortOption, platformOption, selectedStar, searchTerm} : GamesProps) {  
+const CardDeck = () => { 
   
+  const context = useContext(GameContext);
+
+if (!context) {
+  throw new Error("CardDeck must be used within a GameProvider");
+  }
+
+  const {sortOption, platformOption, selectedStar, searchTerm} = context;
+
   const [games, setGames] = useState<Game[]>([]);
   
   useEffect(() => {  
@@ -48,4 +48,4 @@ function Games({sortOption, platformOption, selectedStar, searchTerm} : GamesPro
   );    
 }  
 
-export default Games; 
+export default CardDeck; 

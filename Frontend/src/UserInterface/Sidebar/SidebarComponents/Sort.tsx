@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
+import { GameContext } from '../../../App/GameContext';
 
 const Button = styled.div`
     width: 100%;
@@ -33,21 +34,20 @@ interface SearchProps {
     isSelected: boolean;
 };
 
-interface FilterProps {
-    setSortOption: (value: string) => void;
-    setPlatformOption: (value: string) => void;
-}
-
 export const options = {
     sort: ['Default', 'Newest', 'Most Ratings', 'Best Ratings'],
     platform: ['All', 'PC', 'Xbox', 'PlayStation', 'Nintendo']
 }
 
-function Sort({setSortOption, setPlatformOption}: FilterProps) {
+const Sort = () => {
     const [display1, setDisplay1] = useState({drop: 'none'});
     const [display2, setDisplay2] = useState({drop: 'none'});
     const [selectedOption, setSelectedOption] = useState('');
     const [selectedPlatformOption, setSelectedPlatformOption] = useState('');
+
+    const context = useContext(GameContext);
+
+    const {setSortOption, setPlatformOption} = context!;
 
     const toggleDropdown1 = () => {
         setDisplay1(prevState => ({

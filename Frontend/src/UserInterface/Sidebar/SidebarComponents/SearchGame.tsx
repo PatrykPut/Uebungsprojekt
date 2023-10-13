@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { GameContext } from "../../../App/GameContext";
 
 const Input = styled.input`
     margin-top: 20px;
@@ -9,12 +11,11 @@ const Input = styled.input`
     margin-left: 10px;
     `;
 
-interface SearchGameProps {
-    searchTerm: string;
-    setSearchTerm: (searchTerm: string) => void;
-}
+const SearchGame = () => {
 
-function SearchGame ({searchTerm, setSearchTerm} : SearchGameProps) {
+    const context = useContext(GameContext);
+
+    const {searchTerm, setSearchTerm} = context!;
     
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);

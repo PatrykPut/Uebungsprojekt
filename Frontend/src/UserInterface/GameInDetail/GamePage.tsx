@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Game, Rating,  } from "../Games/GameCard";
+import { Game, Rating } from "../../App/GameContext";
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
@@ -12,7 +12,6 @@ const MainContainer = styled.div`
   background-color: #fafafa;  
   padding: 20px;  
   border-radius: 10px;  
-  //box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 `;
 
 const GameContainer = styled.div`

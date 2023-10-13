@@ -1,12 +1,14 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import Sort from "../UserInterface/Sidebar/Sort";
+import Sort from "../UserInterface/Sidebar/SidebarComponents/Sort";
 import '@testing-library/jest-dom/extend-expect'; 
+import { GameContext } from "../App/GameContext";
+import { mockContext } from "./mockContext";
 
 test('dropdown menus toggle on button click', () => {
 
-    const setSortOption = jest.fn()
-    const setPlatformOption = jest.fn()
-    render(<Sort setSortOption={setSortOption} setPlatformOption={setPlatformOption}/>)
+    render(<GameContext.Provider value={mockContext}>
+        <Sort/>
+    </GameContext.Provider>)
 
     const filterButton = screen.getByText('Filter');
     const platformButton = screen.getByText('Platforms');
@@ -31,7 +33,12 @@ test('setSprtOption and setPlatformOption are called with correct value', () => 
 
     const setSortOption = jest.fn();
     const setPlatformOption = jest.fn();
-    render(<Sort setSortOption={setSortOption} setPlatformOption={setPlatformOption}/>)
+
+    const value = {...mockContext, setSortOption, setPlatformOption}
+
+    render(<GameContext.Provider value={value}>
+        <Sort/>
+    </GameContext.Provider>)
 
     fireEvent.click(screen.getByText('Filter'));
     fireEvent.click(screen.getByText('Platforms'));
@@ -44,3 +51,5 @@ test('setSprtOption and setPlatformOption are called with correct value', () => 
 
     expect(setPlatformOption).toHaveBeenCalledWith('All');
 })
+
+export{}

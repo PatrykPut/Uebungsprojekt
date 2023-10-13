@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import { GameContext } from '../../../App/GameContext';
 
 const StarContainer = styled.div`
     height: max-content;
@@ -36,12 +37,12 @@ interface StarProps {
     isActive: boolean;
     isSelected: boolean;
 }
-interface StarsProps {
-    selectedStar: number;
-    setSelectedStar: React.Dispatch<React.SetStateAction<number>>;
-}
 
-function Stars({selectedStar, setSelectedStar} : StarsProps) {
+const Stars = () => {
+    const context = useContext(GameContext);
+
+    const {selectedStar, setSelectedStar,} = context!;
+
     const [activeStar, setActiveStar] = useState(0);
 
     const mouseOver = (index : number) => {
@@ -65,6 +66,7 @@ function Stars({selectedStar, setSelectedStar} : StarsProps) {
         <StarContainer>
             {[...Array(5)].map((star, index) => (
             <Star
+            data-testid={index < selectedStar ? 'selectedStar' : 'unselectedStar'}
             key={index}
             isActive={index < activeStar}
             isSelected={index < selectedStar}

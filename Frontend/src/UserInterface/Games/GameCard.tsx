@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { Game } from "../../App/GameContext";
 
 const CardContainer = styled.div`
     perspective: 1500px;
@@ -44,24 +45,6 @@ const Image = styled.img`
     height: 100px;
     width: auto;
 `;
-
-
-
-export interface Game {                                            
-    id: number;        
-    name: string;        
-    releaseDate: string;        
-    developer: string;
-    description: string;
-    trailer: string;
-    image: string;     
-  }
-
-export interface Rating {      
-    id: number;   
-    comment: string;      
-    rating: number;      
-  }
   
 export function GameCard({ game }: {game : Game}) { 
   
