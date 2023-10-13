@@ -7,10 +7,15 @@ const CardContainer = styled.div`
     width: 250px;
     height: 320px;
     position: relative;
-    transition: transform 0.6s;
-    margin-bottom: 20px;
+    transition: transform 0.8s;
+`;
 
-    &:hover {
+const CardWrapper = styled.div`
+    width: 250px;
+    height: 320px;
+    perspective: 1000px;
+    margin-bottom: 20px;
+    &:hover ${CardContainer} {
       transform: rotateY(180deg);
     }
 `;
@@ -40,6 +45,8 @@ const Image = styled.img`
     width: auto;
 `;
 
+
+
 export interface Game {                                            
     id: number;        
     name: string;        
@@ -56,16 +63,17 @@ export interface Rating {
     rating: number;      
   }
   
-export function GameCard({ game }: {game : Game}) {   
+export function GameCard({ game }: {game : Game}) { 
   
     const navigate = useNavigate();
   
     const handleClick = () => {
       navigate(`game/${game.id}`);
     }
-  
+
     return (   
-      <CardContainer>
+      <CardWrapper>
+        <CardContainer>
         <GameContainer onClick={handleClick}>   
             <Image src={process.env.PUBLIC_URL + game.image} alt={game.name} />                    
               <h3>{game.name}</h3>    
@@ -76,5 +84,6 @@ export function GameCard({ game }: {game : Game}) {
           <p>{game.description}</p>
         </GameContainerBack>
      </CardContainer>
+      </CardWrapper>
     );
   }    

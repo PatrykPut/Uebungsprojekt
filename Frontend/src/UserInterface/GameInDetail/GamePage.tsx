@@ -1,51 +1,61 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { Game, Rating } from "../Games/GameCard";
+import { Game, Rating,  } from "../Games/GameCard";
 import styled from 'styled-components';
 
 const MainContainer = styled.div`
-  justify-content: space-between;
-  width: 60vw;
-  background-color: #f3fff3;
-  padding: 10px;
+  display: flex;  
+  flex-direction: column;  
+  align-items: center;  
+  justify-content: space-between;  
+  width: 60vw;  
+  background-color: #fafafa;  
+  padding: 20px;  
+  border-radius: 10px;  
+  //box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 `;
 
 const GameContainer = styled.div`
-  background-color: lightgray;
-  height:max-content;
-  width: max-content;
-  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 20px;
   border-radius: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
+  margin-bottom: 20px;
 `;
 
-const RatingsWithTitle = styled.div`
-  margin-top: 300px;
+const RatingsHeadline = styled.div`
+  font-size: 30px;
+  font-weight: 500;
+  margin-top: 20px;
 `;
 
 const RatingsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 10px;
 `;
 
 const Ratings = styled.div`
-  background-color: lightgray;
-  height:max-content;
-  padding: 10px;
-  width: 15vw;
-  margin-bottom: 10px;
+  background-color: #ffffff;
+  padding: 20px;
+  width: 25%;
   border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
+  margin: 10px;
 `;
 
 const DescriptionContainer = styled.div`
-  background-color: lightgray;
-  height:max-content;
+  background-color: #fafafa;
+  height: 380px;
   width: 300px;
   padding: 10px;
   border-radius: 10px;
+  box-shadow: 0px 10px 20px -3px rgba(0, 0, 0, 0.2), 0px 6px 10px -2px rgba(0, 0, 0, 0.1); 
+  font-size: 20px;  
 `;
 
 const Trailer = styled.iframe`
@@ -72,13 +82,16 @@ function GamePage() {
   return gameWithRatings ?  (  
     <MainContainer>
       <GameContainer>
-      <h3>{gameWithRatings.game.name}</h3>
-      <p>{gameWithRatings.game.developer}</p>
-      <p>{gameWithRatings.game.releaseDate}</p> 
+      <div>
+      <h1>{gameWithRatings.game.name}</h1>
+      <p>{"Developer: " + gameWithRatings.game.developer}</p>
+      <p>{"Release Date: " + gameWithRatings.game.releaseDate}</p> 
+      </div>
+      <img src={process.env.PUBLIC_URL + gameWithRatings.game.image} alt={gameWithRatings.game.name} />
       </GameContainer>
 
       <Trailer_Description>
-      <Trailer width="560" height="315" src={gameWithRatings.game.trailer}  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
+      <Trailer width="800" height="400" src={gameWithRatings.game.trailer}  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
         No Trailer available
         </Trailer> 
       
@@ -87,17 +100,17 @@ function GamePage() {
       </DescriptionContainer>
       </Trailer_Description>
 
-      <RatingsWithTitle>
-        <h3>Ratings</h3>
+      
+        <RatingsHeadline>Ratings</RatingsHeadline>
       <RatingsContainer>
       {gameWithRatings.ratings.map((rating) => (
       <Ratings key={rating.id}>
         <p>{rating.comment}</p>
-        <p>{rating.rating}</p>
+        <p>{"Rating: " + rating.rating}</p>
       </Ratings>
       ))}  
         </RatingsContainer> 
-      </RatingsWithTitle>
+      
     </MainContainer>  
   ) : (
     null

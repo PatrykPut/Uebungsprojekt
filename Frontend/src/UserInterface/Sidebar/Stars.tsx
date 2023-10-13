@@ -7,8 +7,8 @@ const StarContainer = styled.div`
     color: white;
     border-radius: 20px;
     position: relative;
-    //display:flex;
     justify-content:center;
+    display: flex;
 `;
 
 const spin = keyframes`
@@ -30,12 +30,6 @@ const Star = styled.span<StarProps>`
     display:inline-block;
     color: ${props => props.isSelected ? 'rgb(255, 255, 27)' : ''};
     animation: ${props => props.isActive ? css`${spin} 0.5s forwards` : ''};
-`;
-
-const Ratings = styled.div`
-    color: black;
-    font-size: 20px;
-    margin-top: 10px;
 `;
 
 interface StarProps {
@@ -69,7 +63,6 @@ function Stars({selectedStar, setSelectedStar} : StarsProps) {
 
     return (
         <StarContainer>
-            <Ratings>Ratings</Ratings>
             {[...Array(5)].map((star, index) => (
             <Star
             key={index}
