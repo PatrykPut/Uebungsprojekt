@@ -2,22 +2,14 @@ import { useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
 const StarContainer = styled.div`
-    width: max-content;
     height: max-content;
     padding: 10px;
     color: white;
     border-radius: 20px;
     position: relative;
+    //display:flex;
+    justify-content:center;
 `;
-
-interface StarProps {
-    isActive: boolean;
-    isSelected: boolean;
-}
-interface StarsProps {
-    selectedStar: number;
-    setSelectedStar: React.Dispatch<React.SetStateAction<number>>;
-}
 
 const spin = keyframes`
 from {
@@ -39,6 +31,21 @@ const Star = styled.span<StarProps>`
     color: ${props => props.isSelected ? 'rgb(255, 255, 27)' : ''};
     animation: ${props => props.isActive ? css`${spin} 0.5s forwards` : ''};
 `;
+
+const Ratings = styled.div`
+    color: black;
+    font-size: 20px;
+    margin-top: 10px;
+`;
+
+interface StarProps {
+    isActive: boolean;
+    isSelected: boolean;
+}
+interface StarsProps {
+    selectedStar: number;
+    setSelectedStar: React.Dispatch<React.SetStateAction<number>>;
+}
 
 function Stars({selectedStar, setSelectedStar} : StarsProps) {
     const [activeStar, setActiveStar] = useState(0);
@@ -62,6 +69,7 @@ function Stars({selectedStar, setSelectedStar} : StarsProps) {
 
     return (
         <StarContainer>
+            <Ratings>Ratings</Ratings>
             {[...Array(5)].map((star, index) => (
             <Star
             key={index}

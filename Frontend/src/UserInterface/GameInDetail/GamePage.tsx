@@ -78,7 +78,9 @@ function GamePage() {
       </GameContainer>
 
       <Trailer_Description>
-      <Trailer width="560" height="315" src={gameWithRatings.game.trailer}  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></Trailer> 
+      <Trailer width="560" height="315" src={gameWithRatings.game.trailer}  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
+        No Trailer available
+        </Trailer> 
       
       <DescriptionContainer>
       <p>{gameWithRatings.game.description}</p>

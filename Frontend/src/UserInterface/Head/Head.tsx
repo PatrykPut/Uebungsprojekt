@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const Header = styled.div`
     display:flex;
@@ -17,12 +17,22 @@ const NavbarContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: 30px;
 `; 
+
+const spin = keyframes`
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+`;
 
 const Controller = styled.img`
     height: 100px;
     margin-left: 20px;
+    animation: ${spin} 5s infinite linear;
 `;
 
 const MainContainer = styled.div`

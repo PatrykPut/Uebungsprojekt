@@ -16,6 +16,7 @@ public class GameEntity {
     @Column(length = 2000)
     private String description;
     private String trailer;
+    private String image;
     @ManyToMany
     @JoinTable(
             name = "game_platforms",
@@ -23,7 +24,7 @@ public class GameEntity {
             inverseJoinColumns = @JoinColumn(name = "platform_id"))
     private Set<PlatformEntity> platforms;
     public GameEntity(){}
-    public GameEntity(Long id, String name, String releaseDate, String developer, String description, String trailer, Set<PlatformEntity> platforms) {
+    public GameEntity(Long id, String name, String releaseDate, String developer, String description, String trailer, Set<PlatformEntity> platforms, String image) {
         this.id = id;
         this.name = name;
         this.releaseDate = releaseDate;
@@ -31,6 +32,7 @@ public class GameEntity {
         this.description = description;
         this.trailer = trailer;
         this.platforms = platforms;
+        this.image = image;
     }
     public Long getId() { return id; }
     public String getName() { return name; }
@@ -39,4 +41,5 @@ public class GameEntity {
     public String getDescription() { return description; }
     public String getTrailer() { return trailer; }
     public Set<PlatformEntity> getPlatforms() { return platforms ; }
+    public String getImage() { return image; }
 }

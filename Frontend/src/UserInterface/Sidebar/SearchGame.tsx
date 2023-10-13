@@ -2,8 +2,12 @@ import styled from "styled-components";
 
 const Input = styled.input`
     margin-top: 20px;
-    width:70%;
-`;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    margin-right: 10px;
+    margin-left: 10px;
+    `;
 
 interface SearchGameProps {
     searchTerm: string;

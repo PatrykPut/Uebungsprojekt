@@ -12,9 +12,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class GamesSortedTest {
-    private final GameEntity game1 = new GameEntity(1L, "Witcher", "2000-01-01", "Developer1", "Description1", "Trailer1", null);
-    private final GameEntity game2 = new GameEntity(2L, "Minecraft", "2000-01-02", "Developer2", "Description2", "Trailer2", null);
-    private final GameEntity game3 = new GameEntity(3L, "Warzone", "2000-01-03", "Developer3", "Description3", "Trailer3", null);
+    private final GameEntity game1 = new GameEntity(1L, "Witcher", "2000-01-01", "Developer1", "Description1", "Trailer1", null, "image");
+    private final GameEntity game2 = new GameEntity(2L, "Minecraft", "2000-01-02", "Developer2", "Description2", "Trailer2", null, "image");
+    private final GameEntity game3 = new GameEntity(3L, "Warzone", "2000-01-03", "Developer3", "Description3", "Trailer3", null, "image");
     private final RatingEntity rating1 = new RatingEntity(1L, 2, "", 1L);
     private final RatingEntity rating2 = new RatingEntity(2L, 3, "", 2L);
     private final RatingEntity rating3 = new RatingEntity(3L, 4, "", 2L);
