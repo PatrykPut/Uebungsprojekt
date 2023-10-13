@@ -100,7 +100,6 @@ function GamePage() {
       </DescriptionContainer>
       </Trailer_Description>
 
-      
         <RatingsHeadline>Ratings</RatingsHeadline>
       <RatingsContainer>
       {gameWithRatings.ratings.map((rating) => (

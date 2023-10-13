@@ -25,10 +25,10 @@ interface GamesProps {
     platformOption: string;
   }
 
-const CardDeckSidebar =({sortOption, selectedGame, setSortOption, setPlatformOption, setSelectedGame, selectedStar, setSelectedStar, searchTerm, setSearchTerm, platformOption} : GamesProps) => {
+const MainPage =({sortOption, selectedGame, setSortOption, setPlatformOption, setSelectedGame, selectedStar, setSelectedStar, searchTerm, setSearchTerm, platformOption} : GamesProps) => {
 
-    const match = useMatch("game/:id")
-    
+    const match = useMatch("game/:id") // wenn Url != game/:id dann wird die Sidabar gerendert
+
     return (
 <BigBox>
     {!match && <Sidebar setSortOption={setSortOption} setPlatformOption={setPlatformOption} selectedStar={selectedStar} setSelectedStar={setSelectedStar} searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>}
@@ -40,4 +40,4 @@ const CardDeckSidebar =({sortOption, selectedGame, setSortOption, setPlatformOpt
 );
 }
 
-export default CardDeckSidebar;
+export default MainPage;

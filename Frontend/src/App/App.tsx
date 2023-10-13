@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Head from "../UserInterface/Head/Head";
-import CardDeckSidebar from "../UserInterface/CardDeckAndSidebar";
+import MainPage from "../UserInterface/MainPage";
 import { createGlobalStyle } from 'styled-components';
 import { useState } from "react";
 import { Game } from "../UserInterface/Games/GameCard";
@@ -31,7 +31,7 @@ function App () {
       <GlobalStyle/>
         <Head/>
          <Routes>
-          <Route path="/*" element={<CardDeckSidebar sortOption={sortOption} selectedGame={selectedGame} setSortOption={setSortOption}
+          <Route path="/*" element={<MainPage sortOption={sortOption} selectedGame={selectedGame} setSortOption={setSortOption}
            setPlatformOption={setPlatformOption} setSelectedGame={setSelectedGame} selectedStar={selectedStar} setSelectedStar={setSelectedStar}
             searchTerm={searchTerm} setSearchTerm={setSearchTerm} platformOption={platformOption}/>}/>
          </Routes>
