@@ -1,6 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 
-const Header = styled.div`
+const Header = styled.div.withConfig({
+    displayName: 'Header'
+})`
     display:flex;
     justify-content: left;
     align-items: center;

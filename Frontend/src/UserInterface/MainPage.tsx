@@ -3,6 +3,7 @@ import Sidebar from "./Sidebar/SideBar";
 import styled from 'styled-components';
 import CardDeck from "./Games/CardDeck";
 import GamePage from "./GameInDetail/GamePage";
+import { RecommendedGames } from "./GameInDetail/Recommended/RecommendedGames";
 
 const MainBox = styled.div`
     display:flex;
@@ -22,7 +23,8 @@ const MainPage =() => {
     <Routes>  
         <Route index element={<><CardDeck/></>}/>  
         <Route path="game/:id" element={<GamePage/>}/>  
-      </Routes>     
+      </Routes> 
+      {!match && <RecommendedGames/>}    
 </MainBox>
 );
 }

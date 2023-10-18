@@ -15,7 +15,7 @@ const SearchGame = () => {
 
     const context = useContext(GameContext);
 
-    const {searchTerm, setSearchTerm} = context!;
+    const {searchTerm, setSearchTerm} = context;
     
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
