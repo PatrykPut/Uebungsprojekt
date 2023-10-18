@@ -10,6 +10,8 @@ export const mockContext: GameContextProps = {
     selectedStar: 0,
     setSelectedStar: jest.fn(),
     searchTerm: '',
-    setSearchTerm: jest.fn()
+    setSearchTerm: jest.fn(),
+    allGames: [],
+    setAllGames: jest.fn()
 };
 

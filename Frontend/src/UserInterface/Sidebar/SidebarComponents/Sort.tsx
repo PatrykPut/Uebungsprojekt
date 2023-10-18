@@ -65,8 +65,9 @@ return (
         <Button onClick={toggleDropdown1}>Filter</Button>
             <Drop style={{height: display1.drop === 'none' ? '0' : 'auto', opacity: display1.drop === 'none' ? '0' : '1'}}>
 
-                {options.sort.map(option => (
+                {options.sort.map((option, index) => (
                 <Search 
+                key={index}
                 isSelected={selectedOption === option}
                 onClick={() => {
                 setSortOption(option);
@@ -81,8 +82,9 @@ return (
             <Button onClick={toggleDropdown2}>Platforms</Button>
             <Drop style={{height: display2.drop === 'none' ? '0' : 'auto', opacity: display2.drop === 'none' ? '0' : '1'}}>
                 
-                {options.platform.map(option => (
+                {options.platform.map((option, index) => (
                 <Search
+                key={index}
                 isSelected={selectedPlatformOption === option}
                 onClick={() => {
                 setPlatformOption(option)

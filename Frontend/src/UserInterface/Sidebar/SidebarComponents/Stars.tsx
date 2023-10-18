@@ -24,7 +24,7 @@ to {
 `;
 
 const Star = styled.span<StarProps>`
-    font-size: 50px; 
+    font-size: 400%; 
     position: relative;
     bottom: 4px;
     cursor: pointer;

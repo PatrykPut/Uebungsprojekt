@@ -27,6 +27,23 @@ export interface GameContextProps {
     setSelectedStar: Dispatch<SetStateAction<number>>;  
     searchTerm: string;  
     setSearchTerm: Dispatch<SetStateAction<string>>;  
+    allGames: Game[];
+    setAllGames: (games: Game[]) => void;
   }  
 
-export const GameContext = React.createContext<GameContextProps | undefined>(undefined);
+const defaultGameContext: GameContextProps = {
+  sortOption: "",
+  setSortOption: () => {},
+  platformOption: "",
+  setPlatformOption: () => {},
+  selectedGame: null, 
+  setSelectedGame: () => {},
+  selectedStar: 0,
+  setSelectedStar: () => {},
+  searchTerm: "",
+  setSearchTerm: () => {},
+  allGames: [],
+  setAllGames: () => {},
+};
+
+export const GameContext = React.createContext<GameContextProps>(defaultGameContext);

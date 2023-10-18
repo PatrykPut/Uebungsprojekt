@@ -8,7 +8,7 @@ const CardContainer = styled.div`
     width: 250px;
     height: 320px;
     position: relative;
-    transition: transform 0.8s;
+    transition: transform 0.4s;
 `;
 
 const CardWrapper = styled.div`
