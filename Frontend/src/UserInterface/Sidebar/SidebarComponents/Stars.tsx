@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import { GameContext } from '../../../App/GameContext';
 
 const StarContainer = styled.div`
     height: max-content;
@@ -7,8 +8,8 @@ const StarContainer = styled.div`
     color: white;
     border-radius: 20px;
     position: relative;
-    //display:flex;
     justify-content:center;
+    display: flex;
 `;
 
 const spin = keyframes`
@@ -23,7 +24,7 @@ to {
 `;
 
 const Star = styled.span<StarProps>`
-    font-size: 50px; 
+    font-size: 400%; 
     position: relative;
     bottom: 4px;
     cursor: pointer;
@@ -32,22 +33,16 @@ const Star = styled.span<StarProps>`
     animation: ${props => props.isActive ? css`${spin} 0.5s forwards` : ''};
 `;
 
-const Ratings = styled.div`
-    color: black;
-    font-size: 20px;
-    margin-top: 10px;
-`;
-
 interface StarProps {
     isActive: boolean;
     isSelected: boolean;
 }
-interface StarsProps {
-    selectedStar: number;
-    setSelectedStar: React.Dispatch<React.SetStateAction<number>>;
-}
 
-function Stars({selectedStar, setSelectedStar} : StarsProps) {
+const Stars = () => {
+    const context = useContext(GameContext);
+
+    const {selectedStar, setSelectedStar,} = context!;
+
     const [activeStar, setActiveStar] = useState(0);
 
     const mouseOver = (index : number) => {
@@ -69,9 +64,9 @@ function Stars({selectedStar, setSelectedStar} : StarsProps) {
 
     return (
         <StarContainer>
-            <Ratings>Ratings</Ratings>
             {[...Array(5)].map((star, index) => (
             <Star
+            data-testid={index < selectedStar ? 'selectedStar' : 'unselectedStar'}
             key={index}
             isActive={index < activeStar}
             isSelected={index < selectedStar}

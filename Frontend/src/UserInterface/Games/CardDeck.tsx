@@ -1,29 +1,32 @@
 import styled from 'styled-components';    
-import React, { useState, useEffect } from 'react'; 
-import { Game, GameCard } from './GameCard';
+import { useEffect, useContext } from 'react'; 
+import { GameCard } from './GameCard';
+import { Game, GameContext } from '../../App/GameContext';
 
 const AllGamesContainer = styled.div`
     display:flex;
     flex-wrap: wrap;
-    width: 60vw;
+    width: 60%;
     justify-content:space-evenly;
     height: max-content;
     margin-top: 20px; 
 `;
 
-interface GamesProps {
-  sortOption: string;
-  selectedGame: Game | null;
-  setSelectedGame: React.Dispatch<React.SetStateAction<Game | null>>;
-  selectedStar: number;
-  searchTerm: string;
-  platformOption: string;
-}
+const RecommendedContainer = styled.div`
+    width: 18%;
+    background-color: lightgrey;
+    position: fixed;
+    right: 0px;
+    height:100%;
+    display:flex;
+`;
 
-function Games({sortOption, platformOption, selectedStar, searchTerm} : GamesProps) {  
+const CardDeck = () => { 
   
-  const [games, setGames] = useState<Game[]>([]);
-  
+  const context = useContext(GameContext);
+
+  const {sortOption, platformOption, selectedStar, searchTerm, allGames, setAllGames} = context!;
+
   useEffect(() => {  
     const allGamesWithRatings_URL = `http://localhost:8080/games/sorted?sortOption=${sortOption}`
      + (platformOption ? `&platform=${platformOption}` : '')
@@ -35,17 +38,22 @@ function Games({sortOption, platformOption, selectedStar, searchTerm} : GamesPro
       .then((originalJson: Game[]) => {
         console.log(originalJson);
         const json = [...originalJson]
-        setGames(json);
+        setAllGames(json);
         });
-      },[sortOption, selectedStar, searchTerm, platformOption]);
+      },[sortOption, selectedStar, searchTerm, platformOption, setAllGames]);
         
   return (
+      <>
       <AllGamesContainer>
-          {games.map((game) => (
+          {allGames.map((game) => (
               <GameCard key={game.id} game={game}/>
           ))}
-      </AllGamesContainer>   
+      </AllGamesContainer>
+      <RecommendedContainer>
+        
+      </RecommendedContainer> 
+      </>  
   );    
 }  
 
-export default Games; 
+export default CardDeck; 

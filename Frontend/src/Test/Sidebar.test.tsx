@@ -1,17 +1,16 @@
 import { render, screen } from "@testing-library/react"
 import Sidebar from "../UserInterface/Sidebar/SideBar"
 import '@testing-library/jest-dom';  
+import { GameContext } from "../App/GameContext";
+import { mockContext } from "./mockContext";
 
 test('renders Sidebar and children components', () => {
-    const mockProps = {
-        setSortOption: jest.fn(),
-        setPlatformOption: jest.fn(),
-        selectedStar: 0,
-        setSelectedStar: jest.fn(),
-        searchTerm: '',
-        setSearchTerm: jest.fn()    
-    };
-    render(<Sidebar {...mockProps}/>)
+ 
+    render(
+        <GameContext.Provider value={mockContext}>
+            <Sidebar/>
+        </GameContext.Provider>
+    )
 
     const sidebarContainer = screen.getByTestId('SidebarContainer');
     expect(sidebarContainer).toBeInTheDocument();
@@ -25,3 +24,4 @@ test('renders Sidebar and children components', () => {
     const sort = screen.getByText('Default');
     expect(sort).toBeInTheDocument();
     })
+    export {}
