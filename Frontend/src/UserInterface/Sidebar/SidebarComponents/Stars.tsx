@@ -41,7 +41,7 @@ interface StarProps {
 const Stars = () => {
     const context = useContext(GameContext);
 
-    const {selectedStar, setSelectedStar,} = context!;
+    const {selectedStar, setSelectedStar,} = context;
 
     const [activeStar, setActiveStar] = useState(0);
 

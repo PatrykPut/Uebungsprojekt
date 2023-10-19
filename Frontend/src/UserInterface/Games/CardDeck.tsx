@@ -1,5 +1,5 @@
 import styled from 'styled-components';    
-import { useEffect, useContext } from 'react'; 
+import { useEffect, useContext, useState } from 'react'; 
 import { GameCard } from './GameCard';
 import { Game, GameContext } from '../../App/GameContext';
 
@@ -12,20 +12,11 @@ const AllGamesContainer = styled.div`
     margin-top: 20px; 
 `;
 
-const RecommendedContainer = styled.div`
-    width: 18%;
-    background-color: lightgrey;
-    position: fixed;
-    right: 0px;
-    height:100%;
-    display:flex;
-`;
-
 const CardDeck = () => { 
   
   const context = useContext(GameContext);
 
-  const {sortOption, platformOption, selectedStar, searchTerm, allGames, setAllGames} = context!;
+  const {sortOption, platformOption, selectedStar, searchTerm, allGames, setAllGames} = context;
 
   useEffect(() => {  
     const allGamesWithRatings_URL = `http://localhost:8080/games/sorted?sortOption=${sortOption}`
@@ -33,26 +24,21 @@ const CardDeck = () => {
      + (selectedStar ? `&selectedStar=${selectedStar}` : '')
      + (searchTerm ? `&searchTerm=${searchTerm}` : '');
        
-    fetch(allGamesWithRatings_URL)    
+     fetch(allGamesWithRatings_URL)    
       .then((response) => response.json())    
       .then((originalJson: Game[]) => {
-        console.log(originalJson);
         const json = [...originalJson]
         setAllGames(json);
+
         });
       },[sortOption, selectedStar, searchTerm, platformOption, setAllGames]);
-        
+
   return (
-      <>
       <AllGamesContainer>
           {allGames.map((game) => (
               <GameCard key={game.id} game={game}/>
           ))}
       </AllGamesContainer>
-      <RecommendedContainer>
-        
-      </RecommendedContainer> 
-      </>  
   );    
 }  
 

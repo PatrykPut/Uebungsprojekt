@@ -47,7 +47,7 @@ const Sort = () => {
 
     const context = useContext(GameContext);
 
-    const {setSortOption, setPlatformOption} = context!;
+    const {setSortOption, setPlatformOption} = context;
 
     const toggleDropdown1 = () => {
         setDisplay1(prevState => ({
