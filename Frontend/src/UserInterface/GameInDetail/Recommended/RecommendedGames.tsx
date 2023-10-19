@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Game, GameContext } from "../../../App/GameContext";
 import { RecommendedGameCard } from "./RecommendedGameCard";
@@ -12,11 +12,12 @@ const RecommendedSidebar = styled.div`
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
 `;
 
 const H2 = styled.h2`
     margin-top: 30px;
-    height: fit-content;
+    font-size: 1.3vw;
 `;
 
 export const RecommendedGames = () => {
@@ -36,8 +37,8 @@ export const RecommendedGames = () => {
 
       return (
         <RecommendedSidebar>
+          <div>
             <H2>Recommended Games</H2>
-            <div>
             {recommendedGames.map((game) => (
           <RecommendedGameCard key={game.id} game={game}/>
         ))}
