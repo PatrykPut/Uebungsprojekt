@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const SidebarContainer = styled.div`
     display: flex;
     flex-direction: column;
-    width: 18%;
+    width: 18vw;
     height:100% ;
     background-color: lightgrey;
     position: fixed;

@@ -12,8 +12,8 @@ const CardContainer = styled.div`
 `;
 
 const CardWrapper = styled.div`
-    width: 250px;
-    height: 220px;
+    width: 13.5vw;
+    height: 21vh;
     perspective: 1000px;
     border-radius: 10px;
     margin-bottom: 30px;
@@ -28,7 +28,7 @@ const GameContainerFront = styled.div`
     width: 100%;
     height: 100%;
     justify-content: center;
-    padding: 20px;
+    padding: 1vw;
     border: white solid 1px ;
     border-radius: 10px;
     box-sizing: border-box;
@@ -37,6 +37,10 @@ const GameContainerFront = styled.div`
     backface-visibility: hidden;
     overflow: hidden;
     background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.9vw;
 `;
 
 const GameContainerBack = styled(GameContainerFront)`
@@ -45,8 +49,8 @@ const GameContainerBack = styled(GameContainerFront)`
 `;
 
 const Image = styled.img`
-    height: 100px;
-    width: auto;
+    height: 55%;
+    width: 100%;
 `;
   
 export function RecommendedGameCard({ game }: {game : Game}) { 

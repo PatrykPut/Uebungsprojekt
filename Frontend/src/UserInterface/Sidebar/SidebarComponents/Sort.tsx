@@ -5,6 +5,7 @@ import { GameContext } from '../../../App/GameContext';
 const Button = styled.div`
     width: 100%;
     height: 20px;
+    font-size: 100%;
     background-color: aliceblue;
     cursor: pointer;
     padding-top: 5px;
