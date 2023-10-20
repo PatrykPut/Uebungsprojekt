@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { Game, GameContext } from "../../../App/GameContext";
+import { Game, GameContext } from "../../App/GameContext";
 import { RecommendedGameCard } from "./RecommendedGameCard";
 
 const RecommendedSidebar = styled.div`
