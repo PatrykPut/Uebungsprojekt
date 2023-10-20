@@ -13,5 +13,13 @@ export const mockContext: GameContextProps = {
     setSearchTerm: jest.fn(),
     allGames: [],
     setAllGames: jest.fn(),
+    rating: '',
+    comment: '',
+    setRating: jest.fn(),
+    setComment: jest.fn(),
+    commentError: false,
+    ratingError: false,
+    setCommentError: jest.fn(),
+    setRatingError: jest.fn()
 };
 

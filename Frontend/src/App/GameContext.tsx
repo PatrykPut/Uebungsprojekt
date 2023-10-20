@@ -29,6 +29,14 @@ export interface GameContextProps {
     setSearchTerm: Dispatch<SetStateAction<string>>;  
     allGames: Game[];
     setAllGames: (games: Game[]) => void;
+    commentError: boolean;
+    setCommentError: Dispatch<SetStateAction<boolean>>;
+    ratingError: boolean;
+    setRatingError: Dispatch<SetStateAction<boolean>>;
+    rating: string;
+    setRating: Dispatch<SetStateAction<string>>;
+    comment: string;
+    setComment: Dispatch<SetStateAction<string>>;
   }  
 
 const defaultGameContext: GameContextProps = {
@@ -44,6 +52,14 @@ const defaultGameContext: GameContextProps = {
   setSearchTerm: () => {},
   allGames: [],
   setAllGames: () => {},
+  commentError: false,
+  setCommentError: () => {},
+  ratingError: false,
+  setRatingError: () => {},
+  rating: '',
+  setRating: () => {},
+  comment: '',
+  setComment: () => {}
 };
 
 export const GameContext = React.createContext<GameContextProps>(defaultGameContext);

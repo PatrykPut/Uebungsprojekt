@@ -25,13 +25,18 @@ function App () {
     const [selectedStar, setSelectedStar] = useState(0);
     const [searchTerm, setSearchTerm] = useState('');
     const [allGames, setAllGames] = useState<Game[]>([]);
+    const [commentError, setCommentError] = useState(false);
+    const [ratingError, setRatingError] = useState(false);
+    const [comment, setComment] = useState('');
+    const [rating, setRating] = useState('');
     
   return (
     
     <Router>
       <GlobalStyle/>
         <Head/>
-         <GameContext.Provider value={{ sortOption, setSortOption, platformOption, setPlatformOption, selectedGame, setSelectedGame, selectedStar, setSelectedStar, searchTerm, setSearchTerm, allGames, setAllGames}}>
+         <GameContext.Provider value={{ sortOption, setSortOption, platformOption, setPlatformOption, selectedGame, setSelectedGame, selectedStar, setSelectedStar, searchTerm,
+           setSearchTerm, allGames, setAllGames, commentError, setCommentError, ratingError, setRatingError, comment, setComment, rating, setRating}}>
             <Routes>
               <Route path="/*" element={<MainPage/>}/>
             </Routes>
