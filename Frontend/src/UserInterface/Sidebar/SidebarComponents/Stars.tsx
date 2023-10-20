@@ -4,10 +4,10 @@ import { GameContext } from '../../../App/GameContext';
 
 const StarContainer = styled.div`
     height: max-content;
-    padding: 10px;
+    width: 17.6vw;
+    padding: 0.2wv;
     color: white;
     border-radius: 20px;
-    position: relative;
     justify-content:center;
     display: flex;
 `;
@@ -24,9 +24,7 @@ to {
 `;
 
 const Star = styled.span<StarProps>`
-    font-size: 400%; 
-    position: relative;
-    bottom: 4px;
+    font-size: 3.5vw; 
     cursor: pointer;
     display:inline-block;
     color: ${props => props.isSelected ? 'rgb(255, 255, 27)' : ''};

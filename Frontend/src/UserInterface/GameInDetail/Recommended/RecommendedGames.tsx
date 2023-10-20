@@ -1,10 +1,10 @@
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { Game, GameContext } from "../../../App/GameContext";
 import { RecommendedGameCard } from "./RecommendedGameCard";
 
 const RecommendedSidebar = styled.div`
-    width: 18%;
+    width: 18vw;
     background-color: lightgrey;
     position: fixed;
     right: 0px;
@@ -12,15 +12,12 @@ const RecommendedSidebar = styled.div`
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
 `;
 
 const H2 = styled.h2`
     margin-top: 30px;
-    height: fit-content;
-`;
-
-const RecommendedContainer = styled.div`
-    
+    font-size: 1.3vw;
 `;
 
 export const RecommendedGames = () => {
@@ -29,23 +26,23 @@ export const RecommendedGames = () => {
 
     const { allGames } = context;
 
-    const [randomGames, setRandomGames] = useState<Game[]>([]);
+    const [recommendedGames, setRecommendedGames] = useState<Game[]>([]);
     
     useEffect(() => {
-        if (allGames.length >= 3 && randomGames.length === 0) {
+        if (allGames.length >= 3 && recommendedGames.length === 0) {
           const shuffled = [...allGames].sort(() => 0.5 - Math.random());
-          setRandomGames(shuffled.slice(0, 3));
+          setRecommendedGames(shuffled.slice(0, 3));
         }
-      }, [allGames, randomGames]);
+      }, [allGames, recommendedGames]);
 
       return (
         <RecommendedSidebar>
+          <div>
             <H2>Recommended Games</H2>
-            <RecommendedContainer>
-            {randomGames.map((game) => (
+            {recommendedGames.map((game) => (
           <RecommendedGameCard key={game.id} game={game}/>
         ))}
-            </RecommendedContainer>
+            </div>
         </RecommendedSidebar>
       )
 }

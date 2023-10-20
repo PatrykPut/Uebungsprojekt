@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { GameContext } from "../../../App/GameContext";
 
 const Input = styled.input`
-    margin-top: 20px;
+    margin-top: 3vh;
     height: 30px;
     border-radius: 10px;
     border: none;
