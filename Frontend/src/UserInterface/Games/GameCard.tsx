@@ -15,7 +15,7 @@ const CardWrapper = styled.div`
     width: 250px;
     height: 320px;
     perspective: 1000px;
-    margin-bottom: 20px;
+    margin-top: 20px;
     border-radius: 10px;
     &:hover ${CardContainer} {
       transform: rotateY(180deg);

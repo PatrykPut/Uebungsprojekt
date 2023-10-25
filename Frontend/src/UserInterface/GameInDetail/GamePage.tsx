@@ -4,6 +4,14 @@ import { Game, Rating } from "../../App/GameContext";
 import styled from 'styled-components';
 import { RatingButton } from "./RatingButton";
 
+const BackgroundContainer = styled.div`
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #c4dfe6;
+`;
+
 const MainContainer = styled.div`
   display: flex;  
   flex-direction: column;  
@@ -50,8 +58,8 @@ const Ratings = styled.div`
 
 const DescriptionContainer = styled.div`
   background-color: #fafafa;
-  height: 380px;
-  width: 300px;
+  height: 94%;
+  width: 30%;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 10px 20px -3px rgba(0, 0, 0, 0.2), 0px 6px 10px -2px rgba(0, 0, 0, 0.1); 
@@ -63,13 +71,17 @@ const Trailer = styled.iframe`
   margin-bottom: 10px;
   margin-right: 10px;
   border: none;
+  width: 70%;
+  border-radius: 20px;
+  height: 100%;
 `;
 
 const Trailer_Description = styled.div`
   display: flex;
+  width: 100%;
 `;
 
-function GamePage() {  
+export function GamePage() {  
   const { id } = useParams<{ id: string }>();  
   const [gameWithRatings, setGameWithRatings] = useState<{ game : Game, ratings : Rating[] } | null>(null);  
   
@@ -80,7 +92,8 @@ function GamePage() {
   }, [id]);  
   
   return gameWithRatings ?  (  
-    <MainContainer>
+    <BackgroundContainer>
+      <MainContainer>
       <GameContainer>
       <div>
       <h1>{gameWithRatings.game.name}</h1>
@@ -91,7 +104,7 @@ function GamePage() {
       </GameContainer>
 
       <Trailer_Description>
-      <Trailer width="800" height="400" src={gameWithRatings.game.trailer}  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
+      <Trailer src={gameWithRatings.game.trailer}  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
         No Trailer available
         </Trailer> 
       
@@ -112,10 +125,9 @@ function GamePage() {
       ))}  
         </RatingsContainer> 
       
-    </MainContainer>  
+    </MainContainer>
+    </BackgroundContainer>  
   ) : (
     null
   );
 }  
-
-export default GamePage;

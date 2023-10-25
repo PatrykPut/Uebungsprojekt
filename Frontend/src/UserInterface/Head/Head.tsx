@@ -1,12 +1,12 @@
 import styled, { keyframes } from 'styled-components';
 
-const Header = styled.div.withConfig({
+const HeaderContainer = styled.div.withConfig({
     displayName: 'Header'
 })`
     display:flex;
     justify-content: left;
     align-items: center;
-    background-color: gray;
+    background-color: #006c80;
     height:10vh;
     font-size: 50px;
     padding: 20px;
@@ -15,7 +15,7 @@ const Header = styled.div.withConfig({
 const NavbarContainer = styled.div`
     display: flex;
     height: 4vh;
-    background-color: rgb(72, 124, 107);
+    background-color: #66a5ad;
     justify-content: space-between;
     align-items: center;
     padding-left: 20px;
@@ -47,10 +47,10 @@ const MainContainer = styled.div`
 function Head() {
     return (
         <MainContainer>
-            <Header>
+            <HeaderContainer>
                 GameLibrary
                 <Controller src="/controller.png" alt='controller'/>
-            </Header>
+            </HeaderContainer>
             <NavbarContainer>
                 <span>Home</span>
                 <span>Games</span>

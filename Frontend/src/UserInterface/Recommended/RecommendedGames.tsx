@@ -5,7 +5,7 @@ import { RecommendedGameCard } from "./RecommendedGameCard";
 
 const RecommendedSidebar = styled.div`
     width: 18vw;
-    background-color: lightgrey;
+    background-color: #66a5ad;
     position: fixed;
     right: 0px;
     height:100%;

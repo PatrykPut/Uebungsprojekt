@@ -2,7 +2,7 @@ import { Routes, Route, useMatch } from "react-router-dom";
 import Sidebar from "./Sidebar/SideBar";
 import styled from 'styled-components';
 import CardDeck from "./Games/CardDeck";
-import GamePage from "./GameInDetail/GamePage";
+import { GamePage } from "./GameInDetail/GamePage";
 import { RecommendedGames } from "./Recommended/RecommendedGames";
 
 const MainBox = styled.div`
@@ -15,7 +15,7 @@ const MainBox = styled.div`
 
 const MainPage =() => {
 
-    const match = useMatch("game/:id") // wenn Url != game/:id dann wird die Sidabar gerendert
+    const match = useMatch("game/:id")
 
     return (
 <MainBox>
@@ -30,5 +30,3 @@ const MainPage =() => {
 }
 
 export default MainPage;
-
-//<Recommended/>

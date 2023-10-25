@@ -8,7 +8,7 @@ const SidebarContainer = styled.div`
     flex-direction: column;
     width: 18vw;
     height:100% ;
-    background-color: lightgrey;
+    background-color: #66a5ad;
     position: fixed;
     left: 0;
 `;
