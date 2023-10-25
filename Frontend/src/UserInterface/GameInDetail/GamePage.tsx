@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { Game, Rating } from "../../App/GameContext";
 import styled from 'styled-components';
 import { RatingButton } from "./RatingButton";
+import { Game, Rating } from "../../App/GameContext";
+import { useParams } from "react-router-dom";
 
 const BackgroundContainer = styled.div`
   height: 100vh;
@@ -81,16 +81,19 @@ const Trailer_Description = styled.div`
   width: 100%;
 `;
 
-export function GamePage() {  
-  const { id } = useParams<{ id: string }>();  
-  const [gameWithRatings, setGameWithRatings] = useState<{ game : Game, ratings : Rating[] } | null>(null);  
+export function GamePage() {   
+
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const { id } = useParams<{ id : string }>(); 
+  const [gameWithRatings, setGameWithRatings] = useState<{ game : Game, ratings : Rating[] } | null>(null);  
   
-  useEffect(() => {  
-    fetch(`http://localhost:8080/game/${id}`)  
-      .then((response) => response.json())  
-      .then((data: { game : Game, ratings : Rating[] }) => setGameWithRatings(data))  
-  }, [id]); 
+  useEffect(() => {   
+     
+    fetch(`http://localhost:8080/game/${id}`)    
+      .then((response) => response.json())    
+      .then((data: { game : Game, ratings : Rating[] }) => 
+        setGameWithRatings(data))   
+  } , [id]);   
   
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -100,7 +103,7 @@ export function GamePage() {
     return () => clearTimeout(timer);
   }, []);
   
-  return gameWithRatings ?  (  
+  return gameWithRatings ? (  
     <BackgroundContainer>
       <MainContainer>
       <GameContainer>
