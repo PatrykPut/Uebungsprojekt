@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Game } from "../../../App/GameContext";
+import { Game } from "../../App/GameContext";
 
 const GameContainerFront = styled.div`
     width: 13vw;

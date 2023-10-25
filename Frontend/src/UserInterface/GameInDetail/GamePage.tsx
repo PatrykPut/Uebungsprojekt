@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Game, Rating } from "../../App/GameContext";
 import styled from 'styled-components';
+import { RatingButton } from "./RatingButton";
 
 const MainContainer = styled.div`
   display: flex;  
@@ -98,6 +99,8 @@ function GamePage() {
       <p>{gameWithRatings.game.description}</p>
       </DescriptionContainer>
       </Trailer_Description>
+
+      <RatingButton gameId={id}/>
 
         <RatingsHeadline>Ratings</RatingsHeadline>
       <RatingsContainer>

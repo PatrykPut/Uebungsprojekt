@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar/SideBar";
 import styled from 'styled-components';
 import CardDeck from "./Games/CardDeck";
 import GamePage from "./GameInDetail/GamePage";
-import { RecommendedGames } from "./GameInDetail/Recommended/RecommendedGames";
+import { RecommendedGames } from "./Recommended/RecommendedGames";
 
 const MainBox = styled.div`
     display:flex;
