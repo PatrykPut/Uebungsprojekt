@@ -1,17 +1,17 @@
 import { useContext } from "react";
 import styled from "styled-components";
-import { GameContext } from "../../../App/GameContext";
+import { GameContext } from "../../App/GameContext";
 
 const Input = styled.input`
-    margin-top: 3vh;
     height: 30px;
     border-radius: 10px;
     border: none;
-    margin-right: 10px;
-    margin-left: 10px;
+    position: relative;
+    z-index: 3;
+    margin-left: 20.5%;
     `;
 
-const SearchGame = () => {
+export const SearchGame = () => {
 
     const context = useContext(GameContext);
 
@@ -25,5 +25,3 @@ const SearchGame = () => {
     <Input placeholder="Search" value={searchTerm} onChange={handleChange}/>
         )
 }
-
-export default SearchGame;

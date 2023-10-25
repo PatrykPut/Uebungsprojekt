@@ -1,6 +1,5 @@
 import Stars from './SidebarComponents/Stars';
 import Sort from './SidebarComponents/Sort';
-import SearchGame from './SidebarComponents/SearchGame';
 import styled from 'styled-components';
 
 const SidebarContainer = styled.div`
@@ -18,7 +17,6 @@ const Sidebar = () => {
 
     return (
         <SidebarContainer data-testid="SidebarContainer">
-            <SearchGame/>
             <Stars/>
             <Sort/>
         </SidebarContainer>

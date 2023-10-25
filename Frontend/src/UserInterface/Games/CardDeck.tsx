@@ -8,7 +8,7 @@ const AllGamesContainer = styled.div`
     flex-wrap: wrap;
     width: 64vw;
     justify-content:space-evenly;
-    height: max-content;
+    height: 100%;
     background-color: #c4dfe6;
 `;
 
@@ -34,7 +34,7 @@ const CardDeck = () => {
       },[sortOption, selectedStar, searchTerm, platformOption, setAllGames]);
 
   return (
-      <AllGamesContainer>
+        <AllGamesContainer>
           {allGames.map((game) => (
               <GameCard key={game.id} game={game}/>
           ))}

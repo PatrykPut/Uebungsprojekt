@@ -1,4 +1,4 @@
-import { Routes, Route, useMatch, useLocation } from "react-router-dom";
+import { Routes, Route, useMatch, useLocation, useParams } from "react-router-dom";
 import Sidebar from "./Sidebar/SideBar";
 import styled, { css, keyframes } from 'styled-components';
 import CardDeck from "./Games/CardDeck";
