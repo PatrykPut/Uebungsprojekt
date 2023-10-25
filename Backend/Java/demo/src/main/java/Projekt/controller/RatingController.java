@@ -2,7 +2,6 @@ package Projekt.controller;
 
 import Projekt.repository.RatingRepository;
 import Projekt.repository.entities.RatingEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +13,6 @@ public class RatingController {
 
     private final RatingRepository ratingRepository;
 
-    @Autowired
     public RatingController(RatingRepository ratingRepository) {
         this.ratingRepository = ratingRepository;
     }
