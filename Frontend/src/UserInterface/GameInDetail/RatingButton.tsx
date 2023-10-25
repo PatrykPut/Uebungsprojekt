@@ -10,7 +10,8 @@ const RatingButtonContainer = styled.button`
   border-radius: 10px;
   width: 20vw;
   cursor: pointer;
-  transition: 0.5s;  
+  transition: 0.5s; 
+  margin-top: 1vh; 
 
    &:hover {
     background-color: #4a4aff;
@@ -18,7 +19,7 @@ const RatingButtonContainer = styled.button`
    }
 `;
 
-const OpacityContainer = styled.div`
+const OpacityContainer = styled.div<{ show: boolean }>`
   height: 100vh;
   width: 100vw;
   background-color: rgba(0 ,0 ,0 , 0.7); 
@@ -29,6 +30,9 @@ const OpacityContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: ${props => props.show ? 1 : 0};
+  visibility: ${props => props.show ? 'visible' : 'hidden'};
+  transition: opacity 1s, visibility 1s;
 `;
 
 const SurveyContainer = styled.div`
@@ -40,6 +44,7 @@ const SurveyContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  transition: 1s;
 `;
 
 const Leave = styled.button`
@@ -148,8 +153,7 @@ try {
             Make Rating
         </RatingButtonContainer>
 
-        {showSurvey && (
-            <OpacityContainer>
+            <OpacityContainer show={showSurvey}>
                 <SurveyContainer>
             <h2>Rate the game</h2>
             <Leave onClick={() => setShowSurvey(false)}>x</Leave>
@@ -167,7 +171,6 @@ try {
               }}>Submit Rating</Submit>
             </SurveyContainer>
             </OpacityContainer>
-        )}
         </div>
     );
 }
