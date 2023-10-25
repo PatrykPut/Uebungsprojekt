@@ -6,7 +6,7 @@ import { RatingButton } from "./RatingButton";
 
 const BackgroundContainer = styled.div`
   height: 100vh;
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: center;
   background-color: #c4dfe6;
@@ -18,9 +18,9 @@ const MainContainer = styled.div`
   align-items: center;  
   justify-content: space-between;  
   width: 60vw;  
-  background-color: #fafafa;  
-  padding: 20px;  
-  border-radius: 10px;  
+  background-color: #fafafa;
+  padding-left: 20px;   
+  padding-right: 20px; 
 `;
 
 const GameContainer = styled.div`
@@ -28,7 +28,6 @@ const GameContainer = styled.div`
   justify-content: space-between;
   background-color: #ffffff;
   padding: 20px;
-  border-radius: 10px;
   width: 100%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
   margin-bottom: 20px;
@@ -38,6 +37,7 @@ const RatingsHeadline = styled.div`
   font-size: 30px;
   font-weight: 500;
   margin-top: 20px;
+  border-top: solid 0.5px;
 `;
 
 const RatingsContainer = styled.div`
@@ -84,12 +84,21 @@ const Trailer_Description = styled.div`
 export function GamePage() {  
   const { id } = useParams<{ id: string }>();  
   const [gameWithRatings, setGameWithRatings] = useState<{ game : Game, ratings : Rating[] } | null>(null);  
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   
   useEffect(() => {  
     fetch(`http://localhost:8080/game/${id}`)  
       .then((response) => response.json())  
       .then((data: { game : Game, ratings : Rating[] }) => setGameWithRatings(data))  
-  }, [id]);  
+  }, [id]); 
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVideoLoaded(true);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
   
   return gameWithRatings ?  (  
     <BackgroundContainer>
@@ -104,9 +113,11 @@ export function GamePage() {
       </GameContainer>
 
       <Trailer_Description>
-      <Trailer src={gameWithRatings.game.trailer}  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
+      {isVideoLoaded && (
+        <Trailer src={gameWithRatings.game.trailer}  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
         No Trailer available
         </Trailer> 
+      )}
       
       <DescriptionContainer>
       <p>{gameWithRatings.game.description}</p>
@@ -128,6 +139,6 @@ export function GamePage() {
     </MainContainer>
     </BackgroundContainer>  
   ) : (
-    null
-  );
+    <div>Loading...</div>
+    );
 }  

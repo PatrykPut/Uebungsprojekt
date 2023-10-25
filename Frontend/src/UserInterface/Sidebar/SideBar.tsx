@@ -11,6 +11,7 @@ const SidebarContainer = styled.div`
     background-color: #66a5ad;
     position: fixed;
     left: 0;
+    z-index: 1;
 `;
 
 const Sidebar = () => {
