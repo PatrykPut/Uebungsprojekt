@@ -10,6 +10,7 @@ const StarContainer = styled.div`
     border-radius: 20px;
     justify-content:center;
     display: flex;
+    margin-top: 1vh;
 `;
 
 const spin = keyframes`

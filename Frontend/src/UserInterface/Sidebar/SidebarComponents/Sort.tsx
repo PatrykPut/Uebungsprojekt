@@ -6,6 +6,7 @@ const Drop = styled.select`
     border: solid greenyellow 0.5px;
     height: 3vh;
     cursor: pointer;
+    margin-bottom: 2vh;
     `;
 
 const Option = styled.option`
@@ -24,8 +25,9 @@ const Sort = () => {
     const {setSortOption, setPlatformOption} = context;
 
 return (
-    <>
-            <Drop onChange={(e) => {
+    <>  
+            <label htmlFor="sort">Sort</label>
+            <Drop name='sort' onChange={(e) => {
                 const selectedOption = e.target.value;
                 setSortOption(selectedOption);
             }}>
@@ -39,8 +41,8 @@ return (
                 ))}
                 
             </Drop>
-
-            <Drop onChange={(e) => {
+            <label htmlFor="filter">Filter</label>
+            <Drop name='filter' onChange={(e) => {
                 const selectedPlatformOption = e.target.value;
                 setPlatformOption(selectedPlatformOption);
             }}>

@@ -59,7 +59,7 @@ const defaultGameContext: GameContextProps = {
   rating: '',
   setRating: () => {},
   comment: '',
-  setComment: () => {}
+  setComment: () => {},
 };
 
 export const GameContext = React.createContext<GameContextProps>(defaultGameContext);

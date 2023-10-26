@@ -1,15 +1,15 @@
 import styled from 'styled-components';    
-import { useEffect, useContext, useState } from 'react'; 
+import { useEffect, useContext } from 'react'; 
 import { GameCard } from './GameCard';
 import { Game, GameContext } from '../../App/GameContext';
 
 const AllGamesContainer = styled.div`
     display:flex;
     flex-wrap: wrap;
-    width: 60%;
+    width: 64vw;
     justify-content:space-evenly;
-    height: max-content;
-    margin-top: 20px; 
+    height: 100%;
+    background-color: #c4dfe6;
 `;
 
 const CardDeck = () => { 
@@ -34,7 +34,7 @@ const CardDeck = () => {
       },[sortOption, selectedStar, searchTerm, platformOption, setAllGames]);
 
   return (
-      <AllGamesContainer>
+        <AllGamesContainer>
           {allGames.map((game) => (
               <GameCard key={game.id} game={game}/>
           ))}

@@ -1,22 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Game } from "../../App/GameContext";
+import { GameCardRating } from "./GameCardRating";
 
 const CardContainer = styled.div`
-    perspective: 1500px;
     transform-style: preserve-3d;
-    width: 250px;
-    height: 320px;
-    position: relative;
+    height: 100%;
     transition: transform 0.4s;
 `;
 
 const CardWrapper = styled.div`
-    width: 250px;
-    height: 320px;
+    width: 260px;;
+    height: 330px;
     perspective: 1000px;
-    margin-bottom: 20px;
-    border-radius: 10px;
+    margin-top: 3vh;
     &:hover ${CardContainer} {
       transform: rotateY(180deg);
     }
@@ -24,22 +21,23 @@ const CardWrapper = styled.div`
 
 const GameContainerFront = styled.div`
     position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
-    justify-content: center;
     padding: 20px;
-    border: white solid 1px ;
     border-radius: 10px;
     box-sizing: border-box;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 4px 12px;
     cursor: pointer;
     backface-visibility: hidden;
-    overflow: auto;
+    overflow: hidden;
     background-color: white;
 `;
 
 const GameContainerBack = styled(GameContainerFront)`
     transform: rotateY(180deg);
+    overflow: auto;
 `;
 
 const Image = styled.img`
@@ -60,9 +58,12 @@ export function GameCard({ game }: {game : Game}) {
         <CardContainer>
         <GameContainerFront onClick={handleClick}>   
             <Image src={process.env.PUBLIC_URL + game.image} alt={game.name} />                    
+              <div>
               <h3>{game.name}</h3>    
               <p>{game.releaseDate}</p>    
-              <p>{game.developer}</p>  
+              <p>{game.developer}</p>
+              </div>
+              <GameCardRating id={game.id.toString()}/>  
         </GameContainerFront>
         <GameContainerBack onClick={handleClick}>
           <p>{game.description}</p>

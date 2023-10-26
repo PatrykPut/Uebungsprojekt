@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import SearchGame from '../UserInterface/Sidebar/SidebarComponents/SearchGame';
+import { SearchGame } from '../UserInterface/Head/SearchGame';
 import { GameContext } from '../App/GameContext';
 import { mockContext } from './mockContext';
 

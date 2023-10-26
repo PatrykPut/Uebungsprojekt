@@ -34,9 +34,9 @@ function App () {
     
     <Router>
       <GlobalStyle/>
-        <Head/>
          <GameContext.Provider value={{ sortOption, setSortOption, platformOption, setPlatformOption, selectedGame, setSelectedGame, selectedStar, setSelectedStar, searchTerm,
-           setSearchTerm, allGames, setAllGames, commentError, setCommentError, ratingError, setRatingError, comment, setComment, rating, setRating}}>
+           setSearchTerm, allGames, setAllGames, commentError, setCommentError, ratingError, setRatingError, comment, setComment, rating, setRating }}>
+            <Head/>
             <Routes>
               <Route path="/*" element={<MainPage/>}/>
             </Routes>

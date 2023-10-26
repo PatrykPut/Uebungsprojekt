@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { Game, Rating } from "../../App/GameContext";
 import styled from 'styled-components';
 import { RatingButton } from "./RatingButton";
+import { Game, Rating } from "../../App/GameContext";
+import { useParams } from "react-router-dom";
+
+const BackgroundContainer = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  background-color: #c4dfe6;
+`;
 
 const MainContainer = styled.div`
   display: flex;  
@@ -10,9 +18,9 @@ const MainContainer = styled.div`
   align-items: center;  
   justify-content: space-between;  
   width: 60vw;  
-  background-color: #fafafa;  
-  padding: 20px;  
-  border-radius: 10px;  
+  background-color: #fafafa;
+  padding-left: 20px;   
+  padding-right: 20px; 
 `;
 
 const GameContainer = styled.div`
@@ -20,7 +28,6 @@ const GameContainer = styled.div`
   justify-content: space-between;
   background-color: #ffffff;
   padding: 20px;
-  border-radius: 10px;
   width: 100%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
   margin-bottom: 20px;
@@ -30,6 +37,7 @@ const RatingsHeadline = styled.div`
   font-size: 30px;
   font-weight: 500;
   margin-top: 20px;
+  border-top: solid 0.5px;
 `;
 
 const RatingsContainer = styled.div`
@@ -50,8 +58,8 @@ const Ratings = styled.div`
 
 const DescriptionContainer = styled.div`
   background-color: #fafafa;
-  height: 380px;
-  width: 300px;
+  height: 94%;
+  width: 30%;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 10px 20px -3px rgba(0, 0, 0, 0.2), 0px 6px 10px -2px rgba(0, 0, 0, 0.1); 
@@ -63,24 +71,41 @@ const Trailer = styled.iframe`
   margin-bottom: 10px;
   margin-right: 10px;
   border: none;
+  width: 70%;
+  border-radius: 20px;
+  height: 100%;
 `;
 
 const Trailer_Description = styled.div`
   display: flex;
+  width: 100%;
 `;
 
-function GamePage() {  
-  const { id } = useParams<{ id: string }>();  
+export function GamePage() {   
+
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const { id } = useParams<{ id : string }>(); 
   const [gameWithRatings, setGameWithRatings] = useState<{ game : Game, ratings : Rating[] } | null>(null);  
   
-  useEffect(() => {  
-    fetch(`http://localhost:8080/game/${id}`)  
-      .then((response) => response.json())  
-      .then((data: { game : Game, ratings : Rating[] }) => setGameWithRatings(data))  
-  }, [id]);  
+  useEffect(() => {   
+     
+    fetch(`http://localhost:8080/game/${id}`)    
+      .then((response) => response.json())    
+      .then((data: { game : Game, ratings : Rating[] }) => 
+        setGameWithRatings(data))   
+  } , [id]);   
   
-  return gameWithRatings ?  (  
-    <MainContainer>
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVideoLoaded(true);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+  
+  return gameWithRatings ? (  
+    <BackgroundContainer>
+      <MainContainer>
       <GameContainer>
       <div>
       <h1>{gameWithRatings.game.name}</h1>
@@ -91,9 +116,11 @@ function GamePage() {
       </GameContainer>
 
       <Trailer_Description>
-      <Trailer width="800" height="400" src={gameWithRatings.game.trailer}  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
+      {isVideoLoaded && (
+        <Trailer src={gameWithRatings.game.trailer}  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
         No Trailer available
         </Trailer> 
+      )}
       
       <DescriptionContainer>
       <p>{gameWithRatings.game.description}</p>
@@ -112,10 +139,9 @@ function GamePage() {
       ))}  
         </RatingsContainer> 
       
-    </MainContainer>  
+    </MainContainer>
+    </BackgroundContainer>  
   ) : (
-    null
-  );
+    <div>Loading...</div>
+    );
 }  
-
-export default GamePage;

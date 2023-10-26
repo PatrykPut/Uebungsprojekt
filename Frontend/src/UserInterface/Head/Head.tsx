@@ -1,26 +1,18 @@
 import styled, { keyframes } from 'styled-components';
+import { SearchGame } from './SearchGame';
 
-const Header = styled.div.withConfig({
-    displayName: 'Header'
-})`
+const HeaderContainer = styled.div`
     display:flex;
     justify-content: left;
     align-items: center;
-    background-color: gray;
-    height:10vh;
+    background-color: #006c80;
+    height:14vh;
     font-size: 50px;
     padding: 20px;
+    position: fixed;
+    width: 100%;
+    z-index: 2;
 `;
-
-const NavbarContainer = styled.div`
-    display: flex;
-    height: 4vh;
-    background-color: rgb(72, 124, 107);
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 20px;
-    padding-right: 30px;
-`; 
 
 const spin = keyframes`
     from {
@@ -37,28 +29,13 @@ const Controller = styled.img`
     animation: ${spin} 5s infinite linear;
 `;
 
-const MainContainer = styled.div`
-    width:100vw;
-    position: fixed;
-    opacity: 1;
-    z-index: 1;
-`;
-
 function Head() {
     return (
-        <MainContainer>
-            <Header>
+            <HeaderContainer>
                 GameLibrary
                 <Controller src="/controller.png" alt='controller'/>
-            </Header>
-            <NavbarContainer>
-                <span>Home</span>
-                <span>Games</span>
-                <span>News</span>
-                <span>Reviews</span>
-                <span>Shop</span>
-            </NavbarContainer>
-        </MainContainer>
+                <SearchGame/>
+            </HeaderContainer>
     );
   };
 
